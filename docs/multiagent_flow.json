@@ -1,0 +1,134 @@
+{
+  "name": "MultiAgentFlowise",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "HumanInput",
+      "name": "User Goal",
+      "outputs": ["2"],
+      "parameters": {
+        "description_type": "Static",
+        "description": "Inserisci l'obiettivo del sistema multi-agente"
+      }
+    },
+    {
+      "id": "2",
+      "type": "AIPromptTemplate",
+      "name": "Planner Prompt",
+      "outputs": ["3"],
+      "parameters": {
+        "template": "You are the PLANNER AI.\nYou receive a user goal from Human Input.\nDivide the goal into atomic tasks in JSON only.\nReturn JSON:\n{\n  \"tasks\": [\n    {\"id\": \"task_01\", \"description\": \"...\"},\n    {\"id\": \"task_02\", \"description\": \"...\"}\n  ]\n}"
+      }
+    },
+    {
+      "id": "3",
+      "type": "Ollama",
+      "name": "Planner LLM",
+      "outputs": ["4"],
+      "parameters": {
+        "model_name": "phi:latest",
+        "temperature": 0.1,
+        "input_nodes": ["1","2"]
+      }
+    },
+    {
+      "id": "4",
+      "type": "JSONExtract",
+      "name": "Extract Tasks",
+      "outputs": ["5"],
+      "parameters": {
+        "json_path": "tasks"
+      }
+    },
+    {
+      "id": "5",
+      "type": "ForEach",
+      "name": "Task Loop",
+      "outputs": ["6"],
+      "parameters": {}
+    },
+    {
+      "id": "6",
+      "type": "AIPromptTemplate",
+      "name": "Worker Prompt",
+      "outputs": ["7"],
+      "parameters": {
+        "template": "You are the WORKER AI.\nReceive a single task JSON from Planner.\nProduce the required content in JSON only:\n{\"task_id\":\"...\",\"content\":\"...\"}"
+      }
+    },
+    {
+      "id": "7",
+      "type": "Ollama",
+      "name": "Worker LLM",
+      "outputs": ["8"],
+      "parameters": {
+        "model_name": "mistral:latest",
+        "temperature": 0.3,
+        "input_nodes": ["6"]
+      }
+    },
+    {
+      "id": "8",
+      "type": "AIPromptTemplate",
+      "name": "Critic Prompt",
+      "outputs": ["9"],
+      "parameters": {
+        "template": "You are the CRITIC AI.\nEvaluate the Worker output JSON.\nDecide APPROVE or REVISE:\n{\"decision\":\"APPROVE|REVISE\",\"notes\":\"\"}"
+      }
+    },
+    {
+      "id": "9",
+      "type": "Ollama",
+      "name": "Critic LLM",
+      "outputs": ["10"],
+      "parameters": {
+        "model_name": "phi:latest",
+        "temperature": 0.1,
+        "input_nodes": ["8","7"]
+      }
+    },
+    {
+      "id": "10",
+      "type": "Conditional",
+      "name": "Check Decision",
+      "outputs": ["11","6"],
+      "parameters": {
+        "condition": "decision == 'APPROVE'",
+        "true_output": "11",
+        "false_output": "6"
+      }
+    },
+    {
+      "id": "11",
+      "type": "AIPromptTemplate",
+      "name": "Writer Prompt",
+      "outputs": ["12"],
+      "parameters": {
+        "template": "You are the WRITER AI.\nUse the write_file tool only.\nWrite content to workspace/output/{task_id}.md\nReturn JSON status."
+      }
+    },
+    {
+      "id": "12",
+      "type": "CustomTool",
+      "name": "write_file",
+      "outputs": [],
+      "parameters": {
+        "code": "const fs = require('fs');\nconst path = require('path');\nconst BASE = path.resolve('./workspace');\nmodule.exports = async ({ path: p, content }) => {\n  const target = path.resolve(BASE, p);\n  if (!target.startsWith(BASE)) throw new Error('Access denied');\n  fs.mkdirSync(path.dirname(target), { recursive: true });\n  fs.writeFileSync(target, content, 'utf-8');\n  return { status: 'ok', file: p };\n};"
+      }
+    }
+  ],
+  "connections": [
+    {"from":"1","to":"2"},
+    {"from":"2","to":"3"},
+    {"from":"3","to":"4"},
+    {"from":"4","to":"5"},
+    {"from":"5","to":"6"},
+    {"from":"6","to":"7"},
+    {"from":"7","to":"8"},
+    {"from":"8","to":"9"},
+    {"from":"9","to":"10"},
+    {"from":"10","to":"11","label":"true"},
+    {"from":"10","to":"6","label":"false"},
+    {"from":"11","to":"12"}
+  ]
+}

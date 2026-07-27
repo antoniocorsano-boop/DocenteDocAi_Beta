@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#141C2E"/>
+      <stop offset="100%" stop-color="#070B14"/>
+    </radialGradient>
+    <radialGradient id="core" cx="38%" cy="32%" r="65%">
+      <stop offset="0%"   stop-color="#FFDF80"/>
+      <stop offset="32%"  stop-color="#FF9520"/>
+      <stop offset="68%"  stop-color="#F03A10"/>
+      <stop offset="100%" stop-color="#C01A08"/>
+    </radialGradient>
+    <radialGradient id="ambient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#FF8C00" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#FF8C00" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="f-glow">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="f-core">
+      <feGaussianBlur stdDeviation="18" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="f-ring">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+
+  <!-- Ambient core glow -->
+  <circle cx="256" cy="256" r="138" fill="url(#ambient)"/>
+
+  <!-- Ring 1 — main, tilted -18°, electric cyan -->
+  <ellipse cx="256" cy="256" rx="172" ry="60"
+    stroke="#00C8FF" stroke-width="2.5" stroke-opacity="0.88"
+    transform="rotate(-18 256 256)" filter="url(#f-ring)"/>
+
+  <!-- Ring 2 — secondary, tilted +52°, violet -->
+  <ellipse cx="256" cy="256" rx="108" ry="36"
+    stroke="#8B6FFF" stroke-width="2" stroke-opacity="0.65"
+    transform="rotate(52 256 256)" filter="url(#f-glow)"/>
+
+  <!-- Core orb -->
+  <circle cx="256" cy="256" r="60" fill="url(#core)" filter="url(#f-core)"/>
+  <!-- Lens highlight -->
+  <ellipse cx="241" cy="237" rx="19" ry="12" fill="white" fill-opacity="0.20"
+    transform="rotate(-20 241 237)"/>
+  <circle cx="248" cy="243" r="4.5" fill="white" fill-opacity="0.32"/>
+
+  <!-- Satellite 1 — mint -->
+  <circle cx="405" cy="286" r="18" fill="#00FFB0" fill-opacity="0.18"/>
+  <circle cx="405" cy="286" r="11" fill="#00FFB0" filter="url(#f-glow)"/>
+
+  <!-- Satellite 2 — cyan -->
+  <circle cx="90" cy="241" r="13" fill="#00C8FF" fill-opacity="0.18"/>
+  <circle cx="90" cy="241" r="8"  fill="#00C8FF" filter="url(#f-glow)"/>
+
+  <!-- Satellite 3 — violet -->
+  <circle cx="293" cy="290" r="10" fill="#B09FFF" fill-opacity="0.18"/>
+  <circle cx="293" cy="290" r="6"  fill="#B09FFF" filter="url(#f-glow)"/>
+</svg>

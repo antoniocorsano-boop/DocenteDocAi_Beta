@@ -1,0 +1,35 @@
+// Esempio di chiamata reale a Google Gemini per layout neurale NKA
+import { NKANode } from './types';
+import { NodePosition } from './aiLayout';
+import { buildLayoutPrompt } from './aiPromptTemplates';
+import { generateContent } from '../services/aiService'; // Assicurati che sia configurato
+
+export async function getLLMNeuralLayout(nodes: NKANode[], width: number, height: number, userContext: any): Promise<NodePosition[]> {
+  const prompt = buildLayoutPrompt(nodes, userContext);
+  const response = await generateContent(prompt, {
+    temperature: 0.4,
+    maxTokens: 800,
+    stop: undefined
+  });
+  // Supponiamo che la risposta sia un JSON array [{ id, x, y }]
+  try {
+    const positions = JSON.parse(response.content) as { id: string; x: number; y: number }[];
+    // Merge positions with node data
+    return nodes.map(node => {
+      const pos = positions.find(p => p.id === node.id);
+      return {
+        ...node,
+        x: pos?.x ?? width / 2,
+        y: pos?.y ?? height / 2
+      };
+    });
+  } catch (e) {
+    // Fallback demo layout
+    const angleStep = (2 * Math.PI) / Math.max(nodes.length, 1);
+    return nodes.map((node, i) => ({
+      ...node,
+      x: width / 2 + Math.cos(i * angleStep) * (width / 3) * (1 + i * 0.1),
+      y: height / 2 + Math.sin(i * angleStep) * (height / 3) * (1 + i * 0.1),
+    }));
+  }
+}

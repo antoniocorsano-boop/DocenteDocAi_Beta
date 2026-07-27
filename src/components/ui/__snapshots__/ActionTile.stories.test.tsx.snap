@@ -1,0 +1,54 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ActionTile Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI application theme provider"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1eiehof-MuiPaper-root"
+    role="main"
+    style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+  >
+    <button
+      aria-label="Test Action - Test subtitle"
+      style="background-color: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-large); padding: var(--md-sys-spacing-4); display: flex; flex-direction: row; align-items: center; gap: var(--md-sys-spacing-4); border: medium; position: relative; overflow: hidden; text-align: left; box-shadow: var(--md-sys-elevation-level1); transform: translateY(0); min-height: var(--md-sys-spacing-12); width: var(--md-sys-percent-100); outline: none; transition: box-shadow var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard), transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+      type="button"
+    >
+      <div
+        style="width: var(--md-sys-spacing-8); height: var(--md-sys-spacing-8); border-radius: var(--md-sys-shape-corner-large); display: flex; align-items: center; justify-content: center; font-size: var(--icon-size-medium); background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface); flex-shrink: 0; box-shadow: var(--md-sys-elevation-level1); border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline-variant); transition: box-shadow var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+      >
+        <span
+          class="material-symbols-outlined"
+          style="font-size: var(--icon-size-medium);"
+        />
+      </div>
+      <div
+        style="flex-grow: 1; min-width: 0; overflow: hidden; display: flex; flex-direction: column; gap: var(--md-sys-spacing-2);"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-subtitle2 css-12g7ski-MuiTypography-root"
+        >
+          Test Action
+        </h6>
+        <span
+          class="MuiTypography-root MuiTypography-caption css-8sgvla-MuiTypography-root"
+        >
+          Test subtitle
+        </span>
+      </div>
+      <div
+        style="width: var(--md-sys-spacing-8); height: var(--md-sys-spacing-8); border-radius: var(--md-sys-shape-corner-full); display: flex; align-items: center; justify-content: center; background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface-variant); flex-shrink: 0; transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+      >
+        <span
+          class="material-symbols-outlined"
+          style="font-size: var(--icon-size-medium); transition: transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+        >
+          chevron_right
+        </span>
+      </div>
+      <div
+        style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; background: var(--md-sys-motion-easing-standard)-gradient(90deg, transparent, var(--md-sys-color-surface-disabled), transparent); transform: translateX(calc(100% * -1)); pointer-events: none; transition: transform var(--md-sys-motion-duration-extra-long) var(--md-sys-motion-easing-standard);"
+      />
+    </button>
+  </div>
+</div>
+`;

@@ -1,0 +1,41 @@
+{
+  "date": "2026-01-29",
+  "period": "daily",
+  "metrics": [
+    {
+      "timestamp": "2026-01-29T17:05:37.873Z",
+      "fps": 60,
+      "memoryUsage": {
+        "used": 47185920,
+        "total": 104857600,
+        "percentage": 45
+      },
+      "bundleSize": {
+        "total": 600000,
+        "chunks": 15
+      },
+      "lazyLoading": {
+        "componentsLoaded": 8,
+        "loadTimes": {
+          "IdeaGeneratorModal": 120,
+          "AnalyticsHub": 180,
+          "UdaPlanner": 95,
+          "KnowledgeBase": 150
+        }
+      },
+      "aiMetrics": {
+        "averageResponseTime": 2500,
+        "timeoutCount": 0,
+        "errorCount": 2,
+        "quotaExceededCount": 0
+      }
+    }
+  ],
+  "feedback": [],
+  "alerts": [],
+  "recommendations": [
+    "Monitor AI response times for optimization opportunities",
+    "Consider implementing response caching for frequently asked prompts",
+    "Review lazy loading performance for heavy components"
+  ]
+}

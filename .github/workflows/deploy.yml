@@ -1,0 +1,178 @@
+name: Deploy — Production
+
+# Triggered automatically when the Release Gate CI passes on main.
+# This ensures deploy NEVER runs on a broken build.
+#
+# Prerequisites (add to repository Settings → Secrets → Actions):
+#   VERCEL_TOKEN       — from vercel.com → Account Settings → Tokens
+#   VERCEL_ORG_ID      — from .vercel/project.json (after `vercel link`)
+#   VERCEL_PROJECT_ID  — from .vercel/project.json
+#   RENDER_DEPLOY_HOOK — from Render dashboard → Service → Deploy Hook URL
+
+on:
+  workflow_run:
+    workflows: ["Release Gate CI"]
+    types: [completed]
+    branches: [main]
+
+  # Manual trigger for hotfix deploys
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Deploy target'
+        required: true
+        default: 'all'
+        type: choice
+        options: [all, client, server]
+
+concurrency:
+  group: deploy-production
+  # Do NOT cancel an in-progress deploy — let it finish
+  cancel-in-progress: false
+
+jobs:
+  # ── Guard: skip if release-gate failed (workflow_run only) ─────────────────
+  check-gate:
+    name: Gate Check
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    outputs:
+      deploy_client: ${{ steps.resolve.outputs.deploy_client }}
+      deploy_server: ${{ steps.resolve.outputs.deploy_server }}
+
+    steps:
+      - name: Resolve deploy targets
+        id: resolve
+        run: |
+          TARGET="${{ github.event.inputs.target || 'all' }}"
+          if [ "$TARGET" = "all" ] || [ "$TARGET" = "client" ]; then
+            echo "deploy_client=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy_client=false" >> "$GITHUB_OUTPUT"
+          fi
+          if [ "$TARGET" = "all" ] || [ "$TARGET" = "server" ]; then
+            echo "deploy_server=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy_server=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ── Client deploy → Vercel ────────────────────────────────────────────────
+  deploy-client:
+    name: Deploy Client → Vercel
+    runs-on: ubuntu-latest
+    needs: check-gate
+    if: needs.check-gate.outputs.deploy_client == 'true'
+    environment:
+      name: production-client
+      url: ${{ steps.deploy.outputs.url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Verify PWA artifacts
+        run: |
+          for f in dist/index.html dist/sw.js dist/manifest.webmanifest; do
+            [ -f "$f" ] || (echo "❌ MISSING: $f" && exit 1)
+          done
+          echo "✅ PWA artifacts verified"
+
+      - name: Deploy to Vercel
+        id: deploy
+        run: |
+          npm install -g vercel --quiet
+          DEPLOY_URL=$(vercel --prod --token "${{ secrets.VERCEL_TOKEN }}" \
+            --scope "${{ secrets.VERCEL_ORG_ID }}" \
+            --yes 2>&1 | tail -1)
+          echo "url=${DEPLOY_URL}" >> "$GITHUB_OUTPUT"
+          echo "✅ Client deployed: ${DEPLOY_URL}"
+        env:
+          VERCEL_ORG_ID:     ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Smoke test — client
+        run: |
+          URL="${{ steps.deploy.outputs.url }}"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${URL}/")
+          [ "$STATUS" = "200" ] || (echo "❌ Client smoke test failed (HTTP ${STATUS})" && exit 1)
+          echo "✅ Client smoke test passed (HTTP ${STATUS})"
+
+  # ── Server deploy → Render ───────────────────────────────────────────────
+  deploy-server:
+    name: Deploy Server → Render
+    runs-on: ubuntu-latest
+    needs: check-gate
+    if: needs.check-gate.outputs.deploy_server == 'true'
+    environment:
+      name: production-server
+
+    steps:
+      - name: Trigger Render deploy hook
+        run: |
+          if [ -z "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
+            echo "⚠️  RENDER_DEPLOY_HOOK not set — skipping server deploy"
+            exit 0
+          fi
+          HTTP_STATUS=$(curl -s -o /tmp/render-response.json -w "%{http_code}" \
+            -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}")
+          cat /tmp/render-response.json
+          [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "201" ] || \
+            (echo "❌ Render deploy failed (HTTP ${HTTP_STATUS})" && exit 1)
+          echo "✅ Render deploy triggered (HTTP ${HTTP_STATUS})"
+
+      - name: Wait for server health
+        run: |
+          if [ -z "${{ vars.BACKEND_URL }}" ]; then
+            echo "⚠️  BACKEND_URL variable not set — skipping health check"
+            exit 0
+          fi
+          echo "Waiting for server to come up..."
+          for i in $(seq 1 12); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              "${{ vars.BACKEND_URL }}/health" || echo "000")
+            if [ "$STATUS" = "200" ]; then
+              echo "✅ Server healthy after $((i * 10))s"
+              exit 0
+            fi
+            echo "  Attempt ${i}/12 — HTTP ${STATUS}, retrying in 10s..."
+            sleep 10
+          done
+          echo "❌ Server health check timed out after 120s"
+          exit 1
+
+  # ── Post-deploy summary ───────────────────────────────────────────────────
+  post-deploy:
+    name: Summary
+    runs-on: ubuntu-latest
+    needs: [deploy-client, deploy-server]
+    if: always()
+
+    steps:
+      - name: Generate summary
+        run: |
+          CLIENT="${{ needs.deploy-client.result }}"
+          SERVER="${{ needs.deploy-server.result }}"
+          echo "## 🚀 P26 Deploy Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Target  | Result  |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---------|---------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Client (Vercel) | ${CLIENT:-skipped} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Server (Render) | ${SERVER:-skipped} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Commit:** \`${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Triggered by:** ${{ github.event_name }}" >> "$GITHUB_STEP_SUMMARY"

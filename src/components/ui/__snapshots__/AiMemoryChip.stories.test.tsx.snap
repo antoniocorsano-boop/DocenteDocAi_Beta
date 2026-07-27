@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AiMemoryChip Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI application theme provider"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1eiehof-MuiPaper-root"
+    role="main"
+    style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+  >
+    <div
+      aria-label="Contesto AI: Test Context"
+      role="note"
+      style="display: flex; align-items: center; gap: var(--md-sys-spacing-4); padding: var(--md-sys-spacing-2) var(--md-sys-spacing-2); min-height: var(--md-sys-spacing-8); opacity: 0.6; transition: opacity var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard); user-select: none; background-color: var(--md-sys-color-tertiary-container); border-radius: var(--md-sys-shape-corner-full); border: var(--md-sys-border-width-normal) solid var(--md-sys-color-tertiary);"
+      title="Contesto utilizzato dall'AI"
+    >
+      <span
+        style="font-size: var(--md-sys-typescale-body-large-font-size); color: var(--md-sys-color-on-tertiary-container); font-weight: var(--md-sys-typescale-weight-bold); animation: pulse var(--md-sys-motion-duration-extra-long) var(--md-sys-motion-easing-standard) infinite;"
+      >
+        psychology
+      </span>
+      <span
+        style="font-size: var(--md-sys-typescale-body-large-font-size); font-weight: var(--md-sys-typescale-weight-extrabold); color: var(--md-sys-color-on-tertiary-container); text-transform: uppercase; letter-spacing: 0.15em;"
+      >
+        Test Context
+      </span>
+    </div>
+  </div>
+</div>
+`;

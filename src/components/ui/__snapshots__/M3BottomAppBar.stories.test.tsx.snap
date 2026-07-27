@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`M3BottomAppBar Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-g3p503-MuiPaper-root"
+    role="application"
+    style="--Paper-shadow: none;"
+  >
+    <div
+      style="width: var(--md-sys-percent-100); position: relative; display: flex; align-items: center; gap: var(--md-sys-spacing-2); padding: var(--md-sys-spacing-2) var(--md-sys-spacing-3); background-color: var(--md-sys-color-surface); border-top: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline-variant); box-sizing: border-box; box-shadow: none;"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;

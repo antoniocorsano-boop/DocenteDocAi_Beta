@@ -1,0 +1,80 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+.next/
+coverage/
+tmp/
+*.tmp
+test-results/
+*.test-results.json
+# Playwright debug screenshots generated at root
+debug-*.png
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+Icon?
+*.lnk
+
+# Backup files
+*.backup
+*.bak
+
+# CSS temp files
+*.css.temp
+*.css.final-cleanup
+*.css.legacy-removed
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.iml
+
+# Flowise specific
+.flowise/
+
+# Deprecated files
+.deprecated/
+node_modules
+# Misc
+scripts/*.local.*
+.vercel
+.env*.local
+
+# Debug files
+archive/debug/*.json
+
+# Local Netlify folder
+.netlify
+
+# Playwright and screenshot artifacts
+playwright-report/
+docs/screenshots/
+scripts/audit-md3-expressive.js
+
+# Lighthouse audit reports (auto-generated per run)
+audit/lighthouse/
+audit/bundle-stats.html
+
+*storybook.log
+storybook-static
+
+# TypeScript incremental build cache
+*.tsbuildinfo

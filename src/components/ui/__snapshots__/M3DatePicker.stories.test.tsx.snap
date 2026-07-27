@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`M3DatePicker Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-g3p503-MuiPaper-root"
+    role="application"
+    style="--Paper-shadow: none;"
+  >
+    <div
+      style="width: var(--md-sys-percent-100);"
+    >
+      <label
+        for=":r0:"
+        style="display: block; margin-bottom: var(--md-sys-spacing-2); font-size: var(--md-sys-typescale-body-large-font-size); font-family: var(--md-sys-typescale-body-large-font-family); font-weight: var(--md-sys-typescale-body-large-font-weight); color: var(--md-sys-color-on-surface);"
+      >
+        Test
+      </label>
+      <input
+        id=":r0:"
+        style="width: var(--md-sys-percent-100); padding: var(--md-sys-spacing-3); border-radius: var(--md-sys-shape-corner-small); border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline); box-sizing: border-box; background-color: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface); font-family: var(--md-sys-typescale-body-large-font-family); font-size: var(--md-sys-typescale-body-large-font-size);"
+        type="date"
+      />
+    </div>
+  </div>
+</div>
+`;

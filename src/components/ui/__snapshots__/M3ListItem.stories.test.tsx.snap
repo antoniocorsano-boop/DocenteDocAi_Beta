@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`M3ListItem Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-g3p503-MuiPaper-root"
+    role="application"
+    style="--Paper-shadow: none;"
+  >
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-xl5i8k-MuiListItem-root"
+    >
+      <div
+        class="MuiListItemText-root css-1suf81v-MuiListItemText-root"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-body1 css-1q8cnwh-MuiTypography-root"
+        >
+          Test
+        </div>
+      </div>
+    </li>
+  </div>
+</div>
+`;

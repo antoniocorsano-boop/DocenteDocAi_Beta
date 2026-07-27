@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architettura del Sistema Cognitivo Multi-Agente — DocenteDoc AI</title>
+  <style>
+    /* ── Reset / Base ──────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary:      #1a56a4;
+      --color-primary-dark: #0d3470;
+      --color-accent:       #e8f0fe;
+      --color-surface:      #ffffff;
+      --color-surface-alt:  #f8f9fc;
+      --color-border:       #d0d7e3;
+      --color-text:         #1a1f36;
+      --color-secondary:    #4a5568;
+      --color-success:      #0d6e4e;
+      --color-warning:      #92400e;
+
+      --font-heading: 'Georgia', 'Times New Roman', serif;
+      --font-body:    'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono:    'Consolas', 'Monaco', 'Courier New', monospace;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.10);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.10);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family:     var(--font-body);
+      color:           var(--color-text);
+      background:      #eef1f7;
+      line-height:     1.65;
+      padding:         2rem 1rem;
+    }
+
+    /* ── Page wrapper ──────────────────────────────────────────────────────── */
+    .page {
+      max-width:     900px;
+      margin:        0 auto;
+      background:    var(--color-surface);
+      border:        1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow:    var(--shadow-md);
+      overflow:      hidden;
+    }
+
+    /* ── Cover ─────────────────────────────────────────────────────────────── */
+    .cover {
+      background:  linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #2d7fd3 100%);
+      color:       #fff;
+      padding:     3.5rem 3rem 3rem;
+    }
+
+    .cover-badge {
+      display:       inline-block;
+      background:    rgba(255,255,255,.18);
+      border:        1px solid rgba(255,255,255,.35);
+      border-radius: 20px;
+      padding:       .25rem .85rem;
+      font-size:     .8rem;
+      letter-spacing:.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .cover h1 {
+      font-family:   var(--font-heading);
+      font-size:     clamp(1.6rem, 3vw, 2.4rem);
+      font-weight:   700;
+      line-height:   1.25;
+      margin-bottom: .75rem;
+    }
+
+    .cover .subtitle {
+      font-size:     1.05rem;
+      opacity:       .85;
+      margin-bottom: 2.5rem;
+    }
+
+    .cover-meta {
+      display:        flex;
+      flex-wrap:      wrap;
+      gap:            1.5rem;
+      border-top:     1px solid rgba(255,255,255,.25);
+      padding-top:    1.5rem;
+      font-size:      .85rem;
+      opacity:        .85;
+    }
+
+    .cover-meta span { display: flex; align-items: center; gap: .4rem; }
+
+    /* ── Content body ──────────────────────────────────────────────────────── */
+    .content { padding: 2.5rem 3rem; }
+
+    @media (max-width: 600px) {
+      .cover      { padding: 2rem 1.5rem; }
+      .content    { padding: 1.5rem; }
+      .cover h1   { font-size: 1.5rem; }
+    }
+
+    /* ── TOC ───────────────────────────────────────────────────────────────── */
+    .toc {
+      background:    var(--color-accent);
+      border:        1px solid #c6d4f0;
+      border-radius: var(--radius-md);
+      padding:       1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .toc h2 {
+      font-size:     .85rem;
+      text-transform: uppercase;
+      letter-spacing:.08em;
+      color:         var(--color-primary);
+      margin-bottom: .75rem;
+    }
+
+    .toc ol {
+      list-style:  none;
+      counter-reset: toc;
+    }
+
+    .toc li {
+      counter-increment: toc;
+      display:    flex;
+      gap:        .6rem;
+      font-size:  .9rem;
+      margin-bottom: .3rem;
+    }
+
+    .toc li::before {
+      content:    counter(toc) ".";
+      color:      var(--color-primary);
+      font-weight: 600;
+      min-width:  1.3rem;
+    }
+
+    .toc a {
+      color:       var(--color-primary);
+      text-decoration: none;
+    }
+
+    .toc a:hover { text-decoration: underline; }
+
+    /* ── Section headings ──────────────────────────────────────────────────── */
+    .section { margin-bottom: 3rem; }
+
+    h2.section-title {
+      font-family:   var(--font-heading);
+      font-size:     1.4rem;
+      font-weight:   700;
+      color:         var(--color-primary-dark);
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: .4rem;
+      margin-bottom:  1.1rem;
+      display:        flex;
+      align-items:    center;
+      gap:            .5rem;
+    }
+
+    h2.section-title .num {
+      background:    var(--color-primary);
+      color:         #fff;
+      width:         1.8rem;
+      height:        1.8rem;
+      border-radius: 50%;
+      display:       inline-flex;
+      align-items:   center;
+      justify-content: center;
+      font-size:     .85rem;
+      font-family:   var(--font-body);
+      flex-shrink:   0;
+    }
+
+    h3 {
+      font-size:     1.05rem;
+      font-weight:   600;
+      color:         var(--color-primary);
+      margin:        1.4rem 0 .5rem;
+    }
+
+    p { margin-bottom: .9rem; }
+
+    /* ── Pipeline diagram ──────────────────────────────────────────────────── */
+    .pipeline {
+      display:       flex;
+      flex-direction: column;
+      align-items:   flex-start;
+      gap:           0;
+      margin:        1.5rem 0;
+    }
+
+    .pipeline-step {
+      display:        flex;
+      align-items:    center;
+      gap:            .8rem;
+    }
+
+    .pipeline-box {
+      background:    var(--color-primary);
+      color:         #fff;
+      border-radius: var(--radius-sm);
+      padding:       .45rem 1rem;
+      font-size:     .875rem;
+      font-weight:   600;
+      min-width:     220px;
+      display:       flex;
+      align-items:   center;
+      gap:           .5rem;
+    }
+
+    .pipeline-box.new {
+      background:  var(--color-success);
+    }
+
+    .pipeline-label {
+      font-size:   .8rem;
+      color:       var(--color-secondary);
+      font-style:  italic;
+    }
+
+    .pipeline-arrow {
+      width:        2px;
+      height:       22px;
+      background:   var(--color-primary);
+      margin-left:  1.65rem;
+      position:     relative;
+    }
+
+    .pipeline-arrow::after {
+      content:    '';
+      position:   absolute;
+      bottom:     -6px;
+      left:       -4px;
+      border:     5px solid transparent;
+      border-top: 6px solid var(--color-primary);
+    }
+
+    /* ── Components grid ───────────────────────────────────────────────────── */
+    .components-grid {
+      display:               grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap:                   1rem;
+      margin:                1.25rem 0;
+    }
+
+    .component-card {
+      border:        1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding:       1rem 1.1rem;
+      background:    var(--color-surface-alt);
+    }
+
+    .component-card .tag {
+      display:       inline-block;
+      background:    var(--color-accent);
+      color:         var(--color-primary);
+      border-radius: 20px;
+      font-size:     .72rem;
+      font-weight:   600;
+      padding:       .15rem .6rem;
+      letter-spacing:.04em;
+      margin-bottom: .5rem;
+    }
+
+    .component-card h4 {
+      font-size:     .95rem;
+      font-weight:   600;
+      margin-bottom: .35rem;
+      color:         var(--color-primary-dark);
+    }
+
+    .component-card p {
+      font-size:   .85rem;
+      color:       var(--color-secondary);
+      margin:      0;
+    }
+
+    /* ── Agents table ──────────────────────────────────────────────────────── */
+    table {
+      width:           100%;
+      border-collapse: collapse;
+      font-size:       .875rem;
+      margin:          1rem 0;
+    }
+
+    thead th {
+      background:  var(--color-primary);
+      color:       #fff;
+      padding:     .55rem .9rem;
+      text-align:  left;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) { background: var(--color-surface-alt); }
+
+    tbody td {
+      padding:     .5rem .9rem;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+
+    /* ── Lifecycle diagram ─────────────────────────────────────────────────── */
+    .lifecycle {
+      display:       flex;
+      align-items:   center;
+      gap:           .4rem;
+      flex-wrap:     wrap;
+      margin:        1rem 0;
+    }
+
+    .state-box {
+      border:        2px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      padding:       .35rem .8rem;
+      font-size:     .85rem;
+      font-weight:   600;
+      color:         var(--color-primary-dark);
+    }
+
+    .state-box.success { border-color: var(--color-success); color: var(--color-success); }
+    .state-box.error   { border-color: #c0392b; color: #c0392b; }
+
+    .state-arrow { font-size: 1.1rem; color: var(--color-secondary); }
+
+    /* ── Callout boxes ─────────────────────────────────────────────────────── */
+    .callout {
+      border-left:   4px solid var(--color-primary);
+      background:    var(--color-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding:       .9rem 1.2rem;
+      margin:        1.2rem 0;
+      font-size:     .9rem;
+    }
+
+    .callout.success { border-color: var(--color-success); background: #f0faf5; }
+    .callout.warning { border-color: #d97706; background: #fffbeb; }
+
+    .callout strong { display: block; margin-bottom: .3rem; }
+
+    /* ── Score table ───────────────────────────────────────────────────────── */
+    .score-row {
+      display:       flex;
+      align-items:   center;
+      gap:           1rem;
+      padding:       .5rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .score-label { min-width: 180px; font-size: .9rem; }
+
+    .score-bar-wrap {
+      flex:         1;
+      background:   #e9ecef;
+      border-radius: 20px;
+      height:       8px;
+      overflow:     hidden;
+    }
+
+    .score-bar {
+      height:       100%;
+      border-radius: 20px;
+      background:   var(--color-primary);
+    }
+
+    .score-stars { font-size: .9rem; min-width: 70px; }
+
+    /* ── Code block ────────────────────────────────────────────────────────── */
+    pre {
+      background:    #1e2235;
+      color:         #cdd6f4;
+      padding:       1rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-family:   var(--font-mono);
+      font-size:     .825rem;
+      overflow-x:    auto;
+      margin:        1rem 0;
+      line-height:   1.6;
+    }
+
+    code { font-family: var(--font-mono); font-size: .85em; }
+
+    /* ── Footer ────────────────────────────────────────────────────────────── */
+    .doc-footer {
+      background:  var(--color-surface-alt);
+      border-top:  1px solid var(--color-border);
+      padding:     1.25rem 3rem;
+      font-size:   .8rem;
+      color:       var(--color-secondary);
+      display:     flex;
+      justify-content: space-between;
+      flex-wrap:   wrap;
+      gap:         .5rem;
+    }
+
+    @media print {
+      body       { background: #fff; padding: 0; }
+      .page      { box-shadow: none; border: none; max-width: 100%; }
+      pre        { white-space: pre-wrap; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Cover ──────────────────────────────────────────────────────────── -->
+  <div class="cover">
+    <div class="cover-badge">Documento Tecnico — Revisione 1.0</div>
+    <h1>Sistema di Interfaccia Cognitiva<br>Multi-Agente per Supporto Didattico</h1>
+    <p class="subtitle">
+      Architettura della pipeline cognitiva adattiva — Progetto DocenteDoc AI
+    </p>
+    <div class="cover-meta">
+      <span>📅 Data: Marzo 2026</span>
+      <span>🏗 Versione: P13–P21 (ciclo completo)</span>
+      <span>🔒 Classificazione: Uso interno / PA</span>
+    </div>
+  </div>
+
+  <!-- ── Content ────────────────────────────────────────────────────────── -->
+  <div class="content">
+
+    <!-- TOC -->
+    <div class="toc">
+      <h2>Indice</h2>
+      <ol>
+        <li><a href="#obiettivo">Obiettivo del sistema</a></li>
+        <li><a href="#architettura">Architettura generale — Pipeline cognitiva</a></li>
+        <li><a href="#componenti">Componenti principali</a></li>
+        <li><a href="#agenti">Modello Multi-Agente</a></li>
+        <li><a href="#lifecycle">Ciclo di vita dell'esecuzione (TaskState)</a></li>
+        <li><a href="#carico">Gestione del carico cognitivo</a></li>
+        <li><a href="#sicurezza">Sicurezza e robustezza</a></li>
+        <li><a href="#valutazione">Valutazione architetturale</a></li>
+        <li><a href="#didattica">Applicazione didattica</a></li>
+        <li><a href="#pa">Coerenza con linee guida PA 2024</a></li>
+        <li><a href="#etica">Considerazioni etiche</a></li>
+        <li><a href="#evoluzioni">Evoluzioni future</a></li>
+      </ol>
+    </div>
+
+    <!-- 1. Obiettivo -->
+    <div class="section" id="obiettivo">
+      <h2 class="section-title"><span class="num">1</span> Obiettivo del sistema</h2>
+      <p>
+        DocenteDoc AI è un sistema di supporto didattico per i docenti italiani delle scuole secondarie.
+        La componente <strong>Orbit / Jarvis</strong> costituisce il nucleo cognitivo dell'applicazione:
+        un orchestratore multi-agente che percepisce il contesto operativo del docente, coordina agenti
+        intelligenti specializzati ed espone il risultato attraverso un'interfaccia adattiva.
+      </p>
+      <p>Il sistema persegue quattro obiettivi fondamentali:</p>
+      <ul style="margin: .75rem 0 .75rem 1.5rem;">
+        <li>Supportare la <strong>pianificazione didattica</strong> (UDA, schede, attività);</li>
+        <li>Ridurre il <strong>carico cognitivo</strong> del docente durante l'uso;</li>
+        <li>Coordinare più <strong>agenti intelligenti</strong> senza conflitti;</li>
+        <li>Spiegare in modo trasparente <strong>cosa sta accadendo</strong> (XAI).</li>
+      </ul>
+    </div>
+
+    <!-- 2. Architettura -->
+    <div class="section" id="architettura">
+      <h2 class="section-title"><span class="num">2</span> Architettura generale — Pipeline cognitiva</h2>
+      <p>
+        Il sistema è strutturato come una <strong>pipeline cognitiva a 8 stadi</strong>, ciascuno con una
+        responsabilità atomica. Ogni stadio produce un artefatto immutabile consumato dallo stadio successivo;
+        non esiste accoppiamento diretto tra stadi non adiacenti.
+      </p>
+
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <div class="pipeline-box">📡 patternDetector</div>
+          <span class="pipeline-label">P16 — rileva intenzione, complessità, confidence</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-step">
+          <div class="pipeline-box">🧠 cognitiveLoad</div>
+          <span class="pipeline-label">P17 — misura e limita il carico cognitivo</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-step">
+          <div class="pipeline-box">👁 attentionRouter</div>
+          <span class="pipeline-label">P18 — seleziona l'agente primario</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-step">
+          <div class="pipeline-box">🤝 coordinationEngine</div>
+          <span class="pipeline-label">P19 — assegna ruoli, gestisce handoff</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-step">
+          <div class="pipeline-box new">⚙ executionEngine</div>
+          <span class="pipeline-label">P20 — esegue azioni reali con lifecycle</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-step">
+          <div class="pipeline-box new">💬 narrativeLayer</div>
+          <span class="pipeline-label">P21 — traduce in linguaggio umano (IT)</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-step">
+          <div class="pipeline-box">🖥 JarvisNexus UI</div>
+          <span class="pipeline-label">Interfaccia adattiva — banner narrativo, orb animato</span>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <strong>Principio architetturale chiave</strong>
+        Ogni componente UI <em>riceve</em> dati già elaborati — non decide mai.
+        Tutta la logica di coordinazione, attenzione ed esecuzione avviene fuori dal layer React,
+        in moduli TypeScript puri testabili indipendentemente.
+      </div>
+    </div>
+
+    <!-- 3. Componenti -->
+    <div class="section" id="componenti">
+      <h2 class="section-title"><span class="num">3</span> Componenti principali</h2>
+      <div class="components-grid">
+
+        <div class="component-card">
+          <div class="tag">P16</div>
+          <h4>Behavior Analysis Module</h4>
+          <p>Rileva l'intenzione dell'utente (<code>explore | execute | learn | idle</code>),
+             stima la complessità del task e calcola la confidence dell'agente.</p>
+        </div>
+
+        <div class="component-card">
+          <div class="tag">P17</div>
+          <h4>Cognitive Load Manager</h4>
+          <p>Calcola il livello di carico cognitivo corrente e limita
+             l'intensità della UI per prevenire l'overload informativo.</p>
+        </div>
+
+        <div class="component-card">
+          <div class="tag">P18</div>
+          <h4>Attention Routing System</h4>
+          <p>Assegna a ogni agente uno stato di attenzione:
+             <code>primary | secondary | background | suppressed</code>.
+             Un solo agente può essere primario per ciclo.</p>
+        </div>
+
+        <div class="component-card">
+          <div class="tag">P19</div>
+          <h4>Multi-Agent Coordination Engine</h4>
+          <p>Assegna ruoli operativi agli agenti attivi, costruisce sequenze
+             di azioni, gestisce il meccanismo di handoff tra personalità
+             incompatibili con l'azione richiesta.</p>
+        </div>
+
+        <div class="component-card">
+          <div class="tag">P20</div>
+          <h4>Execution Engine</h4>
+          <p>Trasforma <code>AgentAction[]</code> in side-effect reali
+             tramite un registry di handler iniettabili. Espone un
+             lifecycle <code>TaskState</code> per il monitoraggio.</p>
+        </div>
+
+        <div class="component-card">
+          <div class="tag">P21</div>
+          <h4>Narrative Layer</h4>
+          <p>Prende l'azione prioritaria e la traduce in un messaggio
+             italiano comprensibile: <em>"Analyst: Analisi in corso…"</em>.
+             Supporto per XAI (eXplainable AI).</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4. Agenti -->
+    <div class="section" id="agenti">
+      <h2 class="section-title"><span class="num">4</span> Modello Multi-Agente</h2>
+      <p>
+        Il sistema definisce quattro <strong>personalità agentiche</strong>, ciascuna con un insieme
+        fisso di capacità operative. Il meccanismo di <em>handoff</em> garantisce che le azioni
+        vengano sempre eseguite dall'agente più adeguato, anche quando l'agente primario non
+        è in grado di gestirle direttamente.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Personalità</th>
+            <th>Capacità operative</th>
+            <th>Ruolo nel sistema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Analyst</strong></td>
+            <td><code>analyze, plan</code></td>
+            <td>Ispeziona il contesto, costruisce approcci strutturati prima di agire.</td>
+          </tr>
+          <tr>
+            <td><strong>Executor</strong></td>
+            <td><code>execute</code></td>
+            <td>Esegue azioni concrete (avvio flussi, task automation).</td>
+          </tr>
+          <tr>
+            <td><strong>Mentor</strong></td>
+            <td><code>explain, plan</code></td>
+            <td>Produce spiegazioni per l'utente; guida nei percorsi di apprendimento.</td>
+          </tr>
+          <tr>
+            <td><strong>Observer</strong></td>
+            <td><code>observe</code></td>
+            <td>Monitoraggio passivo; non produce output visibili ma alimenta il contesto futuro.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Regole di coordinazione</h3>
+      <p>La funzione <code>coordinateAgents()</code> applica le seguenti regole in ordine di priorità:</p>
+      <ol style="margin: .5rem 0 .5rem 1.5rem; line-height: 2;">
+        <li><strong>Execute</strong>: Executor diretto, oppure handoff dall'agente primario.</li>
+        <li><strong>Learn</strong>: Il Mentor produce una spiegazione; fallback all'Analyst.</li>
+        <li><strong>Explore</strong>: Tutti gli agenti non soppressi lavorano in parallelo.</li>
+        <li><strong>High complexity</strong>: Pipeline Analyst → handoff → Executor.</li>
+        <li><strong>Fallback</strong>: L'agente primario osserva silenziosamente (priority 1).</li>
+      </ol>
+    </div>
+
+    <!-- 5. Lifecycle -->
+    <div class="section" id="lifecycle">
+      <h2 class="section-title"><span class="num">5</span> Ciclo di vita dell'esecuzione</h2>
+      <p>
+        Il <code>runExecutionPipeline()</code> espone un <strong>ciclo di vita esplicito</strong>
+        tramite il callback <code>onStateChange</code> dell'<code>ExecutionContext</code>:
+      </p>
+
+      <div class="lifecycle">
+        <div class="state-box">idle</div>
+        <span class="state-arrow">→</span>
+        <div class="state-box">running</div>
+        <span class="state-arrow">→</span>
+        <div class="state-box success">success</div>
+      </div>
+      <div class="lifecycle" style="margin-top: .25rem;">
+        <div class="state-box" style="opacity:.4;">idle</div>
+        <span class="state-arrow">→</span>
+        <div class="state-box">running</div>
+        <span class="state-arrow">→</span>
+        <div class="state-box error">error (continua)</div>
+      </div>
+
+      <div class="callout warning">
+        <strong>Anti-loop guard</strong>
+        La pipeline è protetta da un meccanismo di deduplicazione chiave-ref
+        (<code>lastPipelineKeyRef</code>) nel componente <code>UserWorkspace</code>:
+        lo stesso set di azioni non viene mai rieseguito due volte consecutivamente,
+        prevenendo loop da <code>useEffect</code>.
+      </div>
+
+      <pre>// Esempio di utilizzo con lifecycle
+await runExecutionPipeline(actions, {
+  dispatch: storeDispatch,
+  onStateChange: (state, action) => {
+    if (state === 'running')  setTaskState('running');
+    if (state === 'success')  setTaskState('idle');
+    if (state === 'error')    setTaskState('error');
+  },
+});</pre>
+    </div>
+
+    <!-- 6. Carico cognitivo -->
+    <div class="section" id="carico">
+      <h2 class="section-title"><span class="num">6</span> Gestione del carico cognitivo</h2>
+      <p>
+        Il <code>cognitiveLoad</code> module calcola un <strong>punteggio aggregato</strong>
+        a partire da: numero di agenti attivi, numero di flussi in esecuzione, complessità
+        stimata del task e larghezza del viewport. Il risultato condiziona direttamente
+        la presenza visiva del sistema:
+      </p>
+      <table>
+        <thead>
+          <tr><th>Livello</th><th>Condizione</th><th>Comportamento UI</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>low</strong></td>
+            <td>score ≤ 3</td>
+            <td>Interfaccia completa, animazioni attive.</td>
+          </tr>
+          <tr>
+            <td><strong>medium</strong></td>
+            <td>score 4–6</td>
+            <td>Riduzione delle animazioni, limita agenti secondari.</td>
+          </tr>
+          <tr>
+            <td><strong>high</strong></td>
+            <td>score ≥ 7</td>
+            <td>Modalità minimale, solo agente primario attivo.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 7. Sicurezza -->
+    <div class="section" id="sicurezza">
+      <h2 class="section-title"><span class="num">7</span> Sicurezza e robustezza</h2>
+      <ul style="margin: .75rem 0 .75rem 1.5rem; line-height: 2;">
+        <li>
+          <strong>Chiavi API esclusivamente server-side</strong>: tutte le chiamate AI
+          transitano per <code>api/ai.ts</code> (Vercel Edge Function); nessuna chiave
+          è esposta nel bundle client.
+        </li>
+        <li>
+          <strong>Nessuna automazione non approvata</strong>: il sistema suggerisce e
+          coordina, ma non esegue azioni distruttive senza conferma esplicita dell'utente.
+        </li>
+        <li>
+          <strong>Anti-spam / anti-loop</strong>: <code>dedupeActions()</code> + ref-guard
+          nel componente impediscono esecuzioni ripetute per lo stesso contesto.
+        </li>
+        <li>
+          <strong>Error containment</strong>: ogni handler è avvolto in un blocco
+          <code>try/catch</code>; un errore su un'azione non blocca le successive.
+        </li>
+        <li>
+          <strong>GDPR</strong>: i dati degli alunni non sono mai inviati alle API AI;
+          il modulo <code>dataRetention.ts</code> applica auto-delete degli artefatti AI
+          dopo 365 giorni.
+        </li>
+      </ul>
+    </div>
+
+    <!-- 8. Valutazione -->
+    <div class="section" id="valutazione">
+      <h2 class="section-title"><span class="num">8</span> Valutazione architetturale</h2>
+
+      <div class="score-row">
+        <span class="score-label">Architettura</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:100%"></div></div>
+        <span class="score-stars">⭐⭐⭐⭐⭐</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Robustezza</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:80%"></div></div>
+        <span class="score-stars">⭐⭐⭐⭐</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Scalabilità</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:100%"></div></div>
+        <span class="score-stars">⭐⭐⭐⭐⭐</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">UX Intelligence</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:80%"></div></div>
+        <span class="score-stars">⭐⭐⭐⭐</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Production readiness</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:80%"></div></div>
+        <span class="score-stars">⭐⭐⭐⭐</span>
+      </div>
+
+      <div class="callout" style="margin-top:1.25rem;">
+        Il sistema raggiunge un grado di maturità stimato <strong>all'80–85%</strong> di un sistema
+        di produzione enterprise. Le aree di miglioramento riguardano principalmente la memory
+        persistente degli agenti (apprendimento cross-sessione) e l'integrazione con sistemi
+        scolastici terzi (SIDI, Argo, ecc.).
+      </div>
+    </div>
+
+    <!-- 9. Didattica -->
+    <div class="section" id="didattica">
+      <h2 class="section-title"><span class="num">9</span> Applicazione didattica</h2>
+      <p>Nel contesto scolastico italiano il sistema offre:</p>
+      <table>
+        <thead><tr><th>Scenario d'uso</th><th>Componente coinvolto</th><th>Beneficio</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Pianificazione UDA</td>
+            <td>Analyst + Executor</td>
+            <td>Genera struttura UDA e compila i campi automaticamente.</td>
+          </tr>
+          <tr>
+            <td>Spiegazione competenze</td>
+            <td>Mentor</td>
+            <td>Traduce indicatori nazionali in linguaggio operativo per il docente.</td>
+          </tr>
+          <tr>
+            <td>Monitoraggio classe</td>
+            <td>Observer + narrativeLayer</td>
+            <td>Aggiorna silenziosamente il contesto e avvisa solo se necessario.</td>
+          </tr>
+          <tr>
+            <td>Valutazione studenti</td>
+            <td>Analyst + Cognitive Load</td>
+            <td>Riduce la complessità visiva quando il docente gestisce molte schede.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 10. PA -->
+    <div class="section" id="pa">
+      <h2 class="section-title"><span class="num">10</span> Coerenza con linee guida PA 2024</h2>
+      <table>
+        <thead><tr><th>Principio PA / AGID</th><th>Implementazione nel sistema</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Trasparenza algoritmica</td>
+            <td><code>narrativeLayer</code> — ogni azione è spiegata in lingua naturale.</td>
+          </tr>
+          <tr>
+            <td>Controllo umano (human-in-the-loop)</td>
+            <td>Il sistema suggerisce; l'utente decide. Nessun dispatch irrevocabile.</td>
+          </tr>
+          <tr>
+            <td>Accessibilità (WCAG 2.1 AA)</td>
+            <td><code>aria-live</code> sul banner narrativo; <code>aria-label</code> su ogni interattivo.</td>
+          </tr>
+          <tr>
+            <td>Privacy by design (GDPR art. 25)</td>
+            <td>Data retention automática 365 gg; nessun dato alunno inviato a API esterne.</td>
+          </tr>
+          <tr>
+            <td>Interoperabilità</td>
+            <td>Architettura modulare: ogni componente è sostituibile indipendentemente.</td>
+          </tr>
+          <tr>
+            <td>Sicurezza (OWASP Top 10)</td>
+            <td>Chiavi server-side; nessun XSS possibile; sanitizzazione input.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 11. Etica -->
+    <div class="section" id="etica">
+      <h2 class="section-title"><span class="num">11</span> Considerazioni etiche</h2>
+      <div class="callout success">
+        <strong>Principio guida: supporto, non sostituzione</strong>
+        Il sistema è progettato per amplificare le capacità del docente, non per sostituire
+        il suo giudizio professionale. Ogni output AI è etichettato e spiegato.
+      </div>
+      <ul style="margin: .75rem 0 .75rem 1.5rem; line-height: 2;">
+        <li>Nessuna automazione avviene senza un'azione utente esplicita iniziale.</li>
+        <li>Il Narrative Layer garantisce la <strong>spiegabilità</strong> di ogni azione degli agenti.</li>
+        <li>Il Cognitive Load Manager protegge l'utente da overload informativo involontario.</li>
+        <li>Nessun dato degli studenti viene utilizzato per l'addestramento di modelli AI.</li>
+        <li>L'architettura multi-agente evita il single point of failure e il single point of bias.</li>
+      </ul>
+    </div>
+
+    <!-- 12. Evoluzioni -->
+    <div class="section" id="evoluzioni">
+      <h2 class="section-title"><span class="num">12</span> Evoluzioni future</h2>
+      <table>
+        <thead><tr><th>Feature</th><th>Priorità</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Memory persistente degli agenti</td>
+            <td>Alta</td>
+            <td>Gli agenti apprendono le preferenze del docente cross-sessione.</td>
+          </tr>
+          <tr>
+            <td>Personalizzazione avanzata</td>
+            <td>Media</td>
+            <td>Soglie, priorità e personalità configurabili dall'utente.</td>
+          </tr>
+          <tr>
+            <td>Integrazione SIDI / Argo</td>
+            <td>Alta</td>
+            <td>Sincronizzazione con i registri scolastici nazionali.</td>
+          </tr>
+          <tr>
+            <td>Analytics didattici</td>
+            <td>Media</td>
+            <td>Dashboard longitudinale sull'efficacia delle UDA pianificate.</td>
+          </tr>
+          <tr>
+            <td>Certificazione PA (AGID)</td>
+            <td>Alta</td>
+            <td>SPID, dichiarazione di accessibilità, pentest, conformità CAF.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout" style="margin-top:1.5rem;">
+        <strong>Conclusione</strong>
+        Questo sistema rappresenta <em>un'interfaccia cognitiva adattiva basata su orchestrazione
+        multi-agente</em>, progettata per migliorare l'efficacia e la sostenibilità dell'interazione
+        uomo-macchina in ambito educativo. L'architettura — testata con 156 test unitari, tsc = 0,
+        eslint = 0 — è matura, modulare e pronta per la fase pilota in contesto scolastico.
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <div class="doc-footer">
+    <span>DocenteDoc AI — Sistema Orbit/Jarvis — Ciclo P13–P21</span>
+    <span>Documento tecnico — Marzo 2026 — Uso riservato</span>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>

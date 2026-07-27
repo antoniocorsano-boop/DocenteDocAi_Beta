@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UseCaseCard Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI application theme provider"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1eiehof-MuiPaper-root"
+    role="main"
+    style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+  >
+    <div
+      style="background-color: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: var(--md-sys-spacing-6); border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline);"
+    >
+      <div
+        style="display: flex; align-items: center; gap: var(--md-sys-spacing-6); margin-bottom: var(--md-sys-spacing-8);"
+      >
+        <div
+          style="border-radius: var(--md-sys-shape-corner-medium); background-color: var(--md-sys-color-primary); width: var(--md-sys-spacing-32); height: var(--md-sys-spacing-32); display: flex; align-items: center; justify-content: center; color: var(--md-sys-color-on-primary);"
+        >
+          <span
+            aria-hidden="true"
+            class="material-symbols-outlined MuiBox-root css-197oga1"
+          >
+            lightbulb
+          </span>
+        </div>
+        <p
+          class="MuiTypography-root MuiTypography-button css-16bnig1-MuiTypography-root"
+        >
+          Scenario
+        </p>
+      </div>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-rizt0-MuiTypography-root"
+      >
+        "
+        Test
+        "
+      </p>
+      <ol
+        style="margin-top: var(--md-sys-spacing-4);"
+      >
+        <li
+          style="display: flex; gap: var(--md-sys-spacing-8); align-items: flex-start;"
+        >
+          <span
+            style="background-color: var(--md-sys-color-surface); color: var(--md-sys-color-primary); width: var(--md-sys-spacing-6); height: var(--md-sys-spacing-6); border-radius: var(--md-sys-shape-corner-full); display: flex; align-items: center; justify-content: center; font-weight: var(--md-sys-typescale-weight-black); flex-shrink: 0; transition: color var(--md-sys-motion-duration-medium);"
+          >
+            1
+          </span>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-1wfgid7-MuiTypography-root"
+          >
+            Step 1
+          </p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+`;

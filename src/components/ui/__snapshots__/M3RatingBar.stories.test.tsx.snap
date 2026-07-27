@@ -1,0 +1,56 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`M3RatingBar Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-g3p503-MuiPaper-root"
+    role="application"
+    style="--Paper-shadow: none;"
+  >
+    <div
+      aria-disabled="false"
+      aria-label="rating"
+      aria-readonly="false"
+      role="group"
+      style="display: inline-flex; gap: var(--md-sys-spacing-1); align-items: center;"
+    >
+      <button
+        aria-pressed="true"
+        style="border: medium; background: transparent; cursor: pointer; color: var(--md-sys-color-primary); font-size: var(--md-sys-typescale-headline-small); line-height: 1; padding: 0px;"
+        type="button"
+      >
+        ★
+      </button>
+      <button
+        aria-pressed="true"
+        style="border: medium; background: transparent; cursor: pointer; color: var(--md-sys-color-primary); font-size: var(--md-sys-typescale-headline-small); line-height: 1; padding: 0px;"
+        type="button"
+      >
+        ★
+      </button>
+      <button
+        aria-pressed="true"
+        style="border: medium; background: transparent; cursor: pointer; color: var(--md-sys-color-primary); font-size: var(--md-sys-typescale-headline-small); line-height: 1; padding: 0px;"
+        type="button"
+      >
+        ★
+      </button>
+      <button
+        aria-pressed="false"
+        style="border: medium; background: transparent; cursor: pointer; color: var(--md-sys-color-outline)-variant; font-size: var(--md-sys-typescale-headline-small); line-height: 1; padding: 0px;"
+        type="button"
+      >
+        ★
+      </button>
+      <button
+        aria-pressed="false"
+        style="border: medium; background: transparent; cursor: pointer; color: var(--md-sys-color-outline)-variant; font-size: var(--md-sys-typescale-headline-small); line-height: 1; padding: 0px;"
+        type="button"
+      >
+        ★
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,28 @@
+{
+  "models": [
+    {
+      "title": "Local Gemma",
+      "provider": "ollama",
+      "model": "gemma3:4b",
+      "apiBase": "http://localhost:11434"
+    }
+  ],
+  "agents": [
+    {
+      "name": "DocenteAI",
+      "model": "Local Gemma",
+      "description": "Un agente AI che analizza il progetto, legge i file del codice e fornisce suggerimenti, correzioni e refactor passo passo.",
+      "systemPrompt": "You are a helpful coding assistant. Analyze the current VS Code project files and suggest improvements, fix bugs, refactor code, and provide step-by-step instructions.",
+      "memory": {
+        "type": "local",
+        "maxTokens": 2000
+      },
+      "capabilities": [
+        "read_project_files",
+        "suggest_code_changes",
+        "refactor_code",
+        "multi_step_reasoning"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`M3IconButton Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-g3p503-MuiPaper-root"
+    role="application"
+    style="--Paper-shadow: none;"
+  >
+    <button
+      aria-label="Test button"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1f6rtmh-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      title="Test button"
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+        class="material-symbols-outlined MuiBox-root css-t4ole3"
+      >
+        test-icon
+      </span>
+    </button>
+  </div>
+</div>
+`;

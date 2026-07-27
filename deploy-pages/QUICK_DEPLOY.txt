@@ -1,0 +1,35 @@
+================================================================================
+  DOCENTEDOC AI — ENHANCED TEACHER LANDING PAGE (READY TO DEPLOY)
+================================================================================
+
+✅ PAGES JUST IMPROVED:
+- Richer hero with modern layout
+- "Novità recenti" section highlighting your latest fixes (drawer, back nav, Copilot, docs)
+- Better cards, steps, and visual design
+- Fully responsive
+- Professional Italian teacher-focused content
+
+FILES IN THIS FOLDER:
+- index.html          → Standalone enhanced page (use this)
+- .nojekyll
+- QUICK_DEPLOY.txt
+
+================================================================================
+DEPLOY OPTIONS (ALL FREE & NO TERMINAL NEEDED)
+================================================================================
+
+OPZIONE 1 — NETLIFY DROP (RECOMMENDED - 20 seconds)
+1. Go to: https://app.netlify.com/drop
+2. Drag the entire "deploy-pages" folder (or just index.html) onto the page
+3. Done! You get a free URL instantly.
+
+OPZIONE 2 — GITHUB PAGES (via browser)
+1. Go to: https://github.com/antoniocorsano-boop/docentedocai
+2. Click "Add file" → "Upload files"
+3. Drag index.html + .nojekyll from this folder
+4. Commit changes
+5. Go to Settings → Pages → Source = "Deploy from a branch" (main / root)
+6. Your page will be live at:
+   https://antoniocorsano-boop.github.io/docentedocai/
+
+================================================================================

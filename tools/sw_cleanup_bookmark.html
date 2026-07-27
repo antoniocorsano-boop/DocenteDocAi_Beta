@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SW Cleanup Bookmarklet</title>
+  <style>body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:40px}a{display:inline-block;padding:12px 18px;background:#0b74de;color:#fff;border-radius:6px;text-decoration:none}</style>
+</head>
+<body>
+  <h1>SW Cleanup Bookmarklet</h1>
+  <p>Drag the button below to your bookmarks bar (or create a new bookmark and paste the code into the URL field).</p>
+  <p>
+    <a id="bm" href="javascript:(async()=>{try{if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs){console.log('Unregistering',r.scope);await r.unregister()}}if('caches' in window){const keys=await caches.keys();for(const k of keys){await caches.delete(k)}}try{localStorage.clear();sessionStorage.clear()}catch(e){}alert('Service workers unregistered and caches cleared — page will reload');}catch(e){alert('Cleanup error: '+e)}location.reload();})();">SW cleanup — drag to bookmarks</a>
+  </p>
+  <h3>If dragging doesn't work, create the bookmark manually</h3>
+  <ol>
+    <li>Open the bookmarks bar (Ctrl+Shift+B) and choose "Add page" or right-click &gt; "Add bookmark".</li>
+    <li>Give it a name like "Unregister SW".</li>
+    <li>Copy the code from the box below and paste it into the URL/location field of the new bookmark.</li>
+    <li>Save the bookmark, visit the problematic site and click the bookmark.</li>
+  </ol>
+  <label for="code">Bookmarklet code (copy all):</label>
+  <textarea id="code" style="width:100%;height:160px;margin-top:8px;font-family:monospace">javascript:(async()=>{try{if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs){console.log('Unregistering',r.scope);await r.unregister()}}if('caches' in window){const keys=await caches.keys();for(const k of keys){await caches.delete(k)}}try{localStorage.clear();sessionStorage.clear()}catch(e){}alert('Service workers unregistered and caches cleared — page will reload');}catch(e){alert('Cleanup error: '+e)}location.reload();})();</textarea>
+  <p>Tip: if the browser blocks pasting into the URL field, create the bookmark with any URL, save it, then edit the bookmark and replace the URL with the code above.</p>
+  <hr>
+  <p>Usage: open the site where you see the issue, then click the bookmark you just saved. After the alert, close all tabs for that site and open a single Incognito tab to verify the page loads cleanly.</p>
+</body>
+</html>

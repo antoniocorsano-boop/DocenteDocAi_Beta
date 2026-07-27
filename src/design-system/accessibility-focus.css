@@ -1,0 +1,236 @@
+/**
+ * Accessibility Focus Indicators
+ * 
+ * Ensures all interactive elements have visible focus indicators
+ * that meet WCAG 2.4.7 Level AA requirements:
+ * - Minimum 3:1 contrast ratio
+ * - Visible on all themes
+ * - Consistent across browser
+ * - Support for high contrast mode
+ */
+
+/**
+ * Global focus indicator styles
+ * Applied to all interactive elements using :focus-visible
+ */
+:focus-visible {
+  /* Primary focus outline */
+  outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+  outline-offset: var(--md-sys-spacing-1);
+}
+
+/**
+ * High contrast mode support (Windows Accessibility)
+ * Ensures focus indicators remain visible in forced-colors mode
+ */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: var(--md-sys-spacing-1) solid CanvasText;
+    outline-offset: var(--md-sys-spacing-1);
+  }
+}
+
+/**
+ * Preferences for high contrast
+ * User has requested more contrast
+ */
+@media (prefers-contrast: more) {
+  :focus-visible {
+    outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+    outline-offset: var(--md-sys-spacing-1);
+    box-shadow: 0 0 0 var(--md-sys-spacing-1) color-mix(in srgb, var(--md-sys-color-primary) 15%, transparent);
+  }
+}
+
+/**
+ * Remove default browser outlines that may conflict
+ * We use outline instead which is better for accessibility
+ */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[role="button"]:focus,
+[role="menuitem"]:focus,
+[role="tab"]:focus {
+  outline: none;
+}
+
+/**
+ * Button-specific focus styles
+ * Ensure good visibility on all button types
+ */
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+  outline-offset: var(--md-sys-spacing-1);
+}
+
+/**
+ * Form input focus styles
+ * Text inputs, textarea, select
+ */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 var(--md-sys-spacing-1) var(--md-sys-color-primary);
+}
+
+/**
+ * Link focus styles
+ */
+a:focus-visible {
+  outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+  outline-offset: var(--md-sys-spacing-1);
+  border-radius: var(--md-sys-spacing-1);
+}
+
+/**
+ * Focus styles for Material-UI components
+ */
+.MuiButton-root:focus-visible,
+.MuiIconButton-root:focus-visible,
+.MuiMenuItem-root:focus-visible,
+.MuiListItem-root:focus-visible {
+  outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+  outline-offset: var(--md-sys-spacing-1);
+}
+
+/**
+ * Dark theme focus indicator adjustments
+ * Ensures visibility on dark backgrounds
+ */
+@media (prefers-color-scheme: dark) {
+  :focus-visible {
+    outline-color: var(--md-sys-color-primary);
+  }
+  
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline-color: CanvasText;
+    }
+  }
+}
+
+/**
+ * Light theme focus indicator adjustments
+ */
+@media (prefers-color-scheme: light) {
+  :focus-visible {
+    outline-color: var(--md-sys-color-primary);
+  }
+}
+
+/**
+ * Reduced motion support
+ * Don't animate focus changes if user prefers reduced motion
+ */
+@media (prefers-reduced-motion: reduce) {
+  :focus-visible {
+    transition: none;
+  }
+}
+
+/**
+ * Reduced motion: still show focus indicator, just not animated
+ */
+@media (prefers-reduced-motion: reduce) {
+  button:focus-visible,
+  [role="button"]:focus-visible {
+    transition: none;
+  }
+}
+
+/**
+ * Mobile/Touch - ensure focus indicators remain visible
+ * Don't remove focus on mobile devices
+ */
+@media (hover: none) and (pointer: coarse) {
+  /* Keep focus indicators visible on touch devices */
+  :focus-visible {
+    outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+    outline-offset: var(--md-sys-spacing-1);
+  }
+}
+
+/**
+ * Skip link specific focus styling
+ * Made to stand out for keyboard users
+ */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: -999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed;
+  top: var(--md-sys-spacing-2);
+  left: var(--md-sys-spacing-2);
+  width: auto;
+  height: auto;
+  padding: var(--md-sys-spacing-3) var(--md-sys-spacing-4);
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border-radius: var(--md-sys-spacing-2);
+  z-index: var(--md-sys-z-snackbar);
+  outline: none;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--md-sys-color-scrim) 30%, transparent);
+  font-weight: var(--md-sys-typescale-weight-semibold);
+  text-decoration: none;
+}
+
+/**
+ * List/menu item focus styles
+ * For lists rendered with arrow key navigation
+ */
+[role="listbox"] li:focus-visible,
+[role="menubar"] li:focus-visible,
+[role="menu"] li:focus-visible {
+  outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+  outline-offset: calc(-1 * var(--md-sys-spacing-1));
+  background-color: var(--md-sys-color-primary, transparent);
+  background-color: color-mix(in srgb, var(--md-sys-color-primary) 12%, transparent);
+}
+
+/**
+ * Ensure focus indicators work with Material 3 design
+ */
+.m3-button:focus-visible {
+  outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+  outline-offset: var(--md-sys-spacing-1);
+}
+
+/**
+ * Skip link — WCAG 2.4.1 Bypass Blocks (Level A)
+ * Visibile solo quando riceve focus da tastiera.
+ * La posizione negativa lo nasconde; :focus-visible lo riporta in viewport.
+ */
+.skip-link {
+  position: absolute;
+  top: calc(-1 * var(--md-sys-spacing-10));
+  left: 0;
+  z-index: var(--md-sys-z-sticky);
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  padding: var(--md-sys-spacing-2) var(--md-sys-spacing-4);
+  text-decoration: none;
+  border-radius: 0 0 var(--md-sys-shape-corner-small) 0;
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  font-weight: var(--md-sys-typescale-weight-semibold);
+  transition: top var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+}
+
+.skip-link:focus-visible {
+  top: 0;
+  outline: var(--md-sys-spacing-1) solid var(--md-sys-color-on-primary);
+  outline-offset: var(--md-sys-spacing-1);
+}
+
+

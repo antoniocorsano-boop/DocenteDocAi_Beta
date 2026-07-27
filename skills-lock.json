@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "skills": {
+    "claude-md-management": {
+      "source": "giuseppe-trisciuoglio/developer-kit-claude-code",
+      "sourceType": "github",
+      "computedHash": "1fef224ecf2c19dea56c6f191ccb4794cf7932966be1fb048b3ad649a7e6dafe"
+    },
+    "debug": {
+      "source": "anthropics/knowledge-work-plugins",
+      "sourceType": "github",
+      "computedHash": "16c35005c49594d9ae4ddc744f61863b8f6c0f965097ca6662808b5f23a0de6b"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "material-3-expressive": {
+      "source": "albermonte/android-skills",
+      "sourceType": "github",
+      "computedHash": "126f15d8ef1eaf8fc846881ce5bb5018110f19b5d0aff456e0df3b9a63ac95a7"
+    },
+    "material-design-3": {
+      "source": "7spade/black-tortoise",
+      "sourceType": "manual",
+      "note": "Installed manually - original repo unavailable"
+    },
+    "mui-v7-mastery": {
+      "source": "just-mpm/conformai",
+      "sourceType": "github",
+      "computedHash": "eed8a65a35a8c6b545da542ee92f51e786c40cc5677ee05fac36bc9913d9e27e"
+    },
+    "repository-analyzer": {
+      "source": "jackspace/claudeskillz",
+      "sourceType": "github",
+      "computedHash": "eef553f4b9fa39110732d506e0c28519ae99f991fa82d5f8081da6d1b7783546"
+    },
+    "ui-ux-designer": {
+      "source": "lotosbin/claude-skills",
+      "sourceType": "github",
+      "computedHash": "dd0a1b69d9e3abbdc4ccc8ebdde663ab7e01df70f433b8695c06b9cd7d089df6"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "computedHash": "4cfe5e95a230616c17d92b44e3cd37bae543ce087a7756a446a62f77d7c58a37"
+    }
+  }
+}

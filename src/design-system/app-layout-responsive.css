@@ -1,0 +1,36 @@
+/*
+ * AppLayout responsive overrides — scoped to ≤840px, zero impact on desktop.
+ * MD3 Governance: all breakpoint media queries must live here, not inline.
+ */
+
+@media (max-width: 840px) {
+  /* ── Header: lift out of flow and float at top ── */
+  .app-header-bar.MuiAppBar-root {
+    position: fixed !important;
+    top: var(--md-sys-spacing-4) !important;
+    left: var(--md-sys-spacing-4) !important;
+    right: var(--md-sys-spacing-4) !important;
+    width: auto !important;
+    border-radius: var(--md-sys-shape-corner-extra-large) !important;
+    box-shadow: var(--md-sys-elevation-level2) !important;
+  }
+
+  /* ── Shell: add top padding to compensate for header leaving flow ── */
+  /* --md-sys-spacing-16 ≈ 64px + spacing-4 (16px) viewport margin + spacing-2 (8px) */
+  .app-shell-container {
+    padding-top: calc(var(--md-sys-spacing-16) + var(--md-sys-spacing-4) + var(--md-sys-spacing-2)) !important;
+  }
+
+  /* ── Main content: extra bottom clearance for floating nav + safe area ── */
+  .app-main-content {
+    padding-bottom: calc(var(--md-sys-spacing-14) + var(--md-sys-spacing-4) + var(--md-sys-spacing-2) + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* ── BottomNav: horizontal margins + rounded corners + safe-area ── */
+  .bottom-nav-container {
+    left: var(--md-sys-spacing-4) !important;
+    right: var(--md-sys-spacing-4) !important;
+    bottom: calc(var(--md-sys-spacing-4) + env(safe-area-inset-bottom, 0px)) !important;
+    border-radius: var(--md-sys-shape-corner-extra-large) !important;
+  }
+}

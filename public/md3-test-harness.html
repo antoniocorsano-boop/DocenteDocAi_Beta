@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MD3 Visual Test Harness</title>
+
+  <!-- MD3 Design System -->
+  <link rel="stylesheet" href="/src/design-system/md3-tokens.css">
+  <link rel="stylesheet" href="/src/design-system/semantic-tokens.css">
+  <link rel="stylesheet" href="/src/design-system/base.css">
+
+  <!-- Test harness styles -->
+  <style>
+    /* Test harness container */
+    .test-harness {
+      min-height: 100vh;
+      background: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      font-family: var(--md-sys-typescale-body-large-font-family);
+      padding: var(--app-spacing-4);
+    }
+
+    /* Component isolation */
+    .component-container {
+      margin: var(--app-spacing-4) 0;
+      padding: var(--app-spacing-4);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--md-sys-shape-corner-medium);
+      background: var(--md-sys-color-surface-container);
+    }
+
+    .component-label {
+      font-size: var(--md-sys-typescale-label-large-font-size);
+      font-weight: var(--md-sys-typescale-label-large-font-weight);
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: var(--app-spacing-2);
+    }
+
+    /* Test variants grid */
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--app-spacing-4);
+      margin-top: var(--app-spacing-4);
+    }
+
+    .variant-item {
+      padding: var(--app-spacing-3);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--md-sys-shape-corner-small);
+      background: var(--md-sys-color-surface);
+    }
+
+    .variant-label {
+      font-size: var(--md-sys-typescale-body-small-font-size);
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: var(--app-spacing-2);
+    }
+
+    /* MD3 Test Data Attributes */
+    [data-md3-test] {
+      /* Ensure test elements are properly isolated */
+      isolation: isolate;
+    }
+
+    /* Force consistent rendering for tests */
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Hide scrollbars during tests */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-harness" data-md3-test="harness">
+    <h1>MD3 Visual Test Harness</h1>
+    <p>This page provides isolated testing environments for MD3 components.</p>
+
+    <div id="test-content">
+      <!-- Content will be dynamically loaded based on URL parameters -->
+    </div>
+  </div>
+
+  <!-- MD3 Components (mock implementations for testing) -->
+  <script>
+    // MD3 Component Registry for Testing
+    const MD3_COMPONENTS = {
+      M3Button: {
+        render: (variant = 'default') => `
+          <div class="component-container" data-md3-test="M3Button">
+            <div class="component-label">M3Button - ${variant}</div>
+            <button class="m3-button m3-button-${variant}" data-md3="button">
+              Button ${variant}
+            </button>
+          </div>
+        `,
+        variants: ['default', 'filled', 'outlined', 'text', 'elevated', 'tonal']
+      },
+
+      M3Card: {
+        render: (variant = 'default') => `
+          <div class="component-container" data-md3-test="M3Card">
+            <div class="component-label">M3Card - ${variant}</div>
+            <div class="m3-card m3-card-${variant}" data-md3="card">
+              <div class="m3-card-header">
+                <h3>Card Title</h3>
+                <p>Card subtitle</p>
+              </div>
+              <div class="m3-card-content">
+                <p>This is card content that demonstrates MD3 styling.</p>
+              </div>
+              <div class="m3-card-actions">
+                <button class="m3-button">Action 1</button>
+                <button class="m3-button m3-button-text">Action 2</button>
+              </div>
+            </div>
+          </div>
+        `,
+        variants: ['default', 'elevated', 'outlined', 'filled']
+      },
+
+      M3TextField: {
+        render: (variant = 'default') => `
+          <div class="component-container" data-md3-test="M3TextField">
+            <div class="component-label">M3TextField - ${variant}</div>
+            <div class="m3-text-field m3-text-field-${variant}" data-md3="text-field">
+              <label class="m3-text-field-label">Text Field Label</label>
+              <input type="text" class="m3-text-field-input" placeholder="Enter text..." />
+              <div class="m3-text-field-supporting-text">Supporting text</div>
+            </div>
+          </div>
+        `,
+        variants: ['default', 'filled', 'outlined']
+      },
+
+      M3Chip: {
+        render: (variant = 'default') => `
+          <div class="component-container" data-md3-test="M3Chip">
+            <div class="component-label">M3Chip - ${variant}</div>
+            <div class="m3-chip m3-chip-${variant}" data-md3="chip">
+              <span class="m3-chip-text">Chip Text</span>
+              <button class="m3-chip-action" aria-label="Remove">×</button>
+            </div>
+          </div>
+        `,
+        variants: ['default', 'assist', 'filter', 'input', 'suggestion']
+      }
+    };
+
+    // Semantic Token Demo
+    const SEMANTIC_DEMO = {
+      render: () => `
+        <div class="component-container" data-md3-test="semantic-demo">
+          <div class="component-label">Semantic Token Demo</div>
+          <div class="variants-grid">
+            <div class="variant-item">
+              <div class="variant-label">Spacing Scale</div>
+              <div style="display: flex; gap: var(--app-spacing-1);">
+                <div style="width: var(--app-spacing-4); height: var(--app-spacing-4); background: var(--md-sys-color-primary);"></div>
+                <div style="width: var(--app-spacing-6); height: var(--app-spacing-6); background: var(--md-sys-color-secondary);"></div>
+                <div style="width: var(--app-spacing-8); height: var(--app-spacing-8); background: var(--md-sys-color-tertiary);"></div>
+              </div>
+            </div>
+            <div class="variant-item">
+              <div class="variant-label">Typography Scale</div>
+              <div style="font-size: var(--app-typography-h1); line-height: var(--app-typography-h1-line-height);">H1</div>
+              <div style="font-size: var(--app-typography-body); line-height: var(--app-typography-body-line-height);">Body text</div>
+              <div style="font-size: var(--app-typography-caption); line-height: var(--app-typography-caption-line-height);">Caption</div>
+            </div>
+            <div class="variant-item">
+              <div class="variant-label">Motion Tokens</div>
+              <div style="transition-duration: var(--app-motion-duration-short); padding: var(--app-spacing-2); background: var(--md-sys-color-primary-container);" class="animated-element">
+                Animated Element
+              </div>
+            </div>
+          </div>
+        </div>
+      `
+    };
+
+    // Load test content based on URL parameters
+    function loadTestContent() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const component = urlParams.get('component');
+      const variant = urlParams.get('variant') || 'default';
+
+      const content = document.getElementById('test-content');
+
+      if (component === 'all') {
+        // Load all components
+        content.innerHTML = Object.entries(MD3_COMPONENTS)
+          .map(([name, comp]) => comp.render(variant))
+          .join('');
+      } else if (component === 'semantic-demo') {
+        // Load semantic token demo
+        content.innerHTML = SEMANTIC_DEMO.render();
+      } else if (MD3_COMPONENTS[component]) {
+        // Load specific component
+        content.innerHTML = MD3_COMPONENTS[component].render(variant);
+      } else {
+        // Load component variants grid
+        const variants = MD3_COMPONENTS[component]?.variants || ['default'];
+        content.innerHTML = `
+          <div class="component-container" data-md3-test="${component}-variants">
+            <div class="component-label">${component} Variants</div>
+            <div class="variants-grid">
+              ${variants.map(v => `
+                <div class="variant-item">
+                  <div class="variant-label">${v}</div>
+                  ${MD3_COMPONENTS[component]?.render(v) || `<div>Variant: ${v}</div>`}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadTestContent);
+    } else {
+      loadTestContent();
+    }
+
+    // Expose for testing
+    window.MD3_TEST_HARNESS = {
+      loadComponent: (component, variant) => {
+        const url = new URL(window.location);
+        url.searchParams.set('component', component);
+        if (variant) url.searchParams.set('variant', variant);
+        window.location.href = url.toString();
+      },
+      getComponents: () => Object.keys(MD3_COMPONENTS),
+      getVariants: (component) => MD3_COMPONENTS[component]?.variants || []
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,1524 @@
+/* MD3 Platinum: Semantic Token Layer */
+@import './design-system/semantic-tokens.css';
+@import './design-system/tokens/md3-z-index.css';
+
+/* Light mode defaults */
+:root {
+  --md-sys-color-primary: #6750a4;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #EADDFF;
+  --md-sys-color-on-primary-container: #21005D;
+  --md-sys-color-secondary: #625b71;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #E8DEF8;
+  --md-sys-color-on-secondary-container: #1D192B;
+  --md-sys-color-tertiary: #7D5260;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #FFD8E4;
+  --md-sys-color-on-tertiary-container: #31111D;
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FFDAD6;
+  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-success: #146C2E;
+  --md-sys-color-on-success: #FFFFFF;
+  --md-sys-color-warning: #7D5800;
+  --md-sys-color-on-warning: #FFFFFF;
+  --md-sys-color-background: #FFFBFE;
+  --md-sys-color-on-background: #1C1B1F;
+  --md-sys-color-surface: #FFFBFE;
+  --md-sys-color-on-surface: #1C1B1F;
+  --md-sys-color-surface-variant: #E7E0EC;
+  --md-sys-color-on-surface-variant: #49454F;
+  --md-sys-color-outline: #79747E;
+  --md-sys-color-outline-variant: #CAC4D0;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #313033;
+  --md-sys-color-inverse-on-surface: #F4EFF4;
+  --md-sys-color-inverse-primary: #D0BCFF;
+  --md-sys-color-primary-fixed: #EADDFF;
+  --md-sys-color-on-primary-fixed: #21005D;
+  --md-sys-color-primary-fixed-dim: #D0BCFF;
+  --md-sys-color-on-primary-fixed-variant: #4F378B;
+  --md-sys-color-secondary-fixed: #E8DEF8;
+  --md-sys-color-on-secondary-fixed: #1D192B;
+  --md-sys-color-secondary-fixed-dim: #CBC2DB;
+  --md-sys-color-on-secondary-fixed-variant: #4A4458;
+  --md-sys-color-tertiary-fixed: #FFD8E4;
+  --md-sys-color-on-tertiary-fixed: #31111D;
+  --md-sys-color-tertiary-fixed-dim: #EFB8C8;
+  --md-sys-color-on-tertiary-fixed-variant: #633B48;
+  --md-sys-color-surface-dim: #DED8E1;
+  --md-sys-color-surface-bright: #FFFBFE;
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F7F2FA;
+  --md-sys-color-surface-container: #F3EDF7;
+  --md-sys-color-surface-container-high: #ECE6F0;
+  --md-sys-color-surface-container-highest: #E6E0E9;
+
+  --md-sys-typescale-body-large-font-size: var(--md-sys-spacing-4);
+  --md-sys-typescale-body-large-line-height: 1.5;
+  --md-sys-typescale-body-large-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-body-medium-font-size: var(--md-sys-spacing-4); /* fix: was circular self-reference */
+  --md-sys-typescale-body-medium-line-height: 1.4;
+  --md-sys-typescale-body-medium-font-weight: var(--md-sys-typescale-weight-regular);
+  /* DEPRECATED legacy aliases — map to MD3 tokens */
+  --md-sys-typescale-body1-font-size: var(--md-sys-typescale-body-large-font-size);
+  --md-sys-typescale-body1-line-height: var(--md-sys-typescale-body-large-line-height);
+  --md-sys-typescale-body1-font-weight: var(--md-sys-typescale-body-large-font-weight, 400);
+  --md-sys-typescale-body2-font-size: var(--md-sys-typescale-body-medium-font-size);
+  --md-sys-typescale-body2-line-height: var(--md-sys-typescale-body-medium-line-height);
+  --md-sys-typescale-body2-font-weight: var(--md-sys-typescale-body-medium-font-weight, 400);
+  --md-sys-typescale-heading1-font-size: var(--md-sys-typescale-headline-large-font-size);
+  --md-sys-typescale-heading1-line-height: var(--md-sys-typescale-headline-large-line-height);
+  --md-sys-typescale-heading1-font-weight: var(--md-sys-typescale-headline-large-font-weight, 400);
+  --md-sys-typescale-heading2-font-size: var(--md-sys-typescale-headline-medium-font-size);
+  --md-sys-typescale-heading2-line-height: var(--md-sys-typescale-headline-medium-line-height);
+  --md-sys-typescale-heading2-font-weight: var(--md-sys-typescale-headline-medium-font-weight, 400);
+  --md-sys-typescale-caption-font-font-size: var(--md-sys-typescale-label-small-font-size);
+  --md-sys-typescale-caption-line-height: var(--md-sys-typescale-label-small-line-height);
+  --md-sys-typescale-caption-font-font-weight: var(--md-sys-typescale-label-small-font-weight, 500);
+
+  /* MD3 Typography Scale - Complete Set */
+  --md-sys-typescale-font-family: 'Roboto', sans-serif;
+  --md-sys-typescale-display-large-font-size: var(--md-sys-spacing-14);
+  --md-sys-typescale-display-large-line-height: var(--md-sys-spacing-16);
+  --md-sys-typescale-display-large-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-display-large-letter-spacing: -0.015em;
+  --md-sys-typescale-display-medium-font-size: var(--md-sys-spacing-11);
+  --md-sys-typescale-display-medium-line-height: var(--md-sys-spacing-13);
+  --md-sys-typescale-display-medium-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-display-medium-letter-spacing: 0;
+  --md-sys-typescale-display-small-font-size: var(--md-sys-spacing-9);
+  --md-sys-typescale-display-small-line-height: var(--md-sys-spacing-11);
+  --md-sys-typescale-display-small-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-display-small-letter-spacing: 0;
+  --md-sys-typescale-headline-large-font-size: var(--md-sys-spacing-8);
+  --md-sys-typescale-headline-large-line-height: var(--md-sys-spacing-10);
+  --md-sys-typescale-headline-large-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-headline-large-letter-spacing: 0;
+  --md-sys-typescale-headline-medium-font-size: var(--md-sys-spacing-7);
+  --md-sys-typescale-headline-medium-line-height: var(--md-sys-spacing-9);
+  --md-sys-typescale-headline-medium-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-headline-medium-letter-spacing: 0;
+  --md-sys-typescale-headline-small-font-size: var(--md-sys-spacing-6);
+  --md-sys-typescale-headline-small-line-height: var(--md-sys-spacing-8);
+  --md-sys-typescale-headline-small-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-headline-small-letter-spacing: 0;
+  --md-sys-typescale-title-large-font-size: var(--md-sys-spacing-6);
+  --md-sys-typescale-title-large-line-height: var(--md-sys-spacing-7);
+  --md-sys-typescale-title-large-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-title-large-letter-spacing: 0;
+  --md-sys-typescale-title-medium-font-size: var(--md-sys-spacing-4);
+  --md-sys-typescale-title-medium-line-height: var(--md-sys-spacing-6);
+  --md-sys-typescale-title-medium-font-weight: var(--md-sys-typescale-weight-medium);
+  --md-sys-typescale-title-medium-letter-spacing: 0.015em;
+  --md-sys-typescale-title-small-font-size: var(--md-sys-typescale-body-medium-font-size);
+  --md-sys-typescale-title-small-line-height: var(--md-sys-spacing-5);
+  --md-sys-typescale-title-small-font-weight: var(--md-sys-typescale-weight-medium);
+  --md-sys-typescale-title-small-letter-spacing: 0.01em;
+  --md-sys-typescale-body-large-font-size: var(--md-sys-spacing-4);
+  --md-sys-typescale-body-large-line-height: var(--md-sys-spacing-6);
+  --md-sys-typescale-body-large-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-body-large-letter-spacing: 0.015em;
+  --md-sys-typescale-body-medium-font-size: var(--md-sys-spacing-4); /* fix: was circular self-reference */
+  --md-sys-typescale-body-medium-line-height: var(--md-sys-spacing-5);
+  --md-sys-typescale-body-medium-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-body-medium-letter-spacing: 0.025em;
+  --md-sys-typescale-body-small-font-size: var(--md-sys-spacing-3);
+  --md-sys-typescale-body-small-line-height: var(--md-sys-spacing-4);
+  --md-sys-typescale-body-small-font-weight: var(--md-sys-typescale-weight-regular);
+  --md-sys-typescale-body-small-letter-spacing: 0.04em;
+  --md-sys-typescale-label-large-font-size: var(--md-sys-typescale-body-medium-font-size);
+  --md-sys-typescale-label-large-line-height: var(--md-sys-spacing-5);
+  --md-sys-typescale-label-large-font-weight: var(--md-sys-typescale-weight-medium);
+  --md-sys-typescale-label-large-letter-spacing: 0.01em;
+  --md-sys-typescale-label-medium-font-size: var(--md-sys-spacing-3);
+  --md-sys-typescale-label-medium-line-height: var(--md-sys-spacing-4);
+  --md-sys-typescale-label-medium-font-weight: var(--md-sys-typescale-weight-medium);
+  --md-sys-typescale-label-medium-letter-spacing: 0.05em;
+  --md-sys-typescale-label-small-font-size: var(--md-sys-spacing-3); /* fix: was indirect circular via label-large */
+  --md-sys-typescale-label-small-line-height: var(--md-sys-spacing-4); /* fix: was using font-size token as line-height */
+  --md-sys-typescale-label-small-font-weight: var(--md-sys-typescale-weight-medium);
+  --md-sys-typescale-label-small-letter-spacing: 0.05em;
+
+  --md-sys-motion-duration-short1: 50ms;
+  --md-sys-motion-duration-short2: 100ms;
+  --md-sys-motion-duration-short3: 150ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium1: 250ms;
+  --md-sys-motion-duration-medium2: 300ms;
+  --md-sys-motion-duration-medium3: 350ms;
+  --md-sys-motion-duration-medium4: 400ms;
+  --md-sys-motion-duration-long1: 450ms;
+  --md-sys-motion-duration-long2: 500ms;
+  --md-sys-motion-duration-long3: 550ms;
+  --md-sys-motion-duration-long4: 600ms;
+  --md-sys-motion-duration-extra-long1: 700ms;
+  --md-sys-motion-duration-extra-long2: 800ms;
+  --md-sys-motion-duration-extra-long3: 900ms;
+  --md-sys-motion-duration-extra-long4: 1000ms;
+
+  /* Shorthand aliases (no number suffix) — alias al valore canonico per categoria */
+  --md-sys-motion-duration-short:      var(--md-sys-motion-duration-short4);      /* 200ms */
+  --md-sys-motion-duration-medium:     var(--md-sys-motion-duration-medium2);     /* 300ms */
+  --md-sys-motion-duration-long:       var(--md-sys-motion-duration-long2);       /* 500ms */
+  --md-sys-motion-duration-extra-long: var(--md-sys-motion-duration-extra-long1); /* 700ms */
+
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0.0, 0, 1.0);
+  --md-sys-motion-easing-standard-decelerate: cubic-bezier(0.0, 0.0, 0.0, 1.0);
+  --md-sys-motion-easing-standard-accelerate: cubic-bezier(0.3, 0.0, 1.0, 1.0);
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0.0, 0.2, 0.8);
+  /* Gantt bar HSL lightness tokens — adapt in dark mode */
+  --gantt-bg-saturation: 40%;
+  --gantt-bg-lightness: 90%;
+  --gantt-border-saturation: 60%;
+  --gantt-border-lightness: 40%;
+  --gantt-text-saturation: 80%;
+  --gantt-text-lightness: 20%;
+
+  /* ─── Shape Corner Tokens — MD3 § Shape ──────────────────────────────────
+     https://m3.material.io/styles/shape/shape-scale-tokens
+     Previously used throughout CSS but never declared → border-radius silently 0 */
+  --md-sys-shape-corner-none:        0px;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small:       8px;
+  --md-sys-shape-corner-small-soft:  6px;    /* custom: between extra-small and small */
+  --md-sys-shape-corner-medium:      12px;
+  --md-sys-shape-corner-medium-soft: 10px;   /* custom: between small and medium */
+  --md-sys-shape-corner-large:       16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full:        9999px; /* pill / chip / circle */
+
+  /* ─── Elevation Level Aliases ─────────────────────────────────────────────
+     Map --md-sys-elevation-level-N → --md-sys-elevation-N (defined in theme.css) */
+  --md-sys-elevation-level0:  var(--md-sys-elevation-0);
+  --md-sys-elevation-level-0: var(--md-sys-elevation-0);
+  --md-sys-elevation-level1:  var(--md-sys-elevation-1);
+  --md-sys-elevation-level-1: var(--md-sys-elevation-1);
+  --md-sys-elevation-level2:  var(--md-sys-elevation-2);
+  --md-sys-elevation-level3:  var(--md-sys-elevation-3);
+  --md-sys-elevation-level-3: var(--md-sys-elevation-3);
+  --md-sys-elevation-level4:  var(--md-sys-elevation-3); /* cap at level 3 */
+  --md-sys-elevation1:        var(--md-sys-elevation-1); /* legacy no-hyphen alias */
+  --md-sys-elevation2:        var(--md-sys-elevation-2);
+  --md-sys-elevation3:        var(--md-sys-elevation-3);
+
+  /* ─── Spacing Extras ──────────────────────────────────────────────────────
+     Half-step slots not in the main 4px-increment scale */
+  --md-sys-spacing-1-5:        6px;      /* 1.5 × 4px */
+  --md-sys-spacing-2-5:        10px;     /* 2.5 × 4px */
+  --md-sys-spacing-240:        240px;    /* fixed sidebar / panel width */
+  --md-sys-margin-none:        0px;
+  --md-sys-special-offscreen:  -9999px;  /* accessibility off-screen utility */
+
+  /* ─── Motion Extras ───────────────────────────────────────────────────────*/
+  --md-sys-motion-duration-short-4: var(--md-sys-motion-duration-short4); /* hyphen-4 alias */
+  --motion-easing-expressive: cubic-bezier(0.34, 1.2, 0.64, 1); /* used by [data-visual-style="expressive"] */
+
+  /* ─── Typography Shorthands ───────────────────────────────────────────────
+     Shorthand references used where only font-size is needed */
+  --md-sys-typescale-label-large:             var(--md-sys-typescale-label-large-font-size);
+  --md-sys-typescale-body-large:              var(--md-sys-typescale-body-large-font-size);
+  --md-sys-typescale-body-small:              var(--md-sys-typescale-body-small-font-size);
+  --md-sys-typescale-label-tiny-font-size:    0.625rem; /* 10px — sub-label size */
+  --md-sys-typescale-body-medium-font-family: var(--font-family, sans-serif);
+  --md-sys-typescale-label-small-font-family: var(--font-family, sans-serif);
+
+  /* ─── Component-scoped vars (runtime values injected via JavaScript) ───────
+     Declared here only for CSS tooling resolution; JS overrides at runtime.  */
+  --gantt-bar-bg:        transparent;
+  --gantt-bar-border:    transparent;
+  --gantt-bar-left:      0px;
+  --gantt-bar-width:     0px;
+  --gantt-bar-transform: none;
+  --gantt-bar-text:      inherit;
+  --glass-blur-px:       8px;
+  --link-max-width:      100%;
+  --panel-max-height:    100vh;
+  --slot-hue:            220;
+}
+
+/* Dark mode color overrides are defined in src/theme.css under .theme-dark { }
+   Applied to document.documentElement by design-system/applyTheme() and AppMuiThemeWrapper. */
+
+/* Breakpoints */
+@media (max-width: 599px) {
+  :root {
+    --md-sys-breakpoint: mobile;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  :root {
+    --md-sys-breakpoint: tablet;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  :root {
+    --md-sys-breakpoint: desktop;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --md-sys-breakpoint: large;
+  }
+}
+
+/* ========================================
+   MD3 Utility Classes for Inline Styles
+   ======================================== */
+
+/* Flex utilities - Block F migration */
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-column-gap-md {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row-gap-sm {
+  display: flex;
+  flex-direction: row;
+  gap: var(--md-sys-spacing-2);
+}
+
+.width-full {
+  width: 100%;
+}
+
+.margin-top-md {
+  margin-top: var(--md-sys-spacing-6);
+}
+
+.margin-right-sm {
+  margin-right: var(--md-sys-spacing-2);
+}
+
+.text-button-primary {
+  font-weight: var(--md-sys-typescale-weight-black);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.flex-center-gap-md {
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-8);
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+}
+
+/* Additional MD3 utility classes for AssistantModal */
+.bg-error-container {
+  background-color: var(--md-sys-color-error-container);
+}
+
+.color-error {
+  color: var(--md-sys-color-error);
+}
+
+.color-secondary {
+  color: var(--md-sys-color-secondary);
+}
+
+.bg-primary {
+  background-color: var(--md-sys-color-primary);
+}
+
+.color-on-primary {
+  color: var(--md-sys-color-on-primary);
+}
+
+.bg-surface-container-high {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.bg-surface-container-low {
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.color-on-surface {
+  color: var(--md-sys-color-on-surface);
+}
+
+.color-on-surface-variant {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.color-primary {
+  color: var(--md-sys-color-primary);
+}
+
+.font-weight-bold {
+  font-weight: var(--md-sys-typescale-weight-bold);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.flex-center-gap-md {
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-8);
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+}
+
+/* Additional MD3 utility classes for AnnualPlanningWizard */
+.flex-column-gap-sm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+}
+
+.flex-row-gap-md {
+  display: flex;
+  flex-direction: row;
+  gap: var(--md-sys-spacing-6);
+}
+
+.flex-row-gap-lg {
+  display: flex;
+  flex-direction: row;
+  gap: var(--md-sys-spacing-8);
+}
+
+.flex-column-gap-lg {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-8);
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-flex-end {
+  align-items: flex-end;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.padding-md {
+  padding: var(--md-sys-spacing-6);
+}
+
+.padding-sm {
+  padding: var(--md-sys-spacing-2);
+}
+
+.margin-bottom-md {
+  margin-bottom: var(--md-sys-spacing-6);
+}
+
+.margin-bottom-sm {
+  margin-bottom: var(--md-sys-spacing-2);
+}
+
+.margin-right-sm {
+  margin-right: var(--md-sys-spacing-2);
+}
+
+.margin-top-md {
+  margin-top: var(--md-sys-spacing-6);
+}
+
+.border-radius-md {
+  border-radius: var(--md-sys-shape-corner-large);
+}
+
+.border-outline {
+  border: var(--md-sys-spacing-0) solid var(--md-sys-color-outline);
+}
+
+.background-surface-container-high {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.background-surface-container-low {
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.color-on-surface {
+  color: var(--md-sys-color-on-surface);
+}
+
+.color-on-surface-variant {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.color-primary {
+  color: var(--md-sys-color-primary);
+}
+
+.font-weight-bold {
+  font-weight: var(--md-sys-typescale-weight-bold);
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.letter-spacing-wide {
+  letter-spacing: 0.025em;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.max-height-400 {
+  max-height: var(--md-sys-spacing-16);
+}
+
+.max-height-500 {
+  max-height: var(--md-sys-spacing-20);
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.top-1 {
+  top: var(--md-sys-spacing-4);
+}
+
+.left-9px {
+  left: -9px;
+}
+
+.width-4 {
+  width: var(--md-sys-spacing-4);
+}
+
+.height-4 {
+  height: var(--md-sys-spacing-4);
+}
+
+.rounded-full {
+  border-radius: var(--md-sys-percent-50);
+}
+
+.border-2 {
+  border-width: var(--md-sys-spacing-1);
+}
+
+.border-surface {
+  border-color: var(--md-sys-color-surface);
+}
+
+.bg-primary {
+  background-color: var(--md-sys-color-primary);
+}
+
+.bg-error {
+  background-color: var(--md-sys-color-error);
+}
+
+.width-full {
+  width: 100%;
+}
+
+.gap-sm {
+  gap: var(--md-sys-spacing-2);
+}
+
+/* Additional MD3 utility classes for AnnualPlanningWizard */
+.flex-column-gap-sm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+}
+
+.flex-row-gap-md {
+  display: flex;
+  flex-direction: row;
+  gap: var(--md-sys-spacing-6);
+}
+
+.flex-row-gap-lg {
+  display: flex;
+  flex-direction: row;
+  gap: var(--md-sys-spacing-8);
+}
+
+.flex-column-gap-lg {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-8);
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.padding-md {
+  padding: var(--md-sys-spacing-6);
+}
+
+.padding-sm {
+  padding: var(--md-sys-spacing-2);
+}
+
+.margin-bottom-md {
+  margin-bottom: var(--md-sys-spacing-6);
+}
+
+.margin-bottom-sm {
+  margin-bottom: var(--md-sys-spacing-2);
+}
+
+.border-radius-md {
+  border-radius: var(--md-sys-shape-corner-large);
+}
+
+.border-outline {
+  border: var(--md-sys-spacing-0) solid var(--md-sys-color-outline);
+}
+
+.background-surface-container-high {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.background-surface-container-low {
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.color-on-surface {
+  color: var(--md-sys-color-on-surface);
+}
+
+.color-on-surface-variant {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.color-primary {
+  color: var(--md-sys-color-primary);
+}
+
+.font-weight-bold {
+  font-weight: var(--md-sys-typescale-weight-bold);
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.letter-spacing-wide {
+  letter-spacing: 0.025em;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.max-height-400 {
+  max-height: var(--md-sys-spacing-16);
+}
+
+.max-height-500 {
+  max-height: var(--md-sys-spacing-20);
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.top-1 {
+  top: var(--md-sys-spacing-4);
+}
+
+.left-9px {
+  left: -9px;
+}
+
+.width-4 {
+  width: var(--md-sys-spacing-4);
+}
+
+.height-4 {
+  height: var(--md-sys-spacing-4);
+}
+
+.rounded-full {
+  border-radius: var(--md-sys-percent-50);
+}
+
+.border-2 {
+  border-width: var(--md-sys-spacing-1);
+}
+
+.border-surface {
+  border-color: var(--md-sys-color-surface);
+}
+
+.bg-primary {
+  background-color: var(--md-sys-color-primary);
+}
+
+.bg-error {
+  background-color: var(--md-sys-color-error);
+}
+/* MD3 Utility Classes for ShareModal */
+.md3-share-modal-content {
+  background-color: var(--md-sys-color-surface-container-high);
+  opacity: 0.3;
+  gap: var(--md-sys-spacing-4);
+}
+
+.md3-share-description {
+  color: var(--md-sys-color-on-surface-variant);
+  padding-left: var(--md-sys-spacing-4);
+  padding-right: var(--md-sys-spacing-4);
+}
+
+.md3-share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+}
+
+.md3-share-button {
+  border-radius: var(--md-sys-shape-corner-large);
+  background-color: var(--md-sys-color-surface-container-lowest);
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-8);
+  padding: var(--md-sys-spacing-8);
+  transition-property: opacity, transform, background-color;
+transition-duration: var(--md-sys-motion-duration-long);
+transition-timing-function: var(--md-sys-motion-easing-standard);
+  text-align: left;
+  border: var(--md-sys-spacing-0) solid var(--md-sys-color-outline);
+}
+
+.md3-share-icon {
+  border-radius: var(--md-sys-shape-corner-large);
+  width: var(--md-sys-spacing-4);
+  height: var(--md-sys-spacing-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--md-sys-motion-duration-medium3) var(--md-sys-motion-easing-standard);
+}
+
+.md3-share-icon-secondary {
+  color: var(--md-sys-color-on-secondary-container);
+  background-color: var(--md-sys-color-secondary-container);
+}
+
+.md3-share-icon-tertiary {
+  color: var(--md-sys-color-on-tertiary-container);
+  background-color: var(--md-sys-color-tertiary-container);
+}
+
+.md3-share-icon-text {
+  font-size: var(--md-sys-spacing-6);
+}
+
+.md3-share-button-title {
+  font-size: var(--md-sys-spacing-5);
+  font-weight: var(--md-sys-typescale-weight-bold);
+}
+
+.md3-share-button-subtitle {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* MD3 Utility Classes for StudentTransferModal */
+.md3-transfer-modal-content {
+  background-color: var(--md-sys-color-surface-container-high);
+  opacity: 0.3;
+}
+
+.md3-transfer-main-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+  padding-top: var(--md-sys-spacing-4);
+  padding-bottom: var(--md-sys-spacing-4);
+}
+
+.md3-transfer-info-card {
+  background-color: var(--md-sys-color-secondary-container);
+  opacity: 0.1;
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-8);
+  border: var(--md-sys-spacing-0) solid var(--md-sys-color-outline);
+}
+
+.md3-transfer-info-text {
+  color: var(--md-sys-color-on-primary);
+}
+
+.md3-transfer-tab-group {
+  width: 100%;
+}
+
+.md3-transfer-section {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-8);
+  border: var(--md-sys-spacing-0) solid var(--md-sys-color-outline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-transfer-section-error {
+  background-color: var(--md-sys-color-error-container);
+  opacity: 0.1;
+}
+
+.md3-transfer-heading {
+  color: var(--md-sys-color-primary);
+  padding-left: var(--md-sys-spacing-4);
+  padding-right: var(--md-sys-spacing-4);
+}
+
+.md3-transfer-heading-error {
+  color: var(--md-sys-color-error);
+}
+
+.md3-transfer-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-transfer-warning-text {
+  color: var(--md-sys-color-on-surface-variant);
+  padding-left: var(--md-sys-spacing-4);
+  padding-right: var(--md-sys-spacing-4);
+}
+/* MD3 Utility Classes for StudentTransferModal */
+.md3-transfer-modal-content {
+  background-color: var(--md-sys-color-surface-container-high);
+  opacity: 0.3;
+}
+
+.md3-transfer-main-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+  padding-top: var(--md-sys-spacing-4);
+  padding-bottom: var(--md-sys-spacing-4);
+}
+
+.md3-transfer-info-card {
+  background-color: var(--md-sys-color-secondary-container);
+  opacity: 0.1;
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-8);
+  border: var(--md-sys-spacing-0) solid var(--md-sys-color-outline);
+}
+
+.md3-transfer-info-text {
+  color: var(--md-sys-color-on-primary);
+}
+
+.md3-transfer-tab-group {
+  width: 100%;
+}
+
+.md3-transfer-section {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-8);
+  border: var(--md-sys-spacing-0) solid var(--md-sys-color-outline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-transfer-section-error {
+  background-color: var(--md-sys-color-error-container);
+  opacity: 0.1;
+}
+
+.md3-transfer-heading {
+  color: var(--md-sys-color-primary);
+  padding-left: var(--md-sys-spacing-4);
+  padding-right: var(--md-sys-spacing-4);
+}
+
+.md3-transfer-heading-error {
+  color: var(--md-sys-color-error);
+}
+
+.md3-transfer-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-transfer-warning-text {
+  color: var(--md-sys-color-on-surface-variant);
+  padding-left: var(--md-sys-spacing-4);
+  padding-right: var(--md-sys-spacing-4);
+}
+/* MD3 Utility Classes for EditableContentCard */
+.md3-editable-card {
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-8);
+  outline: none;
+}
+
+.md3-editable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.md3-editable-title {
+  color: var(--md-sys-color-on-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-editable-icon {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-editable-edit-btn {
+  background: var(--md-sys-color-surface-container-high);
+  border-radius: var(--md-sys-shape-corner-small);
+}
+
+.md3-editable-icon-font {
+  font-family: 'Material Symbols Outlined';
+}
+
+.md3-editable-content {
+  margin-top: var(--md-sys-spacing-4);
+}
+
+.md3-editable-edit-mode {
+  gap: var(--md-sys-spacing-2);
+}
+
+.md3-editable-textarea {
+  width: 100%;
+  border-radius: var(--md-sys-shape-corner-small);
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+}
+
+.md3-editable-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-editable-display {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-editable-list {
+  padding-left: var(--md-sys-spacing-5);
+  gap: var(--md-sys-spacing-1);
+}
+/* MD3 Utility Classes for HelpModal */
+.md3-help-manual-section {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-4);
+}
+
+.md3-help-manual-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--md-sys-spacing-3);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.md3-help-manual-button-content {
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-3);
+}
+
+.md3-help-manual-icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--md-sys-typescale-title-medium-font-size);
+  color: var(--md-sys-color-primary);
+}
+
+.md3-help-manual-expand-icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--md-sys-typescale-title-medium-font-size);
+  transform: rotate(0deg);
+  transition: transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+}
+
+.md3-help-manual-expand-icon.open {
+  transform: rotate(180deg);
+}
+
+.md3-help-manual-content {
+  padding: var(--md-sys-spacing-4);
+  background-color: var(--md-sys-color-surface-container-high);
+  border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.md3-help-usecase-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-4);
+}
+
+.md3-help-usecase-scenario {
+  margin-bottom: var(--md-sys-spacing-3);
+}
+
+.md3-help-usecase-steps {
+  padding-left: var(--md-sys-spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+}
+
+.md3-help-usecase-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--md-sys-spacing-2);
+}
+
+.md3-help-usecase-step-icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  color: var(--md-sys-color-primary);
+  flex-shrink: 0;
+}
+
+.md3-help-usecase-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--md-sys-spacing-2);
+  margin-top: var(--md-sys-spacing-3);
+  background-color: var(--md-sys-color-secondary-container);
+  padding: var(--md-sys-spacing-3);
+  border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.md3-help-usecase-tip-icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  color: var(--md-sys-color-secondary);
+}
+
+.md3-help-setup-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+}
+
+.md3-help-setup-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-4);
+}
+
+.md3-help-setup-title {
+  font-size: var(--md-sys-typescale-title-medium-font-size);
+  font-family: var(--font-family);
+  color: var(--md-sys-color-primary);
+  font-weight: var(--md-sys-typescale-weight-bold);
+  margin-bottom: var(--md-sys-spacing-4);
+}
+
+.md3-help-setup-description {
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  margin-bottom: var(--md-sys-spacing-4);
+}
+
+.md3-help-setup-list {
+  padding-left: var(--md-sys-spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+}
+
+.md3-help-setup-highlight {
+  background-color: rgba(var(--md-sys-color-surface-container-low-rgb), 0.5);
+  padding: var(--md-sys-spacing-5);
+  border-radius: var(--md-sys-shape-corner-large);
+  border: var(--md-sys-spacing-0) solid rgba(var(--md-sys-color-outline-variant-rgb), 0.2);
+}
+
+.md3-help-guide-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+}
+
+.md3-help-guide-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-8);
+  border-bottom: var(--md-sys-spacing-0) solid var(--md-sys-color-outline-variant);
+  padding-bottom: var(--md-sys-spacing-6);
+  justify-content: space-between;
+  align-items: flex-start;
+}
+/* Additional MD3 Utility Classes for HelpModal */
+.md3-help-info-container {
+  background-color: var(--md-sys-color-primary-container);
+}
+
+.md3-help-manual-content-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-4);
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.md3-help-manual-subtitle {
+  color: var(--md-sys-color-primary);
+}
+
+.md3-help-manual-description {
+  line-height: 1.625;
+}
+
+.md3-help-manual-list {
+  padding-left: var(--md-sys-spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+}
+
+.md3-help-manual-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--md-sys-spacing-2);
+}
+
+.md3-help-manual-list-icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  color: var(--md-sys-color-primary);
+  flex-shrink: 0;
+}
+
+.md3-help-manual-list-text {
+  line-height: var(--md-sys-typescale-body-medium-line-height);
+}
+
+.md3-help-process-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-4);
+}
+
+.md3-help-process-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-4);
+}
+
+.md3-help-process-title {
+  color: var(--md-sys-color-primary);
+  font-weight: var(--md-sys-typescale-weight-bold);
+  margin-bottom: var(--md-sys-spacing-3);
+}
+
+.md3-help-process-description {
+  margin-bottom: var(--md-sys-spacing-3);
+}
+
+.md3-help-process-list {
+  padding-left: var(--md-sys-spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+}
+/* Stakeholder section classes */
+.md3-help-stakeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--md-sys-spacing-12), 1fr));
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-help-stakeholder-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--md-sys-spacing-4);
+}
+
+.md3-help-stakeholder-title {
+  font-size: var(--md-sys-typescale-label-large-font-size);
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-2);
+}
+
+.md3-help-stakeholder-icon-admin {
+  font-family: 'Material Symbols Outlined';
+  color: var(--md-sys-color-primary);
+}
+
+.md3-help-stakeholder-icon-tech {
+  font-family: 'Material Symbols Outlined';
+  color: var(--md-sys-color-secondary);
+}
+
+.md3-help-stakeholder-description {
+  color: var(--md-sys-color-on-surface);
+  line-height: 1.625;
+}
+/* MD3 Utility Classes for AddEvaluationModal */
+.md3-eval-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+}
+
+.md3-eval-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.md3-eval-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-eval-type-label {
+  color: var(--md-sys-color-primary);
+  font-weight: var(--md-sys-typescale-weight-black);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding-left: var(--md-sys-spacing-4);
+  padding-right: var(--md-sys-spacing-4);
+  margin-bottom: var(--md-sys-spacing-6);
+  display: block;
+}
+
+.md3-eval-choice-container {
+  display: flex;
+  gap: var(--md-sys-spacing-8);
+  overflow-x: auto;
+  padding-bottom: var(--md-sys-spacing-2);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.md3-eval-choice-container::-webkit-scrollbar {
+  display: none;
+}
+
+.md3-eval-actions {
+  gap: var(--md-sys-spacing-6);
+  flex-shrink: 0;
+}
+/* MD3 Utility Classes for AddOrientamentoActivityModal */
+.md3-orient-dialog-content {
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-orient-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.md3-orient-classes-section {
+  margin-top: var(--md-sys-spacing-4);
+}
+
+.md3-orient-classes-label {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-orient-classes-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* MD3 Utility Classes for AddProvaModal */
+.md3-prova-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+}
+
+.md3-prova-description {
+  font-family: var(--md-sys-typescale-body-medium-font-family);
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  font-weight: var(--md-sys-typescale-body-medium-font-weight);
+  line-height: var(--md-sys-typescale-body-medium-line-height);
+  letter-spacing: var(--md-sys-typescale-body-medium-letter-spacing);
+  color: var(--md-sys-color-on-surface);
+}
+
+.md3-prova-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-prova-type-label {
+  font-family: var(--md-sys-typescale-label-small-font-family);
+  font-size: var(--md-sys-typescale-label-small-font-size);
+  line-height: var(--md-sys-typescale-label-small-line-height);
+  color: var(--md-sys-color-primary);
+  font-weight: var(--md-sys-typescale-weight-extrabold);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  padding-left: var(--md-sys-spacing-5);
+  padding-right: var(--md-sys-spacing-5);
+  text-align: left;
+  opacity: 0.7;
+  margin-bottom: var(--md-sys-spacing-8);
+  display: block;
+}
+
+.md3-prova-choice-container {
+  display: flex;
+  gap: var(--md-sys-spacing-8);
+  overflow-x: auto;
+  padding-bottom: var(--md-sys-spacing-2);
+}
+/* MD3 Utility Classes for AiEventParserModal */
+.md3-ai-dialog-content {
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-ai-description {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-ai-textarea-container {
+  margin-top: var(--md-sys-spacing-4);
+}
+
+.md3-ai-textarea {
+  width: 100%;
+}
+
+.md3-ai-error {
+  color: var(--md-sys-color-error);
+  text-align: center;
+  margin-top: var(--md-sys-spacing-4);
+}
+
+.md3-ai-dialog-actions {
+  padding-top: 0;
+}
+
+.md3-ai-loading-spinner {
+  border-radius: var(--md-sys-spacing-4);
+  height: var(--md-sys-spacing-5);
+  width: var(--md-sys-spacing-5);
+  margin-right: var(--md-sys-spacing-2);
+}
+
+.md3-ai-icon {
+  margin-right: var(--md-sys-spacing-2);
+}
+/* MD3 Utility Classes for AssistantFab */
+.md3-fab-touch-action {
+  touch-action: none;
+}
+
+.md3-fab-icon {
+  font-family: 'Material Symbols Outlined';
+}
+
+.md3-fab-positioned-action {
+  z-index: var(--md-sys-z-base);
+}
+
+.md3-fab-action-icon {
+  font-family: 'Material Symbols Outlined';
+}
+/* MD3 Utility Classes for AddOrientamentoActivityModal */
+.md3-orient-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+}
+
+.md3-orient-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--md-sys-spacing-4);
+}
+
+.md3-orient-classes-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+}
+
+.md3-orient-classes-label {
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  font-weight: var(--md-sys-typescale-body-medium-font-weight);
+  line-height: var(--md-sys-typescale-body-medium-line-height);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-orient-classes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--md-sys-spacing-3);
+}
+
+.md3-orient-class-button {
+  padding: var(--md-sys-spacing-2) var(--md-sys-spacing-4);
+  border-radius: var(--md-sys-shape-corner-full);
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  font-weight: var(--md-sys-typescale-weight-bold);
+  transition-property: opacity, transform, background-color;
+transition-duration: var(--md-sys-motion-duration-short);
+transition-timing-function: var(--md-sys-motion-easing-standard);
+  border: none;
+  cursor: pointer;
+}
+
+.md3-orient-class-button-selected {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+
+.md3-orient-class-button-unselected {
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
+}
+/* MD3 Utility Classes for AddProvaModal */
+.md3-prova-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-6);
+}
+
+.md3-prova-description {
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  font-weight: var(--md-sys-typescale-body-medium-font-weight);
+  line-height: var(--md-sys-typescale-body-medium-line-height);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-prova-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--md-sys-spacing-4);
+}
+
+.md3-prova-type-label {
+  font-size: var(--md-sys-typescale-body-large-font-size);
+  font-weight: var(--md-sys-typescale-body-large-font-weight);
+  line-height: var(--md-sys-typescale-body-large-line-height);
+  color: var(--md-sys-color-on-surface);
+  margin-bottom: var(--md-sys-spacing-3);
+}
+
+.md3-prova-choice-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--md-sys-spacing-4);
+}

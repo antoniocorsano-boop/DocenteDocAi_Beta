@@ -1,0 +1,385 @@
+/**
+ * MD3 UTILITY CLASSES — Layout Governance
+ * 
+ * Purpose: Provide MD3-compliant CSS classes for common layout patterns
+ * Usage: Replace inline styles with semantic classNames
+ * Contract: All values MUST use MD3 tokens (--md-sys-*)
+ * 
+ * NEVER use this file for hardcoded px/rem/% values
+ * ONLY MD3 tokens allowed
+ */
+
+/* ================================================================
+   WIDTH UTILITIES
+   ================================================================ */
+
+/** Full width container */
+.md3-width-full {
+  width: 100%;
+}
+
+/** Max width container (content constraint) */
+.md3-width-max {
+  max-width: var(--md-sys-spacing-240); /* 960px equivalent */
+}
+
+/** Auto width */
+.md3-width-auto {
+  width: auto;
+}
+
+/* ================================================================
+   HEIGHT UTILITIES
+   ================================================================ */
+
+/** Full height */
+.md3-height-full {
+  height: 100%;
+}
+
+/** Full viewport height */
+.md3-height-screen {
+  height: 100vh;
+}
+
+/** Auto height */
+.md3-height-auto {
+  height: auto;
+}
+
+/* ================================================================
+   MARGIN UTILITIES
+   ================================================================ */
+
+/** Auto horizontal margin (center) */
+.md3-margin-auto {
+  margin: var(--md-sys-margin-auto);
+}
+
+/** Auto horizontal margin, preserve vertical */
+.md3-margin-x-auto {
+  margin-left: var(--md-sys-margin-auto);
+  margin-right: var(--md-sys-margin-auto);
+}
+
+/** No margin */
+.md3-margin-none {
+  margin: var(--md-sys-margin-none);
+}
+
+/* ================================================================
+   PADDING UTILITIES
+   ================================================================ */
+
+/** Standard padding */
+.md3-padding-4 {
+  padding: var(--md-sys-spacing-4);
+}
+
+.md3-padding-8 {
+  padding: var(--md-sys-spacing-8);
+}
+
+.md3-padding-16 {
+  padding: var(--md-sys-spacing-16);
+}
+
+/** Horizontal padding only */
+.md3-padding-x-4 {
+  padding-left: var(--md-sys-spacing-4);
+  padding-right: var(--md-sys-spacing-4);
+}
+
+.md3-padding-x-8 {
+  padding-left: var(--md-sys-spacing-8);
+  padding-right: var(--md-sys-spacing-8);
+}
+
+/** Vertical padding only */
+.md3-padding-y-4 {
+  padding-top: var(--md-sys-spacing-4);
+  padding-bottom: var(--md-sys-spacing-4);
+}
+
+.md3-padding-y-8 {
+  padding-top: var(--md-sys-spacing-8);
+  padding-bottom: var(--md-sys-spacing-8);
+}
+
+/* ================================================================
+   FLEXBOX UTILITIES
+   ================================================================ */
+
+/** Flex container */
+.md3-flex {
+  display: flex;
+}
+
+.md3-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.md3-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/** Flex grow */
+.md3-flex-grow-1 {
+  flex: 1 1 auto;
+}
+
+.md3-flex-grow-0 {
+  flex: 0 0 auto;
+}
+
+/** Flex alignment */
+.md3-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.md3-flex-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.md3-flex-justify-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.md3-flex-justify-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ================================================================
+   GAP UTILITIES
+   ================================================================ */
+
+.md3-gap-4 {
+  gap: var(--md-sys-spacing-4);
+}
+
+.md3-gap-8 {
+  gap: var(--md-sys-spacing-8);
+}
+
+.md3-gap-16 {
+  gap: var(--md-sys-spacing-16);
+}
+
+/* ================================================================
+   TEXT ALIGNMENT
+   ================================================================ */
+
+.md3-text-center {
+  text-align: center;
+}
+
+.md3-text-left {
+  text-align: left;
+}
+
+.md3-text-right {
+  text-align: right;
+}
+
+/* ================================================================
+   DISPLAY UTILITIES
+   ================================================================ */
+
+.md3-display-flex {
+  display: flex;
+}
+
+.md3-display-grid {
+  display: grid;
+}
+
+.md3-display-none {
+  display: none;
+}
+
+.md3-display-block {
+  display: block;
+}
+
+/* ================================================================
+   POSITIONING
+   ================================================================ */
+
+.md3-position-relative {
+  position: relative;
+}
+
+.md3-position-absolute {
+  position: absolute;
+}
+
+.md3-position-fixed {
+  position: fixed;
+}
+
+/* ================================================================
+   ROUNDED CORNERS
+   ================================================================ */
+
+.md3-rounded-small {
+  border-radius: var(--md-sys-shape-corner-small);
+}
+
+.md3-rounded-medium {
+  border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.md3-rounded-large {
+  border-radius: var(--md-sys-shape-corner-large);
+}
+
+/* ================================================================
+   BORDERS
+   ================================================================ */
+
+.md3-border-thin-outline {
+  border: var(--md-sys-border-width-thin) solid var(--md-sys-color-outline);
+}
+
+.md3-border-thin-error {
+  border: var(--md-sys-border-width-thin) solid var(--md-sys-color-error);
+}
+
+/* ================================================================
+   COLORS
+   ================================================================ */
+
+.md3-bg-surface {
+  background-color: var(--md-sys-color-surface);
+}
+
+.md3-bg-surface-container-low {
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.md3-bg-surface-container-high {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.md3-bg-primary-container {
+  background-color: var(--md-sys-color-primary-container);
+}
+
+.md3-bg-error-container {
+  background-color: var(--md-sys-color-error-container);
+}
+
+.md3-text-on-surface {
+  color: var(--md-sys-color-on-surface);
+}
+
+.md3-text-on-surface-variant {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-text-on-primary-container {
+  color: var(--md-sys-color-on-primary-container);
+}
+
+/* ================================================================
+   CURSOR
+   ================================================================ */
+
+.md3-cursor-pointer {
+  cursor: pointer;
+}
+
+.md3-cursor-default {
+  cursor: default;
+}
+
+/* ================================================================
+   OVERFLOW
+   ================================================================ */
+
+.md3-overflow-hidden {
+  overflow: hidden;
+}
+
+.md3-overflow-auto {
+  overflow: auto;
+}
+
+.md3-overflow-x-auto {
+  overflow-x: auto;
+}
+
+/* ================================================================
+   COMPOSITE PATTERNS
+   ================================================================ */
+
+/** Centered content container */
+.md3-container-centered {
+  width: 100%;
+  margin-left: var(--md-sys-margin-auto);
+  margin-right: var(--md-sys-margin-auto);
+  max-width: var(--md-sys-spacing-240);
+}
+
+/** Full width input/textarea field */
+.md3-field-full {
+  width: 100%;
+  padding: var(--md-sys-spacing-2);
+  border: var(--md-sys-border-width-thin) solid var(--md-sys-color-outline);
+  border-radius: var(--md-sys-shape-corner-small);
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.md3-field-full:focus {
+  outline: none;
+  border-color: var(--md-sys-color-primary);
+  background-color: var(--md-sys-color-surface);
+}
+
+/** Row with full width label */
+.md3-label-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  cursor: pointer;
+  gap: var(--md-sys-spacing-4);
+}
+
+/** Modal/Dialog content padding */
+.md3-dialog-padding {
+  padding: var(--md-sys-spacing-4);
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+/** Wizard step navigation padding */
+.md3-wizard-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-4);
+  padding: var(--md-sys-spacing-4);
+}
+
+/* ================================================================
+   TYPOGRAPHY COMPOSITES
+   ================================================================ */
+
+.md3-text-center-large {
+  text-align: center;
+  color: var(--md-sys-color-on-surface-variant);
+  padding: var(--md-sys-spacing-8);
+}
+
+/* ================================================================
+   END OF MD3 UTILITIES
+   ================================================================ */

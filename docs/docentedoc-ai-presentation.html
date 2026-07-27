@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocenteDoc AI - Presentazione</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            text-align: center;
+        }
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .slide {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .slide-title {
+            padding: 15px;
+            background: #6750a4;
+            color: white;
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .navigation {
+            margin: 20px 0;
+        }
+        button {
+            background: #6750a4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #5c4a91;
+        }
+        .slide-counter {
+            margin: 10px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <h1>🎓 DocenteDoc AI - Presentazione delle Funzionalità</h1>
+        <p>Presentazione interattiva delle caratteristiche principali dell'applicazione</p>
+
+        <div class="navigation">
+            <button onclick="previousSlide()">⬅️ Precedente</button>
+            <button onclick="nextSlide()">Successivo ➡️</button>
+            <button onclick="toggleAutoPlay()">⏯️ Auto Play</button>
+        </div>
+
+        <div class="slide-counter">Slide <span id="current-slide">1</span> di <span id="total-slides">11</span></div>
+
+        <div id="slides">
+            
+                <div class="slide" style="display: block;">
+                    <h3 class="slide-title">Slide 1: Homepage - Sezione Hero</h3>
+                    <img src="presentation-screenshots/01-landing-hero.png" alt="Slide 1" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 2: Azioni Rapide</h3>
+                    <img src="presentation-screenshots/02-quick-actions.png" alt="Slide 2" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 3: Suggerimenti AI</h3>
+                    <img src="presentation-screenshots/03-ai-suggestion-empty.png" alt="Slide 3" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 4: Prossima Lezione</h3>
+                    <img src="presentation-screenshots/04-next-lesson.png" alt="Slide 4" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 5: Vista Appello</h3>
+                    <img src="presentation-screenshots/05-appello-section.png" alt="Slide 5" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 6: Vista Valutazioni</h3>
+                    <img src="presentation-screenshots/05-appello-view.png" alt="Slide 6" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 7: Vista Progettazione</h3>
+                    <img src="presentation-screenshots/06-valutazioni-section.png" alt="Slide 7" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 8: Pannello Impostazioni</h3>
+                    <img src="presentation-screenshots/07-progettazione-section.png" alt="Slide 8" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 9: Vista Mobile</h3>
+                    <img src="presentation-screenshots/08-settings-section.png" alt="Slide 9" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 10: Dimostrazione Scrolling</h3>
+                    <img src="presentation-screenshots/09-mobile-view.png" alt="Slide 10" loading="lazy">
+                </div>
+            
+                <div class="slide" style="display: none;">
+                    <h3 class="slide-title">Slide 11: Slide 11</h3>
+                    <img src="presentation-screenshots/10-scroll-demonstration.png" alt="Slide 11" loading="lazy">
+                </div>
+            
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let autoPlayInterval = null;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function updateSlideCounter() {
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
+            currentSlide = index;
+            updateSlideCounter();
+        }
+
+        function nextSlide() {
+            const next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        function previousSlide() {
+            const prev = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
+            showSlide(prev);
+        }
+
+        function toggleAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            } else {
+                autoPlayInterval = setInterval(nextSlide, 3000);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        function getSlideTitle(index) {
+            const titles = [
+                'Homepage - Sezione Hero',
+                'Azioni Rapide',
+                'Suggerimenti AI',
+                'Prossima Lezione',
+                'Vista Appello',
+                'Vista Valutazioni',
+                'Vista Progettazione',
+                'Pannello Impostazioni',
+                'Vista Mobile',
+                'Dimostrazione Scrolling'
+            ];
+            return titles[index] || `Slide ${index + 1}`;
+        }
+    </script>
+</body>
+</html>

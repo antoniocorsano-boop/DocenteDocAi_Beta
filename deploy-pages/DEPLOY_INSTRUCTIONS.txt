@@ -1,0 +1,67 @@
+================================================================================
+  DOCENTEDOC AI — FREE DEPLOYMENT (NO GIT PUSH / NO TERMINAL REQUIRED)
+================================================================================
+
+You have 3 super easy FREE options below. All are 100% free.
+
+────────────────────────────────────────────────────────────────────────────────
+OPTION 1 — NETLIFY DROP (RECOMMENDED - 30 seconds, no account needed)
+────────────────────────────────────────────────────────────────────────────────
+1. Go to this link in your browser:   https://app.netlify.com/drop
+2. Drag the entire "deploy-pages" folder (or just the index.html file) onto the page.
+3. Wait 10 seconds.
+4. You will get a free public URL like:
+   https://amazing-unicorn-42.netlify.app
+
+You can even add a custom domain later for free.
+
+────────────────────────────────────────────────────────────────────────────────
+OPTION 2 — MANUAL UPLOAD TO YOUR EXISTING GITHUB REPO (uses your repo)
+────────────────────────────────────────────────────────────────────────────────
+1. Go to: https://github.com/antoniocorsano-boop/docentedocai
+2. Click the big green button: "Add file" → "Upload files"
+3. Drag these two files from the "deploy-pages" folder:
+   - index.html
+   - .nojekyll
+4. At the bottom, change the commit message to: "Publish teacher landing page"
+5. Click "Commit changes"
+6. Now go to: https://github.com/antoniocorsano-boop/docentedocai/settings/pages
+7. Under "Source" choose "Deploy from a branch"
+8. Branch: main   Folder: / (root)
+9. Click Save
+10. Your page will be live at:
+    https://antoniocorsano-boop.github.io/docentedocai/
+
+────────────────────────────────────────────────────────────────────────────────
+OPTION 3 — SURGE.SH (if you have Node.js)
+────────────────────────────────────────────────────────────────────────────────
+1. Open terminal on your computer
+2. Run:
+   npm install -g surge
+3. cd deploy-pages
+4. surge
+5. Choose a name like: docentedocai.surge.sh
+6. Done! Free URL: https://docentedocai.surge.sh
+
+────────────────────────────────────────────────────────────────────────────────
+WHAT YOU GET
+────────────────────────────────────────────────────────────────────────────────
+- Beautiful teacher-focused landing page (in Italian)
+- Fully static, works everywhere
+- No backend, no costs
+- Mobile friendly
+
+The page contains:
+- What the tool is
+- Table of features
+- 3-step guide
+- Privacy notice
+- Links to the GitHub repo
+
+────────────────────────────────────────────────────────────────────────────────
+TIP
+────────────────────────────────────────────────────────────────────────────────
+You can repeat this any time you want to update the page.
+Just replace index.html with a new version and re-upload.
+
+================================================================================

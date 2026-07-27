@@ -1,0 +1,31 @@
+{
+  "name": "docentedoc-ai-maintenance",
+  "version": "1.0.0",
+  "description": "Phase 6 Maintenance & Monitoring scripts for DocenteDoc AI",
+  "main": "scripts/monitoring.ts",
+  "scripts": {
+    "monitor": "ts-node scripts/monitoring.ts run",
+    "report": "ts-node scripts/monitoring.ts report",
+    "baseline": "ts-node scripts/monitoring.ts baseline",
+    "alerts": "ts-node scripts/alert.ts stats",
+    "alerts:active": "ts-node scripts/alert.ts active"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.30",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "monitoring",
+    "maintenance",
+    "performance",
+    "alerts",
+    "docentedoc-ai"
+  ],
+  "author": "Copilot (Phase 6)",
+  "license": "MIT",
+  "dependencies": {
+    "recharts": "^3.7.0",
+    "zustand": "^5.0.10"
+  }
+}

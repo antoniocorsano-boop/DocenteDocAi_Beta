@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocenteDoc AI — Livello 6 PA Readiness Checklist</title>
+  <style>
+    :root {
+      --md-primary:            #6750A4;
+      --md-on-primary:         #FFFFFF;
+      --md-primary-container:  #EADDFF;
+      --md-secondary:          #625B71;
+      --md-secondary-container:#E8DEF8;
+      --md-tertiary:           #7D5260;
+      --md-tertiary-container: #FFD8E4;
+      --md-surface:            #FFFBFE;
+      --md-surface-container:  #F3EDF7;
+      --md-surface-dim:        #DED8E1;
+      --md-outline:            #79747E;
+      --md-outline-variant:    #CAC4D0;
+      --md-error:              #B3261E;
+      --md-error-container:    #F9DEDC;
+      --md-on-error-container: #410E0B;
+      --col-green:   #1B5E20;
+      --col-green-c: #C8E6C9;
+      --col-yellow:  #E65100;
+      --col-yellow-c:#FFE0B2;
+      --col-red:     #B3261E;
+      --col-red-c:   #F9DEDC;
+      --radius-m: 12px;
+      --radius-s: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Google Sans', 'Segoe UI', system-ui, sans-serif;
+      background: var(--md-surface-container);
+      color: #1C1B1F;
+      min-height: 100vh;
+    }
+
+    /* ── header ── */
+    .header {
+      background: var(--md-primary);
+      color: var(--md-on-primary);
+      padding: 28px 32px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      flex: 1;
+    }
+    .header-sub {
+      font-size: 0.875rem;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+    .badge-cert {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: background 0.3s, color 0.3s;
+    }
+    .badge-green  { background: var(--col-green-c);  color: var(--col-green); }
+    .badge-yellow { background: var(--col-yellow-c); color: var(--col-yellow); }
+    .badge-red    { background: var(--col-red-c);    color: var(--col-red); }
+
+    /* ── overall progress ── */
+    .overall-bar-wrap {
+      margin-top: 14px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .overall-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: #FFFFFF;
+      transition: width 0.4s ease;
+    }
+    .overall-label {
+      margin-top: 6px;
+      font-size: 0.8125rem;
+      opacity: 0.9;
+    }
+
+    /* ── layout ── */
+    .main {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 16px 64px;
+    }
+
+    /* ── section card ── */
+    .section-card {
+      background: var(--md-surface);
+      border-radius: var(--radius-m);
+      border: 1px solid var(--md-outline-variant);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .section-icon {
+      font-size: 1.375rem;
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .section-title-wrap { flex: 1; }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1C1B1F;
+    }
+    .section-subtitle {
+      font-size: 0.75rem;
+      color: var(--md-secondary);
+      margin-top: 2px;
+    }
+    .section-score {
+      font-size: 0.875rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .chevron {
+      font-size: 1.2rem;
+      color: var(--md-outline);
+      transition: transform 0.25s;
+    }
+    .section-card.collapsed .chevron { transform: rotate(-90deg); }
+
+    /* ── section progress bar ── */
+    .section-progress-bar {
+      height: 4px;
+      background: var(--md-outline-variant);
+    }
+    .section-progress-fill {
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    /* ── checklist body ── */
+    .section-body {
+      padding: 4px 0 12px;
+    }
+    .section-card.collapsed .section-body { display: none; }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-radius: 0;
+    }
+    .check-item:hover { background: var(--md-surface-container); }
+
+    .check-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      accent-color: var(--md-primary);
+      cursor: pointer;
+    }
+
+    .check-content { flex: 1; }
+    .check-label {
+      font-size: 0.9rem;
+      color: #1C1B1F;
+      line-height: 1.4;
+    }
+    .check-label.done {
+      text-decoration: line-through;
+      color: var(--md-outline);
+    }
+    .check-note {
+      font-size: 0.75rem;
+      color: var(--md-outline);
+      margin-top: 2px;
+      font-style: italic;
+    }
+    .check-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 1px 7px;
+      border-radius: 10px;
+      margin-left: 8px;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+    .tag-done     { background: var(--col-green-c);  color: var(--col-green); }
+    .tag-blocker  { background: var(--col-red-c);    color: var(--col-red); }
+    .tag-warning  { background: var(--col-yellow-c); color: var(--col-yellow); }
+    .tag-new      { background: var(--md-secondary-container); color: var(--md-secondary); }
+
+    /* ── summary footer ── */
+    .summary-card {
+      background: var(--md-surface);
+      border-radius: var(--radius-m);
+      border: 1px solid var(--md-outline-variant);
+      padding: 24px 28px;
+      margin-top: 28px;
+    }
+    .summary-card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--md-primary);
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .summary-cell {
+      border-radius: var(--radius-s);
+      padding: 10px 14px;
+      text-align: center;
+    }
+    .summary-cell .val {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .summary-cell .lbl {
+      font-size: 0.7rem;
+      margin-top: 4px;
+      opacity: 0.75;
+    }
+
+    .verdict-box {
+      border-radius: var(--radius-s);
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    .verdict-box strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+
+    /* ── actions ── */
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px 22px;
+      border-radius: 20px;
+      border: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, filter 0.15s;
+    }
+    .btn:hover { filter: brightness(0.93); }
+    .btn-primary   { background: var(--md-primary);   color: #FFF; }
+    .btn-secondary { background: var(--md-secondary-container); color: var(--md-secondary); }
+    .btn-outline   { background: transparent; border: 1px solid var(--md-outline); color: #1C1B1F; }
+
+    /* ── responsive ── */
+    @media (max-width: 600px) {
+      .header { padding: 20px 16px; }
+      .header h1 { font-size: 1.2rem; }
+      .main { padding: 0 8px 48px; }
+    }
+
+    /* ── print ── */
+    @media print {
+      .header { position: static; }
+      .actions { display: none; }
+      .section-card.collapsed .section-body { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════ HEADER ══ -->
+<header class="header">
+  <div class="header-top">
+    <span style="font-size:1.5rem">🏛️</span>
+    <h1>DocenteDoc AI — Livello 6 PA Readiness</h1>
+    <span class="badge-cert badge-red" id="globalBadge">⏳ In valutazione</span>
+  </div>
+  <p class="header-sub">
+    Checklist interattiva per la certificazione normativa Pubblica Amministrazione &nbsp;|&nbsp;
+    Aggiornata al 15 marzo 2026
+  </p>
+  <div class="overall-bar-wrap">
+    <div class="overall-bar-fill" id="overallBar" style="width:0%"></div>
+  </div>
+  <div class="overall-label" id="overallLabel">Calcolo in corso…</div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════ MAIN ══ -->
+<main class="main">
+
+<!-- ── SEZIONE 1: Funzionalità AI ── -->
+<div class="section-card" id="sec-0">
+  <div class="section-header" onclick="toggleSection(0)">
+    <span class="section-icon" style="background:#EDE7F6;color:#6750A4">🤖</span>
+    <div class="section-title-wrap">
+      <div class="section-title">1. Funzionalità e Copertura Moduli AI</div>
+      <div class="section-subtitle">Pipeline Pedagogy · Trust · Recommendation · Simulation</div>
+    </div>
+    <span class="section-score" id="score-0">0 / 7</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-progress-bar"><div class="section-progress-fill" id="pbar-0" style="width:0%"></div></div>
+  <div class="section-body">
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="0" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Tutti i test unitari AI passano (≥ 95%)
+          <span class="check-tag tag-done">✅ 146/146</span>
+        </div>
+        <div class="check-note">npx vitest run src/ai — 8 test file, 0 fallimenti al 15/03/2026</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="0" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Pipeline Pedagogy genera PedagogyReport su dataset reale
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">Bloom classification + alignment scoring integrati in CopilotRecommendationPanel</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="0" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Pipeline Trust genera TrustReport su dati reali (studenti + valutazioni)
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">predictStudentRisk → explainClass → generateBiasReport → generateTrustReport</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="0" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Raccomandazioni AI integrate nell'UI docente (Tab "Raccomandazioni AI")
+          <span class="check-tag tag-done">✅ Sprint 9</span>
+        </div>
+        <div class="check-note">CopilotRecommendationPanel.tsx — Tab 11 in CopilotDocentePanel</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="0" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">ActivityGenerator produce attività contestuali per ogni raccomandazione
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">activityGenerator.ts — 5 tipi: quiz, exercise, whatif, discussion, lab</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="0" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">CurriculumAdvisor analizza sequenza lezioni reali senza errori
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">5 heuristic: topic density, HOTS ratio, verification gap, objective coverage, diversity</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="0" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Pipeline di simulazione deterministica (stesso seed → stessi risultati)
+          <span class="check-tag tag-done">✅ R-Sim fix</span>
+        </div>
+        <div class="check-note">simulation.test.ts — executionTimeMs escluso dal confronto strict-equal</div>
+      </div>
+    </label>
+
+  </div>
+</div>
+
+<!-- ── SEZIONE 2: Tracciabilità e Audit ── -->
+<div class="section-card" id="sec-1">
+  <div class="section-header" onclick="toggleSection(1)">
+    <span class="section-icon" style="background:#E8F5E9;color:#2E7D32">📋</span>
+    <div class="section-title-wrap">
+      <div class="section-title">2. Tracciabilità e Audit Trail</div>
+      <div class="section-subtitle">Registrazione decisioni · Log ricostruibili · Immutabilità punteggi</div>
+    </div>
+    <span class="section-score" id="score-1">0 / 6</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-progress-bar"><div class="section-progress-fill" id="pbar-1" style="width:0%"></div></div>
+  <div class="section-body">
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="1" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Ogni decisione AI registrata con timestamp in AuditTrail
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">auditTrail.ts — buffer circolare max 50 entry, start/step/finish pattern</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="1" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          AuditTrail persistente tra sessioni (non solo in-memory)
+          <span class="check-tag tag-done">✅ R4 fix</span>
+        </div>
+        <div class="check-note">pushAudit() persiste in localStorage (ultimi 10 trail) + loadAuditHistoryFromStorage()</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="1" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">Ogni log include: id, studentId, passi, durate, cache-hit, bias-level
+        </div>
+        <div class="check-note">AIAuditTrail type: id, studentId, steps[], totalMs, cacheHit, biasLevel</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="1" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Log accessibili e consultabili dall'interfaccia (DevTools / export JSON)
+          <span class="check-tag tag-warning">⚠️ parziale</span>
+        </div>
+        <div class="check-note">AIDevToolsPanel mostra history; manca export CSV/JSON scaricabile in produzione</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="1" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">Punteggi AI calcolati solo a runtime (non modificabili da UI)</div>
+        <div class="check-note">Tutti i calcoli sono in moduli TypeScript read-only; nessuna override via store</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="1" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Ricostruzione passo-passo di una raccomandazione possibile da log
+          <span class="check-tag tag-blocker">🔴 gap</span>
+        </div>
+        <div class="check-note">I log di auditTrail non includono i parametri in ingresso della pipeline (lessons, udas, scores). Serve input-snapshot.</div>
+      </div>
+    </label>
+
+  </div>
+</div>
+
+<!-- ── SEZIONE 3: Privacy e GDPR ── -->
+<div class="section-card" id="sec-2">
+  <div class="section-header" onclick="toggleSection(2)">
+    <span class="section-icon" style="background:#FFF3E0;color:#E65100">🔒</span>
+    <div class="section-title-wrap">
+      <div class="section-title">3. Privacy e GDPR</div>
+      <div class="section-subtitle">Pseudonimizzazione · Registri trattamento · Consenso · Retention</div>
+    </div>
+    <span class="section-score" id="score-2">0 / 7</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-progress-bar"><div class="section-progress-fill" id="pbar-2" style="width:0%"></div></div>
+  <div class="section-body">
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="2" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          studentId pseudonimizzato nel buffer telemetria (nessun PII raw)
+          <span class="check-tag tag-done">✅ R1 fix</span>
+        </div>
+        <div class="check-note">logAIActionTriggered emette pseudoId = btoa(studentId).slice(0,8) — commit 10a48791</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="2" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">Nessun dato identificativo esportato senza autorizzazione esplicita</div>
+        <div class="check-note">Backup Google Drive richiede OAuth2 grant esplicito dal docente</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="2" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Dati degli studenti isolati per classe/docente (no cross-access)
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">SPA full-client: ogni istanza gestisce solo i propri dati localStorage</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="2" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Registro dei trattamenti (art. 30 GDPR) compilato e aggiornato
+          <span class="check-tag tag-blocker">🔴 mancante</span>
+        </div>
+        <div class="check-note">Documento legale da redigere: tipologia dati, finalità, base giuridica, tempi conservazione</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="2" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Informativa privacy e consenso informato per i docenti
+          <span class="check-tag tag-blocker">🔴 mancante</span>
+        </div>
+        <div class="check-note">Nessuna schermata di consenso all'avvio; nessuna privacy policy pubblicata</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="2" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Policy di data retention documentata (quando cancellare i log)
+          <span class="check-tag tag-warning">⚠️ parziale</span>
+        </div>
+        <div class="check-note">localStorage.clear() disabilitato; nessuna regola automatica di scadenza dati</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="2" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          DPA (Data Processing Agreement) predisposto per provider cloud (Vercel / Google)
+          <span class="check-tag tag-blocker">🔴 mancante</span>
+        </div>
+        <div class="check-note">Vercel e Google Workspace devono firmare DPA prima di trattare dati PA</div>
+      </div>
+    </label>
+
+  </div>
+</div>
+
+<!-- ── SEZIONE 4: Conformità CAD / AGID ── -->
+<div class="section-card" id="sec-3">
+  <div class="section-header" onclick="toggleSection(3)">
+    <span class="section-icon" style="background:#E3F2FD;color:#1565C0">🏛️</span>
+    <div class="section-title-wrap">
+      <div class="section-title">4. Conformità CAD / AGID</div>
+      <div class="section-subtitle">SPID/CIE · Accessibilità WCAG 2.1 AA · Interoperabilità · SLA</div>
+    </div>
+    <span class="section-score" id="score-3">0 / 7</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-progress-bar"><div class="section-progress-fill" id="pbar-3" style="width:0%"></div></div>
+  <div class="section-body">
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="3" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Autenticazione SPID / CIE / CNS implementata
+          <span class="check-tag tag-blocker">🔴 mancante</span>
+        </div>
+        <div class="check-note">Attualmente: Google OAuth2 opzionale. SPID obbligatorio per accesso a dati PA art. 64 CAD</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="3" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Layout MD3 conforme e audit senza violazioni bloccanti
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">npm run md3:audit — conformità strutturale e semantica MD3 Gold</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="3" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Accessibilità WCAG 2.1 AA verificata (aria-label, focus, contrasto)
+          <span class="check-tag tag-warning">⚠️ parziale</span>
+        </div>
+        <div class="check-note">aria-label presenti sui componenti interattivi AI; audit WCAG completo non eseguito</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="3" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Dichiarazione di accessibilità pubblicata (art. 3-quater L. 4/2004)
+          <span class="check-tag tag-blocker">🔴 mancante</span>
+        </div>
+        <div class="check-note">Documento obbligatorio per PA: stato di conformità, data audit, meccanismo di feedback</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="3" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">API documentate e interoperabili (OpenAPI/JSON standard)
+          <span class="check-tag tag-warning">⚠️ parziale</span>
+        </div>
+        <div class="check-note">api/ai.ts documentata internamente; nessuna spec OpenAPI v3 pubblica per integrazione PA</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="3" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Contratto SLA e uptime garantito (≥ 99.5% per PA)
+          <span class="check-tag tag-blocker">🔴 mancante</span>
+        </div>
+        <div class="check-note">Vercel Free Tier non garantisce SLA. Serve Vercel Pro/Enterprise con SLA documentato</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="3" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">Iscrizione / qualificazione nel Marketplace AGID (Cloud PA)
+          <span class="check-tag tag-blocker">🔴 mancante</span>
+        </div>
+        <div class="check-note">Prerequisito per fornitura a PA: qualificazione SaaS AGID, processo ~6–12 mesi</div>
+      </div>
+    </label>
+
+  </div>
+</div>
+
+<!-- ── SEZIONE 5: Sicurezza Tecnica ── -->
+<div class="section-card" id="sec-4">
+  <div class="section-header" onclick="toggleSection(4)">
+    <span class="section-icon" style="background:#FCE4EC;color:#880E4F">🛡️</span>
+    <div class="section-title-wrap">
+      <div class="section-title">5. Sicurezza Tecnica</div>
+      <div class="section-subtitle">TLS · Backup · Pen test · Bias AI · Secret management</div>
+    </div>
+    <span class="section-score" id="score-4">0 / 7</span>
+    <span class="chevron">▾</span>
+  </div>
+  <div class="section-progress-bar"><div class="section-progress-fill" id="pbar-4" style="width:0%"></div></div>
+  <div class="section-body">
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="4" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          HTTPS/TLS su tutti gli endpoint (vercel.json headers configurati)
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">vercel.json: Strict-Transport-Security, X-Frame-Options, CSP, X-Content-Type-Options</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="4" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Chiavi API gestite server-side (nessun secret esposto nel client JS bundle)
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">GEMINI_API_KEY / ANTHROPIC_API_KEY usate solo in api/ai.ts (Vercel Edge) — mai in VITE_*</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="4" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Backup automatico dati docente (Google Drive integration)
+          <span class="check-tag tag-done">✅</span>
+        </div>
+        <div class="check-note">googleDriveBackup.ts — export/import JSON con OAuth2, flow documentato in GOOGLE_DRIVE_SETUP.md</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="4" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Test di regressione automatizzati eseguiti ad ogni commit (CI)
+          <span class="check-tag tag-warning">⚠️ parziale</span>
+        </div>
+        <div class="check-note">Vitest in locale; nessun CI/CD GitHub Actions configurato per auto-run test su push</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="4" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">Bias AI verificato e documentato periodicamente (fairness report)</div>
+        <div class="check-note">biasReport.ts genera BiasAnalysisReport; non esiste ancora una cadenza/policy di revisione periodica</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="4" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">
+          Penetration test minimo eseguito (OWASP Top 10)
+          <span class="check-tag tag-blocker">🔴 mancante</span>
+        </div>
+        <div class="check-note">Nessun pentest documentato. Obbligatorio per qualificazione AGID e deployment PA</div>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" data-sec="4" onchange="update()" />
+      <div class="check-content">
+        <div class="check-label">Security.md aggiornato con policy di disclosure e contatti</div>
+        <div class="check-note">SECURITY.md presente nel repo — verificare che la policy di responsible disclosure sia completa</div>
+      </div>
+    </label>
+
+  </div>
+</div>
+
+<!-- ── RIEPILOGO ── -->
+<div class="summary-card" id="summaryCard">
+  <h2>📊 Riepilogo Readiness</h2>
+  <div class="summary-grid" id="summaryGrid">
+    <!-- populated by JS -->
+  </div>
+  <div class="verdict-box" id="verdictBox" style="background:#F3EDF7"></div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="exportReport()">⬇ Esporta Report JSON</button>
+    <button class="btn btn-secondary" onclick="window.print()">🖨 Stampa / PDF</button>
+    <button class="btn btn-outline" onclick="resetAll()">🔄 Reset checklist</button>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── state ──────────────────────────────────────────────────────────────────────
+
+const STORAGE_KEY = 'pa_readiness_v1';
+
+const SECTIONS = [
+  { id: 0, title: '1. Funzionalità AI',   total: 7 },
+  { id: 1, title: '2. Tracciabilità',     total: 6 },
+  { id: 2, title: '3. Privacy GDPR',      total: 7 },
+  { id: 3, title: '4. CAD / AGID',        total: 7 },
+  { id: 4, title: '5. Sicurezza',         total: 7 },
+];
+
+const SECTION_COLORS = [
+  '#7E57C2', // AI
+  '#43A047', // Audit
+  '#FB8C00', // GDPR
+  '#1E88E5', // CAD
+  '#E91E63', // Sicurezza
+];
+
+function loadState() {
+  try {
+    const s = localStorage.getItem(STORAGE_KEY);
+    return s ? JSON.parse(s) : {};
+  } catch { return {}; }
+}
+
+function saveState(state) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+}
+
+// ── init ───────────────────────────────────────────────────────────────────────
+
+(function init() {
+  const state = loadState();
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, idx) => {
+    if (state[idx]) cb.checked = true;
+    // prevent label click double-toggle
+    cb.addEventListener('click', e => e.stopPropagation());
+  });
+  update();
+})();
+
+// ── core update ────────────────────────────────────────────────────────────────
+
+function update() {
+  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+
+  // persist
+  const state = {};
+  checkboxes.forEach((cb, i) => { state[i] = cb.checked; });
+  saveState(state);
+
+  // toggle label style
+  checkboxes.forEach(cb => {
+    const label = cb.closest('.check-item')?.querySelector('.check-label');
+    if (label) label.classList.toggle('done', cb.checked);
+  });
+
+  let totalChecked = 0, totalItems = 0;
+
+  SECTIONS.forEach(sec => {
+    const items = Array.from(document.querySelectorAll(`input[data-sec="${sec.id}"]`));
+    const checked = items.filter(cb => cb.checked).length;
+    totalChecked += checked;
+    totalItems   += items.length;
+
+    const pct = items.length ? Math.round(checked / items.length * 100) : 0;
+
+    // score badge
+    document.getElementById(`score-${sec.id}`).textContent = `${checked} / ${items.length}`;
+    const scoreEl = document.getElementById(`score-${sec.id}`);
+    scoreEl.style.background = pct >= 70 ? '#C8E6C9' : pct >= 40 ? '#FFE0B2' : '#FFCDD2';
+    scoreEl.style.color      = pct >= 70 ? '#1B5E20' : pct >= 40 ? '#E65100' : '#B71C1C';
+
+    // progress bar
+    const fill = document.getElementById(`pbar-${sec.id}`);
+    fill.style.width      = pct + '%';
+    fill.style.background = pct >= 70 ? '#66BB6A' : pct >= 40 ? '#FFA726' : '#EF5350';
+  });
+
+  // overall
+  const overallPct = totalItems ? Math.round(totalChecked / totalItems * 100) : 0;
+  document.getElementById('overallBar').style.width = overallPct + '%';
+  document.getElementById('overallLabel').textContent =
+    `${overallPct}% completato — ${totalChecked} / ${totalItems} criteri soddisfatti`;
+
+  // global badge
+  const badge = document.getElementById('globalBadge');
+  if (overallPct >= 80) {
+    badge.className = 'badge-cert badge-green';
+    badge.textContent = '✅ Pronto alla Certificazione';
+  } else if (overallPct >= 50) {
+    badge.className = 'badge-cert badge-yellow';
+    badge.textContent = '⚠️ Parzialmente Pronto';
+  } else {
+    badge.className = 'badge-cert badge-red';
+    badge.textContent = '🔴 Gap significativi';
+  }
+
+  // summary grid
+  const grid = document.getElementById('summaryGrid');
+  grid.innerHTML = SECTIONS.map((sec, i) => {
+    const items   = Array.from(document.querySelectorAll(`input[data-sec="${sec.id}"]`));
+    const checked = items.filter(cb => cb.checked).length;
+    const pct     = items.length ? Math.round(checked / items.length * 100) : 0;
+    const bg      = pct >= 70 ? '#C8E6C9' : pct >= 40 ? '#FFE0B2' : '#FFCDD2';
+    const fg      = pct >= 70 ? '#1B5E20' : pct >= 40 ? '#E65100' : '#B71C1C';
+    return `<div class="summary-cell" style="background:${bg};color:${fg}">
+      <div class="val">${pct}%</div>
+      <div class="lbl">${sec.title}</div>
+    </div>`;
+  }).join('') + `<div class="summary-cell" style="background:${overallPct>=70?'#E8EAF6':'#FAFAFA'};color:${overallPct>=70?'#283593':'#37474F'}">
+    <div class="val">${overallPct}%</div>
+    <div class="lbl">⊛ Totale</div>
+  </div>`;
+
+  // verdict
+  const vbox = document.getElementById('verdictBox');
+  const blockers = document.querySelectorAll('.check-tag.tag-blocker').length;
+  const doneBlockers = Array.from(document.querySelectorAll('.check-item')).filter(item =>
+    item.querySelector('.check-tag.tag-blocker') && item.querySelector('input').checked
+  ).length;
+  const openBlockers = blockers - doneBlockers;
+
+  if (overallPct >= 80 && openBlockers === 0) {
+    vbox.style.background = '#C8E6C9';
+    vbox.innerHTML = '<strong>✅ Pronto alla Dichiarazione di Conformità</strong>Tutti i criteri critici sono soddisfatti. Puoi procedere alla redazione della Dichiarazione di Conformità e avviare il percorso di qualificazione AGID.';
+  } else if (overallPct >= 50 || openBlockers <= 3) {
+    vbox.style.background = '#FFE0B2';
+    vbox.innerHTML = `<strong>⚠️ Quasi pronto — ${openBlockers} blocker aperti</strong>I gap indicati come 🔴 devono essere chiusi prima della certificazione. Priorità suggerita: SPID auth → Registro trattamenti GDPR → Dichiarazione accessibilità → SLA / AGID.`;
+  } else {
+    vbox.style.background = '#FFCDD2';
+    vbox.innerHTML = `<strong>🔴 Gap significativi — ${openBlockers} blocker aperti</strong>Il sistema ha funzionalità AI mature ma mancano requisiti normativi fondamentali per la PA. Stimato: 3–6 mesi di lavoro per raggiungere la certificazione completa.`;
+  }
+}
+
+// ── toggle section collapse ────────────────────────────────────────────────────
+
+function toggleSection(id) {
+  const card = document.getElementById(`sec-${id}`);
+  card.classList.toggle('collapsed');
+}
+
+// ── export ─────────────────────────────────────────────────────────────────────
+
+function exportReport() {
+  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+  const items = Array.from(document.querySelectorAll('.check-item')).map((item, i) => ({
+    index:   i,
+    section: item.querySelector('input').dataset.sec,
+    label:   item.querySelector('.check-label')?.childNodes[0]?.textContent?.trim() ?? '',
+    checked: checkboxes[i]?.checked ?? false,
+    tags:    Array.from(item.querySelectorAll('.check-tag')).map(t => t.textContent.trim()),
+  }));
+
+  const report = {
+    title:     'DocenteDoc AI — PA Readiness Report',
+    date:      new Date().toISOString(),
+    version:   'Livello 6',
+    sections:  SECTIONS.map(sec => {
+      const secItems = items.filter(it => it.section === String(sec.id));
+      return {
+        ...sec,
+        checked: secItems.filter(i => i.checked).length,
+        pct:     Math.round(secItems.filter(i => i.checked).length / secItems.length * 100),
+        items:   secItems,
+      };
+    }),
+    overall: {
+      checked: items.filter(i => i.checked).length,
+      total:   items.length,
+      pct:     Math.round(items.filter(i => i.checked).length / items.length * 100),
+    },
+  };
+
+  const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `pa-readiness-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+
+// ── reset ──────────────────────────────────────────────────────────────────────
+
+function resetAll() {
+  if (!confirm('Resettare tutte le selezioni?')) return;
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; });
+  localStorage.removeItem(STORAGE_KEY);
+  update();
+}
+</script>
+</body>
+</html>

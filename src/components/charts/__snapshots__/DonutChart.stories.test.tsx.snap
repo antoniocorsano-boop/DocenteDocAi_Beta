@@ -1,0 +1,56 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DonutChart Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI application theme provider"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1eiehof-MuiPaper-root"
+    role="main"
+    style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+  >
+    <div
+      style="position: relative; width: 200px; height: 200px;"
+    >
+      <svg
+        height="200"
+        viewBox="0 0 200 200"
+        width="200"
+      >
+        <g
+          transform="rotate(-90 100 100)"
+        >
+          <circle
+            cx="100"
+            cy="100"
+            fill="transparent"
+            r="80"
+            stroke="var(--md-sys-color-primary)"
+            stroke-dasharray="502.6548245743669 502.6548245743669"
+            stroke-dashoffset="502.6548245743669"
+            stroke-width="20"
+          />
+        </g>
+        <text
+          fill="var(--md-sys-color-onSurface)"
+          font-size="24"
+          font-weight="bold"
+          text-anchor="middle"
+          x="100"
+          y="95"
+        >
+          10
+        </text>
+        <text
+          fill="var(--md-sys-color-onSurface-variant)"
+          font-size="12"
+          text-anchor="middle"
+          x="100"
+          y="115"
+        >
+          Totale
+        </text>
+      </svg>
+    </div>
+  </div>
+</div>
+`;

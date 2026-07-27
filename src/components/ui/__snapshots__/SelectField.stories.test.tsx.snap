@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SelectField Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-1p2xf3b-MuiPaper-root"
+    role="application"
+    style="--Paper-shadow: none;"
+  >
+    <div
+      class="MuiFormControl-root css-1eqmu5y-MuiFormControl-root"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink="true"
+        for="select-field"
+        id="select-field-label"
+      >
+        Test
+      </label>
+      <div
+        class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl MuiNativeSelect-root css-5h82ro-MuiInputBase-root-MuiInput-root"
+      >
+        <select
+          aria-label="Test"
+          class="MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiInput-input css-b4m9gu-MuiNativeSelect-root-MuiNativeSelect-select-MuiInputBase-input-MuiInput-input"
+          id="select-field"
+        >
+          <option>
+            Test
+          </option>
+        </select>
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiNativeSelect-icon MuiNativeSelect-iconOutlined css-1bjnys1-MuiSvgIcon-root-MuiNativeSelect-root-MuiNativeSelect-icon"
+          data-testid="ArrowDropDownIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;

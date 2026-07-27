@@ -1,0 +1,37 @@
+/* MD3 Z-Index Design Tokens */
+/* Material Design 3 z-index hierarchy for consistent layering */
+
+:root {
+  /* Base layer - default stacking context */
+  --md-sys-z-base: 0;
+
+  /* Content layer - raised content */
+  --md-sys-z-raised: 10;
+
+  /* Navigation layer - navigation elements */
+  --md-sys-z-nav: 100;
+
+  /* App bar layer - app bars, headers */
+  --md-sys-z-app-bar: 200;
+
+  /* Sticky layer - sticky elements */
+  --md-sys-z-sticky: 120;
+
+  /* Snackbar layer - notifications, toasts */
+  --md-sys-z-snackbar: 900;
+
+  /* Scrim layer - backdrop overlay behind drawers and sheets */
+  --md-sys-z-scrim: 540;
+
+  /* Drawer layer - side drawers, bottom sheets */
+  --md-sys-z-drawer: 550;
+
+  /* Modal layer - dialogs, modals */
+  --md-sys-z-modal: 600;
+
+  /* Tooltip layer - tooltips, help text */
+  --md-sys-z-tooltip: 950;
+
+  /* Skip link layer - accessibility skip links */
+  --md-sys-z-skip-link: 9999;
+}

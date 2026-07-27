@@ -1,0 +1,911 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MD3 Visual Regression Snapshots > M3IconButton renders correctly for all variants 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <button
+      aria-label="favorite"
+      style="display: inline-flex; align-items: center; justify-content: center; border-radius: var(--md-sys-shape-corner-full); transition: all var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard); outline: none; outline-offset: var(--md-sys-spacing-0); border: medium; cursor: pointer; pointer-events: auto; font-family: var(--md-sys-typescale-font-family); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-label-large-letter-spacing); width: var(--md-sys-spacing-10); height: var(--md-sys-spacing-10); font-size: var(--md-sys-typescale-label-large-font-size); background-color: transparent; color: var(--md-sys-color-on-surface-variant);"
+      title="favorite"
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+        class="material-symbols-outlined"
+        style="user-select: none; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;"
+      >
+        favorite
+      </span>
+    </button>
+    <button
+      aria-label="favorite"
+      style="display: inline-flex; align-items: center; justify-content: center; border-radius: var(--md-sys-shape-corner-full); transition: all var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard); outline: none; outline-offset: var(--md-sys-spacing-0); border: medium; cursor: pointer; pointer-events: auto; font-family: var(--md-sys-typescale-font-family); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-label-large-letter-spacing); width: var(--md-sys-spacing-10); height: var(--md-sys-spacing-10); font-size: var(--md-sys-typescale-label-large-font-size); background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);"
+      title="favorite"
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+        class="material-symbols-outlined"
+        style="user-select: none; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;"
+      >
+        favorite
+      </span>
+    </button>
+    <button
+      aria-label="favorite"
+      style="display: inline-flex; align-items: center; justify-content: center; border-radius: var(--md-sys-shape-corner-full); transition: all var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard); outline: none; outline-offset: var(--md-sys-spacing-0); border: medium; cursor: pointer; pointer-events: auto; font-family: var(--md-sys-typescale-font-family); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-label-large-letter-spacing); width: var(--md-sys-spacing-10); height: var(--md-sys-spacing-10); font-size: var(--md-sys-typescale-label-large-font-size); background-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container);"
+      title="favorite"
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+        class="material-symbols-outlined"
+        style="user-select: none; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;"
+      >
+        favorite
+      </span>
+    </button>
+    <button
+      aria-label="favorite"
+      style="display: inline-flex; align-items: center; justify-content: center; border-radius: var(--md-sys-shape-corner-full); transition: all var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard); outline: none; outline-offset: var(--md-sys-spacing-0); border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline); cursor: pointer; pointer-events: auto; font-family: var(--md-sys-typescale-font-family); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-label-large-letter-spacing); width: var(--md-sys-spacing-10); height: var(--md-sys-spacing-10); font-size: var(--md-sys-typescale-label-large-font-size); background-color: transparent; color: var(--md-sys-color-on-surface);"
+      title="favorite"
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+        class="material-symbols-outlined"
+        style="user-select: none; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;"
+      >
+        favorite
+      </span>
+    </button>
+    <button
+      aria-label="favorite"
+      disabled=""
+      style="display: inline-flex; align-items: center; justify-content: center; border-radius: var(--md-sys-shape-corner-full); transition: all var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard); outline: none; outline-offset: var(--md-sys-spacing-0); border: medium; cursor: not-allowed; opacity: var(--md-sys-state-opacity-disabled); pointer-events: none; font-family: var(--md-sys-typescale-font-family); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-label-large-letter-spacing); width: var(--md-sys-spacing-10); height: var(--md-sys-spacing-10); font-size: var(--md-sys-typescale-label-large-font-size); background-color: transparent; color: var(--md-sys-color-on-surface-variant);"
+      title="favorite"
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+        class="material-symbols-outlined"
+        style="user-select: none; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;"
+      >
+        favorite
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > M3ListItem renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="display: flex; align-items: flex-start; gap: var(--md-sys-spacing-4); padding: var(--md-sys-spacing-4); border-radius: var(--md-sys-shape-corner-medium); transition: all var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard); min-height: var(--md-sys-spacing-12); cursor: default; background-color: transparent; outline: none; outline-offset: var(--md-sys-spacing-0); border: medium; text-align: left; width: var(--md-sys-percent-100);"
+    >
+      <div
+        style="flex-shrink: 0; margin-top: var(--md-sys-spacing-1);"
+      >
+        <span>
+          L
+        </span>
+      </div>
+      <div
+        style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--md-sys-spacing-1);"
+      >
+        <div
+          style="font-family: var(--font-family); font-size: var(--md-sys-typescale-body-large-font-size); font-weight: var(--md-sys-typescale-body-large-font-weight); line-height: var(--md-sys-typescale-body-large-line-height); letter-spacing: var(--md-sys-typescale-body-large-tracking); color: var(--md-sys-color-on-surface); margin: 0px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+        >
+          List Item
+        </div>
+        <div
+          style="font-family: var(--font-family); font-size: var(--md-sys-typescale-body-small-font-size); font-weight: var(--md-sys-typescale-body-small-font-weight); line-height: var(--md-sys-typescale-body-small-line-height); letter-spacing: var(--md-sys-typescale-body-small-tracking); color: var(--md-sys-color-on-surface-variant); margin: 0px;"
+        >
+          Supporting text
+        </div>
+      </div>
+      <div
+        style="flex-shrink: 0; display: flex; align-items: center; gap: var(--md-sys-spacing-8); align-self: center;"
+      >
+        <span>
+          T
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > M3ProgressBar renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="display: flex; flex-direction: column; gap: var(--md-sys-spacing-1); width: var(--md-sys-percent-100);"
+    >
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-family); font-size: var(--md-sys-typescale-body-small-font-size); font-weight: var(--md-sys-typescale-body-small-font-weight); line-height: var(--md-sys-typescale-body-large-line-height); letter-spacing: var(--md-sys-typescale-body-small-tracking); color: var(--md-sys-color-on-surface-variant);"
+      >
+        <span>
+          Linear
+        </span>
+        <span>
+          50
+          %
+        </span>
+      </div>
+      <div
+        aria-label="Linear"
+        aria-valuemax="100"
+        aria-valuemin="0"
+        aria-valuenow="50"
+        role="progressbar"
+        style="width: var(--md-sys-percent-100); height: var(--md-sys-spacing-2); background-color: var(--md-sys-color-surface-variant); border-radius: var(--md-sys-shape-corner-full); overflow: hidden;"
+      >
+        <div
+          style="width: 50%; height: var(--md-sys-percent-100); background-color: var(--md-sys-color-primary); transition: width var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+        />
+      </div>
+    </div>
+    <div
+      aria-label="Circular"
+      aria-valuemax="100"
+      aria-valuemin="0"
+      aria-valuenow="70"
+      role="progressbar"
+      style="display: inline-flex; align-items: center; gap: var(--md-sys-spacing-2); font-family: var(--font-family); font-size: var(--md-sys-typescale-body-small-font-size); font-weight: var(--md-sys-typescale-body-small-font-weight); line-height: var(--md-sys-typescale-body-large-line-height); letter-spacing: var(--md-sys-typescale-body-small-tracking);"
+    >
+      <div
+        style="width: var(--md-sys-spacing-12); height: var(--md-sys-spacing-12); border-radius: var(--md-sys-shape-corner-full); border-top-color: var(--md-sys-color-primary); animation: spin var(--md-sys-motion-duration-long) var(--md-sys-motion-easing-standard) infinite;"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > M3SuggestionCard renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="background-color: color-mix(in srgb, var(--md-sys-color-surface-variant) var(--md-sys-percent-80), transparent); padding: var(--md-sys-spacing-6); border-radius: var(--md-sys-shape-corner-extra-large); border-left: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);"
+    >
+      Active Suggestion
+    </div>
+    <div
+      style="background-color: color-mix(in srgb, var(--md-sys-color-surface-variant) var(--md-sys-percent-80), transparent); padding: var(--md-sys-spacing-6); border-radius: var(--md-sys-shape-corner-extra-large); border: var(--md-sys-border-width-normal) solid color-mix(in srgb, var(--md-sys-color-outline-variant) var(--md-sys-percent-30), transparent);"
+    >
+      Empty Suggestion
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > M3SuggestionItem renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="background-color: var(--md-sys-color-surface-variant); opacity: 0.8; padding: var(--md-sys-spacing-4); border-radius: var(--md-sys-shape-corner-large); border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline-variant); transition: border-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard); cursor: pointer;"
+    >
+      Clickable Item
+    </div>
+    <div
+      style="background-color: var(--md-sys-color-surface-variant); opacity: 0.8; padding: var(--md-sys-spacing-4); border-radius: var(--md-sys-shape-corner-large); border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline-variant); transition: border-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard); cursor: default;"
+    >
+      Read-only Item
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > M3Surface renders correctly at different levels 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="background-color: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface);"
+    >
+      Surface 0
+    </div>
+    <div
+      style="background-color: var(--md-sys-color-surface-container-lowest); color: var(--md-sys-color-on-surface);"
+    >
+      Surface 1
+    </div>
+    <div
+      style="background-color: var(--md-sys-color-surface-container-low); color: var(--md-sys-color-on-surface);"
+    >
+      Surface 2
+    </div>
+    <div
+      style="background-color: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface);"
+    >
+      Surface 3
+    </div>
+    <div
+      style="background-color: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface);"
+    >
+      Surface 4
+    </div>
+    <div
+      style="background-color: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface);"
+    >
+      Surface 5
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > M3SurfaceCard renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-large); background-color: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface);"
+    >
+      Default Surface Card
+    </div>
+    <div
+      style="border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-large); background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);"
+    >
+      Primary Surface Card
+    </div>
+    <div
+      style="border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-large); background-color: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface); transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+    >
+      Glass Interactive Card
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > M3Typography renders correctly for all variants 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div>
+      <h1
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-display-large-font-size); font-weight: var(--md-sys-typescale-display-large-font-weight); line-height: var(--md-sys-typescale-display-large-line-height); letter-spacing: var(--md-sys-typescale-display-large-tracking); color: inherit; margin: 0px;"
+      >
+        display-large
+      </h1>
+      <h1
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-display-medium-font-size); font-weight: var(--md-sys-typescale-display-medium-font-weight); line-height: var(--md-sys-typescale-display-medium-line-height); letter-spacing: var(--md-sys-typescale-display-medium-tracking); color: inherit; margin: 0px;"
+      >
+        display-medium
+      </h1>
+      <h1
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-display-small-font-size); font-weight: var(--md-sys-typescale-display-small-font-weight); line-height: var(--md-sys-typescale-display-small-line-height); letter-spacing: var(--md-sys-typescale-display-small-tracking); color: inherit; margin: 0px;"
+      >
+        display-small
+      </h1>
+      <h2
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-headline-large-font-size); font-weight: var(--md-sys-typescale-headline-large-font-weight); line-height: var(--md-sys-typescale-headline-large-line-height); letter-spacing: var(--md-sys-typescale-headline-large-tracking); color: inherit; margin: 0px;"
+      >
+        headline-large
+      </h2>
+      <h2
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-headline-medium-font-size); font-weight: var(--md-sys-typescale-headline-medium-font-weight); line-height: var(--md-sys-typescale-headline-medium-line-height); letter-spacing: var(--md-sys-typescale-headline-medium-tracking); color: inherit; margin: 0px;"
+      >
+        headline-medium
+      </h2>
+      <h3
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-headline-small-font-size); font-weight: var(--md-sys-typescale-headline-small-font-weight); line-height: var(--md-sys-typescale-headline-small-line-height); letter-spacing: var(--md-sys-typescale-headline-small-tracking); color: inherit; margin: 0px;"
+      >
+        headline-small
+      </h3>
+      <h4
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-title-large-font-size); font-weight: var(--md-sys-typescale-title-large-font-weight); line-height: var(--md-sys-typescale-title-large-line-height); letter-spacing: var(--md-sys-typescale-title-large-tracking); color: inherit; margin: 0px;"
+      >
+        title-large
+      </h4>
+      <h5
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-title-medium-font-size); font-weight: var(--md-sys-typescale-title-medium-font-weight); line-height: var(--md-sys-typescale-title-medium-line-height); letter-spacing: var(--md-sys-typescale-title-medium-tracking); color: inherit; margin: 0px;"
+      >
+        title-medium
+      </h5>
+      <h6
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-title-small-font-size); font-weight: var(--md-sys-typescale-title-small-font-weight); line-height: var(--md-sys-typescale-title-small-line-height); letter-spacing: var(--md-sys-typescale-title-small-tracking); color: inherit; margin: 0px;"
+      >
+        title-small
+      </h6>
+      <p
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-body-large-font-size); font-weight: var(--md-sys-typescale-body-large-font-weight); line-height: var(--md-sys-typescale-body-large-line-height); letter-spacing: var(--md-sys-typescale-body-large-tracking); color: inherit; margin: 0px;"
+      >
+        body-large
+      </p>
+      <p
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-body-medium-font-size); font-weight: var(--md-sys-typescale-body-medium-font-weight); line-height: var(--md-sys-typescale-body-medium-line-height); letter-spacing: var(--md-sys-typescale-body-medium-tracking); color: inherit; margin: 0px;"
+      >
+        body-medium
+      </p>
+      <p
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-body-small-font-size); font-weight: var(--md-sys-typescale-body-small-font-weight); line-height: var(--md-sys-typescale-body-small-line-height); letter-spacing: var(--md-sys-typescale-body-small-tracking); color: inherit; margin: 0px;"
+      >
+        body-small
+      </p>
+      <span
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-large-font-size); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-label-large-tracking); color: inherit; margin: 0px;"
+      >
+        label-large
+      </span>
+      <span
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-medium-font-size); font-weight: var(--md-sys-typescale-label-medium-font-weight); line-height: var(--md-sys-typescale-label-medium-line-height); letter-spacing: var(--md-sys-typescale-label-medium-tracking); color: inherit; margin: 0px;"
+      >
+        label-medium
+      </span>
+      <span
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-small-font-size); font-weight: var(--md-sys-typescale-label-small-font-weight); line-height: var(--md-sys-typescale-label-small-line-height); letter-spacing: var(--md-sys-typescale-label-small-tracking); color: inherit; margin: 0px;"
+      >
+        label-small
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > ManualSection renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <details
+      style="border: medium; background-color: var(--md-sys-color-surface-container-low); opacity: var(--md-sys-state-opacity-placeholder); border-radius: var(--md-sys-shape-corner-large); margin-bottom: var(--md-sys-spacing-4); overflow: hidden; transition: all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);"
+    >
+      <summary
+        style="padding: var(--md-sys-spacing-4); background-color: transparent; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; transition: background-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);"
+      >
+        <div
+          style="display: flex; align-items: center; gap: var(--md-sys-spacing-4);"
+        >
+          <div
+            style="padding: var(--md-sys-spacing-6); border-radius: var(--md-sys-shape-corner-large); background-color: var(--md-sys-color-surface-container-high); box-shadow: var(--md-sys-elevation-level1); transform: scale(1); transition: transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+          >
+            <span
+              style="font-size: var(--md-sys-typescale-headline-small-font-size); font-weight: var(--md-sys-typescale-headline-small-font-weight); line-height: var(--md-sys-typescale-headline-small-line-height); color: var(--md-sys-color-on-surface-variant);"
+            >
+              info
+            </span>
+          </div>
+          <h3
+            style="font-size: var(--md-sys-typescale-headline-medium-font-size); font-weight: var(--md-sys-typescale-weight-black); line-height: var(--md-sys-typescale-headline-medium-line-height); letter-spacing: var(--md-sys-typescale-headline-medium-tracking); margin: 0px;"
+          >
+            Closed Section
+          </h3>
+        </div>
+        <div
+          style="width: var(--md-sys-spacing-8); height: var(--md-sys-spacing-8); border-radius: var(--md-sys-shape-corner-full); display: flex; align-items: center; justify-content: center; background-color: var(--md-sys-color-outline-variant); opacity: var(--md-sys-state-opacity-tint-subtle); transition: transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized); transform: rotate(0deg);"
+        >
+          <span
+            style="font-size: var(--md-sys-typescale-body-large-font-size); color: var(--md-sys-color-on-primary);"
+          >
+            expand_more
+          </span>
+        </div>
+      </summary>
+      <div
+        style="padding: var(--md-sys-spacing-2) var(--md-sys-spacing-6) var(--md-sys-spacing-6) var(--md-sys-spacing-6); display: flex; flex-direction: column; gap: var(--md-sys-spacing-6);"
+      >
+        <div>
+          Hidden Content
+        </div>
+      </div>
+    </details>
+    <details
+      open=""
+      style="border: medium; background-color: var(--md-sys-color-surface-container-low); opacity: var(--md-sys-state-opacity-placeholder); border-radius: var(--md-sys-shape-corner-large); margin-bottom: var(--md-sys-spacing-4); overflow: hidden; transition: all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);"
+    >
+      <summary
+        style="padding: var(--md-sys-spacing-4); background-color: transparent; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; transition: background-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);"
+      >
+        <div
+          style="display: flex; align-items: center; gap: var(--md-sys-spacing-4);"
+        >
+          <div
+            style="padding: var(--md-sys-spacing-6); border-radius: var(--md-sys-shape-corner-large); background-color: var(--md-sys-color-surface-container-high); box-shadow: var(--md-sys-elevation-level1); transform: scale(1); transition: transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+          >
+            <span
+              style="font-size: var(--md-sys-typescale-headline-small-font-size); font-weight: var(--md-sys-typescale-headline-small-font-weight); line-height: var(--md-sys-typescale-headline-small-line-height); color: var(--md-sys-color-on-surface-variant);"
+            >
+              help
+            </span>
+          </div>
+          <h3
+            style="font-size: var(--md-sys-typescale-headline-medium-font-size); font-weight: var(--md-sys-typescale-weight-black); line-height: var(--md-sys-typescale-headline-medium-line-height); letter-spacing: var(--md-sys-typescale-headline-medium-tracking); margin: 0px;"
+          >
+            Open Section
+          </h3>
+        </div>
+        <div
+          style="width: var(--md-sys-spacing-8); height: var(--md-sys-spacing-8); border-radius: var(--md-sys-shape-corner-full); display: flex; align-items: center; justify-content: center; background-color: var(--md-sys-color-outline-variant); opacity: var(--md-sys-state-opacity-tint-subtle); transition: transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized); transform: rotate(180deg);"
+        >
+          <span
+            style="font-size: var(--md-sys-typescale-body-large-font-size); color: var(--md-sys-color-on-primary);"
+          >
+            expand_more
+          </span>
+        </div>
+      </summary>
+      <div
+        style="padding: var(--md-sys-spacing-2) var(--md-sys-spacing-6) var(--md-sys-spacing-6) var(--md-sys-spacing-6); display: flex; flex-direction: column; gap: var(--md-sys-spacing-6);"
+      >
+        <div>
+          Visible Content
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > MetricCard renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="padding: var(--md-sys-spacing-4); border-radius: var(--md-sys-shape-corner-large); transition: transform var(--md-sys-motion-duration-short4), box-shadow var(--md-sys-motion-duration-short4); transform: scale(1); cursor: default; outline: none; outline-offset: var(--md-sys-spacing-0); background-color: var(--md-sys-color-surface-container-low); box-shadow: var(--md-sys-elevation-level1); border: var(--md-sys-border-width-thin) solid var(--md-sys-color-primary-container); flex: 1 1 0%; min-width: var(--md-sys-spacing-14);"
+    >
+      <div
+        style="background-color: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface); display: flex; flex-direction: column; gap: var(--md-sys-spacing-2); align-items: center; text-align: center;"
+      >
+        <span
+          aria-hidden="true"
+          class="material-symbols-outlined"
+          style="font-size: var(--icon-size-medium); color: var(--md-sys-color-primary); margin-bottom: var(--md-sys-spacing-1);"
+        >
+          visibility
+        </span>
+        <h1
+          style="font-family: var(--font-family); font-size: var(--md-sys-typescale-display-medium-font-size); font-weight: var(--md-sys-typescale-weight-bold); line-height: var(--md-sys-typescale-display-medium-line-height); letter-spacing: var(--md-sys-typescale-display-small-tracking); color: var(--md-sys-color-primary); margin: 0px;"
+        >
+          1,234
+        </h1>
+        <span
+          style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-large-font-size); font-weight: var(--md-sys-typescale-weight-semibold); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-metric-label-tracking); color: var(--md-sys-color-on-surface); margin: 0px; text-transform: uppercase;"
+        >
+          Views
+        </span>
+        <div
+          style="color: var(--md-sys-color-on-surface); border-radius: var(--md-sys-spacing-4); display: flex; align-items: center; gap: var(--md-sys-spacing-1); padding: var(--md-sys-spacing-1) var(--md-sys-spacing-2); background: color-mix(in srgb, var(--md-sys-color-tertiary) 12%, transparent); margin-top: var(--md-sys-spacing-1);"
+        >
+          <span
+            aria-hidden="true"
+            class="material-symbols-outlined"
+            style="font-size: var(--md-sys-spacing-3); color: var(--md-sys-color-tertiary);"
+          >
+            trending_up
+          </span>
+          <span
+            style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-small-font-size); font-weight: var(--md-sys-typescale-weight-semibold); line-height: var(--md-sys-typescale-label-small-line-height); letter-spacing: var(--md-sys-typescale-label-small-tracking); color: var(--md-sys-color-tertiary); margin: 0px;"
+          >
+            +5.2%
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > PageTransition renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="opacity: 0; transform: scale(0.92); transition: opacity var(--md-sys-motion-spring-expressive-default-effects-duration, 200ms) var(--md-sys-motion-spring-expressive-default-effects, cubic-bezier(0.34, 0.80, 0.34, 1.00)), transform var(--md-sys-motion-spring-expressive-default-spatial-duration, 500ms) var(--md-sys-motion-spring-expressive-default-spatial, cubic-bezier(0.38, 1.21, 0.22, 1.00)); will-change: opacity, transform;"
+    >
+      <div>
+        Page Content
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > ProgressIndicator renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      aria-label="Caricamento in corso"
+      aria-valuemax="100"
+      aria-valuemin="0"
+      role="progressbar"
+      style="position: fixed; top: 0px; left: 0px; right: 0px; height: var(--md-sys-spacing-0_5); background-color: var(--md-sys-color-surface-variant); z-index: var(--md-sys-z-snackbar); overflow: hidden;"
+    >
+      <div
+        style="height: var(--md-sys-percent-100); width: var(--md-sys-percent-30); background-color: var(--md-sys-color-primary); animation: progress-indeterminate 2s var(--md-sys-motion-easing-standard) infinite; transform-origin: left center;"
+      />
+    </div>
+    <style>
+      
+        @keyframes progress-indeterminate {
+          0% {
+            transform: translateX(-100%) scaleX(1);
+          }
+          50% {
+            transform: translateX(0%) scaleX(1);
+          }
+          75% {
+            transform: translateX(100%) scaleX(2);
+          }
+          100% {
+            transform: translateX(300%) scaleX(1);
+          }
+        }
+      
+    </style>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > SelectField renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      style="display: flex; flex-direction: column; gap: var(--md-sys-spacing-2); width: auto; margin-bottom: var(--md-sys-spacing-4);"
+    >
+      <label
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-large-font-size); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-label-large-tracking); color: var(--md-sys-color-on-surface-variant); margin: 0px;"
+      >
+        Select
+      </label>
+      <div
+        style="position: relative; display: flex; align-items: center; background-color: var(--md-sys-color-surface-container-highest); border-radius: var(--md-sys-shape-corner-large); padding: var(--md-sys-spacing-3) var(--md-sys-spacing-4); transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard); box-shadow: none; border-color: var(--md-sys-color-outline);"
+      >
+        <select
+          aria-label="Select"
+          style="flex: 1 1 0%; border: medium; background-color: transparent; color: var(--md-sys-color-on-surface); font-size: var(--md-sys-typescale-body-large-font-size); font-family: var(--md-sys-typescale-body-large-font-family); font-weight: var(--md-sys-typescale-body-large-font-weight); line-height: var(--md-sys-typescale-body-large-line-height); letter-spacing: var(--md-sys-typescale-body-large-letter-spacing); outline: none; appearance: none; cursor: pointer;"
+        >
+          <option>
+            Option 1
+          </option>
+        </select>
+        <span
+          aria-hidden="true"
+          class="material-symbols-outlined"
+          style="position: absolute; right: var(--md-sys-spacing-2); top: var(--md-sys-percent-50); transform: translateY(-50%); pointer-events: none; color: var(--md-sys-color-on-surface-variant); font-size: var(--md-sys-spacing-4); transition: color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+        >
+          expand_more
+        </span>
+      </div>
+    </div>
+    <div
+      style="display: flex; flex-direction: column; gap: var(--md-sys-spacing-2); width: auto; margin-bottom: var(--md-sys-spacing-4);"
+    >
+      <label
+        style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-large-font-size); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-large-line-height); letter-spacing: var(--md-sys-typescale-label-large-tracking); color: var(--md-sys-color-on-surface-variant); margin: 0px;"
+      >
+        Error Select
+      </label>
+      <div
+        style="position: relative; display: flex; align-items: center; background-color: var(--md-sys-color-surface-container-highest); border-radius: var(--md-sys-shape-corner-large); padding: var(--md-sys-spacing-3) var(--md-sys-spacing-4); transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard); box-shadow: 0 0 0 var(--md-sys-spacing-2) color-mix(in srgb, var(--md-sys-color-error) var(--md-sys-percent-12), transparent); border-color: var(--md-sys-color-error);"
+      >
+        <select
+          aria-describedby="undefined-error"
+          aria-invalid="true"
+          aria-label="Error Select"
+          style="flex: 1 1 0%; border: medium; background-color: transparent; color: var(--md-sys-color-on-surface); font-size: var(--md-sys-typescale-body-large-font-size); font-family: var(--md-sys-typescale-body-large-font-family); font-weight: var(--md-sys-typescale-body-large-font-weight); line-height: var(--md-sys-typescale-body-large-line-height); letter-spacing: var(--md-sys-typescale-body-large-letter-spacing); outline: none; appearance: none; cursor: pointer;"
+        >
+          <option>
+            Option 1
+          </option>
+        </select>
+        <span
+          aria-hidden="true"
+          class="material-symbols-outlined"
+          style="position: absolute; right: var(--md-sys-spacing-2); top: var(--md-sys-percent-50); transform: translateY(-50%); pointer-events: none; color: var(--md-sys-color-on-surface-variant); font-size: var(--md-sys-spacing-4); transition: color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);"
+        >
+          expand_more
+        </span>
+        <span
+          aria-hidden="true"
+          class="material-symbols-outlined"
+          style="position: absolute; left: var(--md-sys-spacing-2); top: var(--md-sys-percent-50); transform: translateY(-50%); color: var(--md-sys-color-error); font-size: var(--md-sys-spacing-4);"
+        >
+          error
+        </span>
+      </div>
+      <div
+        id="undefined-error"
+        style="display: flex; align-items: center; gap: var(--md-sys-spacing-1); margin-top: var(--md-sys-spacing-1); width: var(--md-sys-percent-100);"
+      >
+        <span
+          aria-hidden="true"
+          class="material-symbols-outlined"
+          style="color: var(--md-sys-color-error); font-size: var(--md-sys-typescale-body-large-font-size);"
+        >
+          error
+        </span>
+        <p
+          style="font-family: var(--font-family); font-size: var(--md-sys-typescale-body-small-font-size); font-weight: var(--md-sys-typescale-body-small-font-weight); line-height: var(--md-sys-typescale-body-small-line-height); letter-spacing: var(--md-sys-typescale-body-small-tracking); color: var(--md-sys-color-error); margin: 0px;"
+        >
+          This is an error
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > Skeleton renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      aria-hidden="true"
+      style="width: var(--md-sys-percent-100); height: var(--md-sys-spacing-4); border-radius: var(--md-sys-spacing-1); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden;"
+    />
+    <style>
+      
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+    </style>
+    <div
+      aria-hidden="true"
+      style="width: var(--md-sys-spacing-10); height: var(--md-sys-spacing-10); border-radius: var(--md-sys-percent-50); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden;"
+    />
+    <style>
+      
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+    </style>
+    <div
+      aria-hidden="true"
+      style="width: var(--md-sys-percent-100); height: var(--md-sys-spacing-25, 100px); border-radius: var(--md-sys-spacing-2); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden;"
+    />
+    <style>
+      
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+    </style>
+    <div
+      style="display: flex; flex-direction: column; gap: var(--md-sys-spacing-3);"
+    >
+      <div
+        style="display: flex; gap: var(--md-sys-spacing-3); padding: var(--md-sys-spacing-4); border-radius: var(--md-sys-spacing-2); background: var(--md-sys-color-surface-container);"
+      >
+        <div
+          aria-hidden="true"
+          style="width: var(--md-sys-spacing-6); height: var(--md-sys-spacing-6); border-radius: var(--md-sys-percent-50); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden;"
+        />
+        <style>
+          
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+        </style>
+        <div
+          style="flex: 1 1 0%;"
+        >
+          <div
+            aria-hidden="true"
+            style="width: 60%; height: var(--md-sys-spacing-3); border-radius: var(--md-sys-spacing-2); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden; margin-bottom: var(--md-sys-spacing-2);"
+          />
+          <style>
+            
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+          </style>
+          <div
+            aria-hidden="true"
+            style="width: 40%; height: var(--md-sys-spacing-2); border-radius: var(--md-sys-spacing-2); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden;"
+          />
+          <style>
+            
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+          </style>
+        </div>
+      </div>
+      <div
+        style="display: flex; gap: var(--md-sys-spacing-3); padding: var(--md-sys-spacing-4); border-radius: var(--md-sys-spacing-2); background: var(--md-sys-color-surface-container);"
+      >
+        <div
+          aria-hidden="true"
+          style="width: var(--md-sys-spacing-6); height: var(--md-sys-spacing-6); border-radius: var(--md-sys-percent-50); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden;"
+        />
+        <style>
+          
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+        </style>
+        <div
+          style="flex: 1 1 0%;"
+        >
+          <div
+            aria-hidden="true"
+            style="width: 60%; height: var(--md-sys-spacing-3); border-radius: var(--md-sys-spacing-2); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden; margin-bottom: var(--md-sys-spacing-2);"
+          />
+          <style>
+            
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+          </style>
+          <div
+            aria-hidden="true"
+            style="width: 40%; height: var(--md-sys-spacing-2); border-radius: var(--md-sys-spacing-2); background: var(--md-sys-color-surface-variant); animation: skeleton-pulse 1.5s ease-in-out infinite; position: relative; overflow: hidden;"
+          />
+          <style>
+            
+        @keyframes skeleton-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 'var(--md-sys-state-opacity-placeholder)'; }
+        }
+        @keyframes skeleton-wave-move {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      
+          </style>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MD3 Visual Regression Snapshots > TabGroup renders correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI Application"
+    role="application"
+    style="background-color: var(--md-sys-color-background); color: var(--md-sys-color-on-background); min-height: var(--md-sys-viewport-height-full);"
+  >
+    <div
+      aria-label="Sezioni di navigazione"
+      role="tablist"
+      style="display: flex; background-color: var(--md-sys-color-surface-container-low); padding: var(--md-sys-spacing-1); border-radius: var(--md-sys-shape-corner-full); border: var(--md-sys-border-width-normal) solid var(--md-sys-color-outline-variant); gap: var(--md-sys-spacing-1);"
+    >
+      <button
+        aria-controls="panel-1"
+        aria-selected="true"
+        data-testid="tab-1"
+        id="tab-1"
+        role="tab"
+        style="position: relative; flex: 1 1 0%; padding: var(--md-sys-spacing-2) var(--md-sys-spacing-4); border-radius: var(--md-sys-shape-corner-full); border: medium; background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); font-size: var(--md-sys-typescale-label-large-font-size); font-weight: var(--md-sys-typescale-label-large-font-weight); text-transform: uppercase; letter-spacing: var(--md-sys-typescale-label-small-letter-spacing); cursor: pointer; transition: all var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard); box-shadow: var(--md-sys-elevation-level1); display: flex; align-items: center; justify-content: center; gap: var(--md-sys-spacing-2); outline: none;"
+        tabindex="0"
+      >
+        <span
+          aria-hidden="true"
+          class="material-symbols-outlined"
+          style="font-size: var(--md-sys-typescale-label-large-font-size);"
+        >
+          home
+        </span>
+        <span
+          style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-small-font-size); font-weight: var(--md-sys-typescale-label-small-font-weight); line-height: var(--md-sys-typescale-label-small-line-height); letter-spacing: var(--md-sys-typescale-label-small-tracking); color: inherit; margin: 0px; text-transform: uppercase;"
+        >
+          Tab 1
+        </span>
+        <div
+          aria-hidden="true"
+          style="position: absolute; bottom: calc(var(--md-sys-spacing-1) * -1); left: var(--md-sys-percent-50); transform: translateX(-50%); width: var(--md-sys-percent-60); height: var(--md-sys-spacing-2); background-color: var(--md-sys-color-primary); border-radius: var(--md-sys-spacing-2);"
+        />
+      </button>
+      <button
+        aria-controls="panel-2"
+        aria-selected="false"
+        data-testid="tab-2"
+        id="tab-2"
+        role="tab"
+        style="position: relative; flex: 1 1 0%; padding: var(--md-sys-spacing-2) var(--md-sys-spacing-4); border-radius: var(--md-sys-shape-corner-full); border: medium; background-color: transparent; color: var(--md-sys-color-on-surface-variant); font-size: var(--md-sys-typescale-label-large-font-size); font-weight: var(--md-sys-typescale-label-large-font-weight); text-transform: uppercase; letter-spacing: var(--md-sys-typescale-label-small-letter-spacing); cursor: pointer; transition: all var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard); box-shadow: none; display: flex; align-items: center; justify-content: center; gap: var(--md-sys-spacing-2); outline: none;"
+        tabindex="-1"
+      >
+        <span
+          style="font-family: var(--font-family); font-size: var(--md-sys-typescale-label-small-font-size); font-weight: var(--md-sys-typescale-label-small-font-weight); line-height: var(--md-sys-typescale-label-small-line-height); letter-spacing: var(--md-sys-typescale-label-small-tracking); color: inherit; margin: 0px; text-transform: uppercase;"
+        >
+          Tab 2
+        </span>
+        <span
+          aria-label="3 elementi"
+          style="display: inline-flex; align-items: center; justify-content: center; min-width: var(--md-sys-spacing-4); height: var(--md-sys-spacing-4); padding: 0 var(--md-sys-spacing-1); border-radius: var(--md-sys-shape-corner-full); background-color: var(--md-sys-color-error); color: var(--md-sys-color-on-error); font-size: var(--md-sys-typescale-label-large-font-size); font-weight: var(--md-sys-typescale-label-large-font-weight); line-height: var(--md-sys-typescale-label-small-line-height);"
+        >
+          3
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

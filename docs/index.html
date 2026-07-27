@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocenteDoc AI — L’assistente intelligente per insegnanti italiani</title>
+  <meta name="description" content="L’assistente intelligente per insegnanti italiani. Semplice, sicuro, privacy-first. Prepara lezioni, valuta studenti e capisci la classe senza mandare dati da nessuna parte.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+    
+    :root { --primary: #6366f1; }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.7;
+      color: #1e2937;
+      background: #f8fafc;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+    
+    header {
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #4338ca;
+      text-decoration: none;
+    }
+    
+    h1 { 
+      font-family: 'Space Grotesk', sans-serif;
+      color: #4338ca; 
+      font-size: 3rem; 
+      margin: 0 0 12px;
+      font-weight: 700;
+      line-height: 1.05;
+    }
+    
+    .subtitle {
+      font-size: 1.3rem;
+      color: #64748b;
+      margin: 0 0 32px;
+      font-weight: 500;
+    }
+    
+    .hero {
+      background: white;
+      padding: 48px;
+      border-radius: 20px;
+      border: 1px solid #e0e7ff;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+      margin: 32px 0;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #6366f1;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 6px 8px 6px 0;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgb(99 102 241 / 0.3);
+    }
+    
+    .btn:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: #4338ca;
+      border: 2px solid #6366f1;
+      box-shadow: none;
+    }
+    
+    h2 { 
+      font-family: 'Space Grotesk', sans-serif;
+      color: #334155; 
+      font-size: 1.9rem;
+      margin-top: 48px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+    
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      border: 1px solid #e0e7ff;
+    }
+    
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin: 20px 0; 
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+    }
+    
+    th, td { 
+      border: 1px solid #e2e8f0; 
+      padding: 14px 16px; 
+      text-align: left; 
+    }
+    
+    th { 
+      background: #f1e7ff; 
+      color: #4338ca;
+      font-weight: 600;
+    }
+    
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+    }
+    
+    .step {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #e0e7ff;
+      position: relative;
+    }
+    
+    .step-number {
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      background: #6366f1;
+      color: white;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    
+    .nav-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    
+    .nav-pill {
+      background: #f1e7ff;
+      color: #4338ca;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .footer {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+      color: #64748b;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    
+    .highlight {
+      background: #f0f4ff;
+      padding: 20px;
+      border-radius: 14px;
+      border-left: 5px solid #6366f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="nav">
+        <a href="#" class="logo">DocenteDoc AI</a>
+        <a href="https://github.com/antoniocorsano-boop/docentedocai" class="btn" style="padding:9px 18px;font-size:0.9rem;">📦 GitHub</a>
+      </div>
+    </header>
+
+    <div class="hero">
+      <h1>L’assistente intelligente per insegnanti italiani</h1>
+      <p class="subtitle">Semplice. Sicuro. Pensato per chi insegna.<br><strong>Tutto resta solo sul tuo computer.</strong></p>
+      
+      <div>
+        <a href="https://github.com/antoniocorsano-boop/docentedocai" class="btn">🚀 Clona e prova gratis</a>
+        <a href="#come-funziona" class="btn btn-secondary">Scopri come funziona</a>
+      </div>
+    </div>
+
+    <h2>Per chi è fatto</h2>
+    <div class="grid">
+      <div class="card"><strong>Insegnanti di medie e superiori</strong><br>Che vogliono usare l’AI senza complicazioni.</div>
+      <div class="card"><strong>Chi tiene alla privacy</strong><br>I dati degli studenti restano sempre sul tuo dispositivo.</div>
+      <div class="card"><strong>Chi non è un informatico</strong><br>Interfaccia semplice con 5 sezioni chiare.</div>
+    </div>
+
+    <h2>Cosa può fare per te</h2>
+    <table>
+      <tr><th>Vuoi fare...</th><th>DocenteDoc AI ti aiuta a...</th></tr>
+      <tr><td>Preparare una lezione</td><td>Proporre attività, domande e materiali</td></tr>
+      <tr><td>Capire la classe</td><td>Mostrare grafici semplici e suggerimenti</td></tr>
+      <tr><td>Valutare gli studenti</td><td>Dare idee di feedback personalizzati</td></tr>
+      <tr><td>Rispondere a una domanda</td><td>Dare la risposta giusta per la tua classe</td></tr>
+      <tr><td>Gestire il registro</td><td>Segnare presenze e note velocemente</td></tr>
+    </table>
+
+    <h2 id="come-funziona">Le 5 sezioni principali</h2>
+    <div class="nav-pills">
+      <span class="nav-pill">Oggi</span>
+      <span class="nav-pill">Aula</span>
+      <span class="nav-pill">Pianifica</span>
+      <span class="nav-pill">Analisi</span>
+      <span class="nav-pill">Assistente</span>
+    </div>
+    
+    <div class="grid">
+      <div class="card"><strong>Oggi</strong><br>Suggerimenti rapidi</div>
+      <div class="card"><strong>Aula</strong><br>Registro e valutazioni</div>
+      <div class="card"><strong>Pianifica</strong><br>Lezioni e UDA</div>
+      <div class="card"><strong>Analisi</strong><br>Grafici della classe</div>
+      <div class="card"><strong>Assistente</strong><br>Chat intelligente</div>
+    </div>
+
+    <h2>Come si usa (3 passi)</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <strong>Apri l’app</strong><br>
+        <small>Clona il repo e avvia</small>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <strong>Inserisci nome e classe</strong><br>
+        <small>Una volta sola</small>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <strong>Clicca “Chiedi all’AI”</strong><br>
+        <small>Ovunque trovi il pulsante</small>
+      </div>
+    </div>
+
+    <h2>Novità recenti</h2>
+    <div class="highlight">
+      <strong>Usabilità migliorata:</strong><br>
+      • Drawer ridotto a una sola sezione “Strumenti”<br>
+      • Navigazione indietro affidabile<br>
+      • CopilotView modernizzato<br>
+      • Documentazione chiara per insegnanti
+    </div>
+
+    <h2>Privacy</h2>
+    <p>Tutto resta <strong>solo sul tuo computer</strong>. Puoi decidere tu se sincronizzare con Google Drive.</p>
+
+    <h2>Domande frequenti</h2>
+    <ul>
+      <li><strong>Serve internet?</strong> No, puoi lavorare anche offline.</li>
+      <li><strong>Funziona sul telefono?</strong> Sì.</li>
+      <li><strong>I dati sono al sicuro?</strong> Sì.</li>
+      <li><strong>Devo sapere programmare?</strong> No.</li>
+      <li><strong>È gratis?</strong> Sì. Chiave AI opzionale per modelli più potenti.</li>
+    </ul>
+
+    <div style="text-align:center; margin:48px 0;">
+      <a href="https://github.com/antoniocorsano-boop/docentedocai" class="btn" style="font-size:1.1rem; padding:16px 38px;">📥 Scarica e prova subito (gratis)</a>
+    </div>
+
+    <div class="footer">
+      <p><strong>DocenteDoc AI</strong> — L’intelligenza artificiale che aiuta davvero chi insegna.</p>
+      <p>Material Design 3 • Privacy-first • Fatto per insegnanti italiani • 2026</p>
+      <p style="margin-top:12px;">
+        <a href="https://github.com/antoniocorsano-boop/docentedocai">GitHub</a> • 
+        <a href="GUIDA_PER_INSEGNANTI.md">Guida per insegnanti</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

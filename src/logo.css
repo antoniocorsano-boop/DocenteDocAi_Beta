@@ -1,0 +1,119 @@
+.app-logo-container {
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-2);
+  cursor: pointer;
+  user-select: none;
+  transition: transform var(--md-sys-motion-duration-long) var(--md-sys-motion-easing-emphasized);
+  position: relative;
+}
+
+.app-logo-container:hover {
+  transform: scale(1.05);
+}
+
+.logo-d-ring {
+  fill: none;
+  stroke: var(--md-sys-color-primary);
+  stroke-width: var(--md-sys-spacing-1);
+  stroke-linecap: round;
+  opacity: 0.4;
+  transition-property: opacity, transform, background-color;
+transition-duration: var(--md-sys-motion-duration-medium);
+transition-timing-function: var(--md-sys-motion-easing-standard);
+}
+
+.logo-d-body {
+  fill: var(--md-sys-color-primary);
+  transition: fill var(--md-sys-motion-duration-medium1) var(--md-sys-motion-easing-standard), transform var(--md-sys-motion-duration-medium1) var(--md-sys-motion-easing-standard);
+  filter: drop-shadow(0 var(--md-sys-spacing-1) var(--md-sys-blur-medium) rgba(var(--md-sys-color-primary-rgb), 0.2));
+}
+
+.logo-d-stem {
+  fill: var(--md-sys-color-outline);
+  opacity: 0.8;
+}
+
+.logo-main-text {
+  fill: var(--md-sys-color-on-surface);
+  font-family: 'Roboto', sans-serif;
+  font-weight: var(--md-sys-typescale-weight-black);
+  font-size: var(--md-sys-typescale-headline-small-font-size);
+  letter-spacing: -1.var(--md-sys-spacing-1);
+}
+
+.logo-ai-text {
+  fill: var(--md-sys-color-tertiary);
+  font-family: 'Roboto Mono', monospace;
+  font-weight: var(--md-sys-typescale-weight-black);
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  filter: drop-shadow(0 0 var(--md-sys-spacing-1) var(--md-sys-color-tertiary));
+}
+
+.logo-sparkle {
+  fill: var(--md-sys-color-tertiary);
+  filter: drop-shadow(0 0 var(--md-sys-spacing-2) var(--md-sys-color-tertiary));
+  animation: logo-sparkle-glow 3s ease-in-out infinite;
+}
+
+@keyframes logo-sparkle-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+/* Stato Thinking AI */
+.app-logo-container.thinking .logo-d-ring {
+  stroke-dasharray: 8, 8;
+  animation: logo-rotate 4s linear infinite;
+  opacity: 1;
+}
+
+@keyframes logo-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Big Bang universe overlay */
+.universe-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--md-sys-z-skip-link);
+  pointer-events: none;
+  background: var(--md-sys-color-surface);
+  opacity: 0;
+  transition: opacity var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+}
+
+.universe-overlay.chaos {
+  opacity: 0.4;
+  background: radial-gradient(circle, var(--md-sys-color-primary-container) var(--md-sys-percent-0), transparent var(--md-sys-percent-70));
+  animation: chaos-shake var(--md-sys-motion-duration-short1) infinite;
+}
+
+.universe-overlay.implosion {
+  opacity: 1;
+  background: var(--md-sys-color-surface);
+  transform: scale(0);
+  animation: implosion-zoom var(--md-sys-motion-duration-medium1) var(--md-sys-motion-easing-standard) forwards;
+}
+
+.universe-overlay.peace {
+  opacity: 0;
+  background: var(--md-sys-color-primary-container);
+  transform: scale(2);
+  transition-property: opacity, transform, background-color;
+transition-duration: var(--md-sys-motion-duration-long);
+transition-timing-function: var(--md-sys-motion-easing-standard);
+}
+
+@keyframes chaos-shake {
+  0% { transform: translate(var(--md-sys-spacing-1), var(--md-sys-spacing-1)); }
+  50% { transform: translate(calc(-1 * var(--md-sys-spacing-1)), calc(-1 * var(--md-sys-spacing-1))); }
+  100% { transform: translate(var(--md-sys-spacing-1), calc(-1 * var(--md-sys-spacing-1))); }
+}
+
+@keyframes implosion-zoom {
+  from { transform: scale(3); opacity: 0; }
+  to { transform: scale(0); opacity: 1; }
+}
+

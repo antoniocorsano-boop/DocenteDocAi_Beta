@@ -1,0 +1,155 @@
+/**
+ * copilot-brand.css — CopilotDoc Identity System Design Tokens
+ *
+ * Namespace --cp-* separato da --md-sys-* e --orbit-*
+ * I tre sistemi coesistono senza conflitti:
+ *   DocenteDoc web:  --md-sys-*  (MD3, MUI v7)
+ *   Orbit:           --orbit-*   (dark space, agenti autonomi)
+ *   CopilotDoc:      --cp-*      (istituzionale PA, assistente docente)
+ */
+
+:root {
+  /* ── Palette istituzionale ────────────────────────────────────────────────── */
+  --cp-cobalt:          #1B3A8C;   /* blu PA principale */
+  --cp-cobalt-light:    #3558C4;   /* hover / active */
+  --cp-cobalt-pale:     #EEF2FF;   /* surface tinted, sfondo pannello */
+  --cp-cobalt-deep:     #0E2560;   /* dark mode bg, header */
+
+  --cp-gold:            #E8A900;   /* oro saggezza — accento principale */
+  --cp-gold-light:      #FFE066;   /* highlight / shine */
+  --cp-gold-pale:       #FFF8E1;   /* surface gold tinted */
+
+  --cp-emerald:         #00875A;   /* conformità, GDPR passed */
+  --cp-emerald-pale:    #E6F7F1;   /* chip conforme */
+
+  --cp-amber:           #FBBF24;   /* warning, parzialmente conforme */
+  --cp-amber-pale:      #FFFBEB;   /* chip warning */
+
+  --cp-ruby:            #C7311A;   /* violazione, blocco, non conforme */
+  --cp-ruby-pale:       #FEF2F0;   /* chip critico */
+
+  /* ── Superfici ────────────────────────────────────────────────────────────── */
+  --cp-bg:              #F0F4FF;   /* background app principale */
+  --cp-bg-dark:         #0A1832;   /* dark mode / audit mode */
+  --cp-surface:         #FFFFFF;   /* card, modal */
+  --cp-surface-tinted:  #EEF2FF;   /* surface con tinto cobalto */
+  --cp-surface-dark:    #111E3C;   /* card dark mode */
+  --cp-border:          #CBD5E1;   /* divider, outline */
+  --cp-border-dark:     #1E3060;   /* border dark mode */
+
+  /* ── Testo ────────────────────────────────────────────────────────────────── */
+  --cp-text:            #111827;   /* primary text */
+  --cp-text-secondary:  #4B5675;   /* muted text */
+  --cp-text-on-cobalt:  #FFFFFF;   /* testo su background cobalt */
+  --cp-text-accent:     #1B3A8C;   /* link, label cobalt */
+  --cp-text-gold:       #E8A900;   /* label gold */
+
+  /* ── Tipografia ───────────────────────────────────────────────────────────── */
+  --cp-font-display: 'Lora', 'Garamond', Georgia, serif;
+  --cp-font-body:    'DM Sans', 'Helvetica Neue', system-ui, sans-serif;
+  --cp-font-mono:    'DM Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+  --cp-weight-regular: 400;
+  --cp-weight-medium:  500;
+  --cp-weight-semi:    600;
+  --cp-weight-bold:    700;
+
+  /* ── Motion ───────────────────────────────────────────────────────────────── */
+  --cp-motion-spark-idle:     3.5s;
+  --cp-motion-spark-thinking: 1.4s;
+  --cp-motion-spark-active:   2s;
+  --cp-motion-transition:     220ms;
+  --cp-motion-slide:          300ms;
+
+  /* ── Elevation / shadow ───────────────────────────────────────────────────── */
+  --cp-shadow-card:    0 1px 4px rgba(27,58,140,0.08), 0 4px 16px rgba(27,58,140,0.06);
+  --cp-shadow-panel:   0 4px 24px rgba(27,58,140,0.12), 0 1px 4px rgba(0,0,0,0.06);
+  --cp-shadow-dialog:  0 8px 48px rgba(10,24,50,0.24);
+  --cp-glow-gold:      0 0 16px rgba(232,169,0,0.4);
+  --cp-glow-alert:     0 0 12px rgba(199,49,26,0.5);
+
+  /* ── Border radius ────────────────────────────────────────────────────────── */
+  --cp-radius-card:    12px;
+  --cp-radius-chip:    6px;
+  --cp-radius-icon:    20px;
+  --cp-radius-panel:   16px;
+
+  /* ── Score audit PA ──────────────────────────────────────────────────────────*/
+  --cp-score-excellent: var(--cp-emerald);
+  --cp-score-good:      var(--cp-cobalt);
+  --cp-score-warning:   var(--cp-amber);
+  --cp-score-critical:  var(--cp-ruby);
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────────────────── */
+@keyframes cp-spark-idle {
+  0%, 100% { opacity: 0.85; transform: scale(1)   rotate(0deg); }
+  50%       { opacity: 1;    transform: scale(1.1) rotate(10deg); }
+}
+
+@keyframes cp-spark-thinking {
+  from { transform: scale(0.95) rotate(0deg); }
+  to   { transform: scale(0.95) rotate(360deg); }
+}
+
+@keyframes cp-spark-alert {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(199,49,26,0.4); }
+  50%       { box-shadow: 0 0 0 10px transparent; }
+}
+
+@keyframes cp-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cp-slide-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes cp-score-count {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes cp-load-bar {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ── Utility classes ──────────────────────────────────────────────────────────── */
+.cp-card {
+  background:    var(--cp-surface);
+  border:        1px solid var(--cp-border);
+  border-radius: var(--cp-radius-card);
+  box-shadow:    var(--cp-shadow-card);
+  padding:       20px 24px;
+  font-family:   var(--cp-font-body);
+  animation:     cp-fade-in var(--cp-motion-transition) ease both;
+}
+
+.cp-score {
+  font-family:    var(--cp-font-mono);
+  font-weight:    var(--cp-weight-medium);
+  font-size:      2rem;
+  letter-spacing: -0.02em;
+  animation:      cp-score-count var(--cp-motion-transition) ease both;
+}
+
+.cp-chip--conforme {
+  background: var(--cp-emerald-pale);
+  color:      var(--cp-emerald);
+  border:     1px solid var(--cp-emerald);
+}
+
+.cp-chip--parziale {
+  background: var(--cp-amber-pale);
+  color:      #92400E;
+  border:     1px solid var(--cp-amber);
+}
+
+.cp-chip--critico {
+  background: var(--cp-ruby-pale);
+  color:      var(--cp-ruby);
+  border:     1px solid var(--cp-ruby);
+}

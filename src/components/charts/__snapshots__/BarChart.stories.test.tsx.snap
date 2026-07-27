@@ -1,0 +1,43 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BarChart Story Snapshots > renders default story correctly 1`] = `
+<div>
+  <div
+    aria-label="DocenteDoc AI application theme provider"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1eiehof-MuiPaper-root"
+    role="main"
+    style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+  >
+    <div
+      style="position: relative;"
+    >
+      <svg
+        height="250"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 500 250"
+        width="var(--md-sys-percent-100)"
+      >
+        <g>
+          <rect
+            fill="var(--md-sys-color-primary)"
+            height="250"
+            rx="4"
+            width="495"
+            x="0"
+            y="0"
+          />
+          <text
+            fill="var(--md-sys-color-onSurface-variant)"
+            font-size="var(--md-sys-typescale-body-large-font-size)"
+            text-anchor="middle"
+            x="247.5"
+            y="245"
+          >
+            Test
+          </text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+`;

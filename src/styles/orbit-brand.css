@@ -1,0 +1,83 @@
+/**
+ * orbit-brand.css — Orbit Identity System Design Tokens
+ *
+ * Import DOPO md3-tokens.css. I token Orbit usano namespace --orbit-*
+ * e sono intenzionalmente separati da --md-sys-* per permettere ai due
+ * sistemi di coesistere (DocenteDoc web usa MD3; Orbit standalone usa questi).
+ */
+
+:root {
+  /* ── Core palette ─────────────────────────────────────────────────────────── */
+  --orbit-color-core:             #FF8C00;    /* ambra — l'orb cognitivo */
+  --orbit-color-core-bright:      #FFDF80;    /* inner highlight */
+  --orbit-color-core-deep:        #C01A08;    /* shadow edge */
+
+  --orbit-color-ring-primary:     #00C8FF;    /* cyan elettrico — ring principale */
+  --orbit-color-ring-secondary:   #8B6FFF;    /* violetto — cognitive layer */
+  --orbit-color-satellite-mint:   #00FFB0;    /* mint — agente attivo 1 */
+  --orbit-color-satellite-cyan:   #00C8FF;    /* agente 2 (stesso ring) */
+  --orbit-color-satellite-violet: #B09FFF;    /* agente 3 (ring 2) */
+
+  --orbit-color-bg:               #070B14;    /* spazio profondo */
+  --orbit-color-surface:          #0F1628;    /* card / modal */
+  --orbit-color-surface-2:        #162040;    /* superficie elevata */
+  --orbit-color-border:           #1E305A;    /* divider sottile */
+
+  --orbit-color-text:             #E8F0FF;    /* testo primario */
+  --orbit-color-text-secondary:   #8899BB;    /* testo secondario */
+  --orbit-color-text-accent:      #00C8FF;    /* link / label */
+
+  /* ── Tipografia ───────────────────────────────────────────────────────────── */
+  --orbit-font-display: 'Barlow Condensed', 'Roboto Condensed', system-ui, sans-serif;
+  --orbit-font-body:    'Barlow', 'Roboto', system-ui, sans-serif;
+  --orbit-font-mono:    'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+
+  --orbit-weight-regular: 400;
+  --orbit-weight-medium:  500;
+  --orbit-weight-bold:    700;
+  --orbit-weight-black:   900;
+
+  /* ── Motion ───────────────────────────────────────────────────────────────── */
+  --orbit-motion-ring-1:   20s;    /* periodo rotazione ring principale */
+  --orbit-motion-ring-2:   15s;    /* periodo ring secondario */
+  --orbit-motion-breathe:  4s;     /* respiro ambient orb */
+  --orbit-motion-pulse:    2.6s;   /* pulse satellite / indicator */
+
+  /* ── Elevation / glow ─────────────────────────────────────────────────────── */
+  --orbit-glow-core:     0 0 32px 8px rgba(255, 140, 0, 0.4);
+  --orbit-glow-ring:     0 0 8px 2px rgba(0, 200, 255, 0.5);
+  --orbit-glow-sat:      0 0 10px 3px rgba(0, 255, 176, 0.6);
+  --orbit-glow-surface:  0 4px 32px rgba(7, 11, 20, 0.8);
+
+  /* ── Border radius ────────────────────────────────────────────────────────── */
+  --orbit-radius-card:   16px;
+  --orbit-radius-chip:   8px;
+  --orbit-radius-icon:   24px;
+}
+
+/* ── Keyframes globali ────────────────────────────────────────────────────────── */
+@keyframes orbit-ring-1 {
+  from { transform: rotate(-18deg); }
+  to   { transform: rotate(342deg); }
+}
+
+@keyframes orbit-ring-2 {
+  from { transform: rotate(52deg); }
+  to   { transform: rotate(-308deg); }
+}
+
+@keyframes orbit-breathe {
+  0%, 100% { opacity: 1;    transform: scale(1); }
+  50%       { opacity: 0.85; transform: scale(1.06); }
+}
+
+@keyframes orbit-load-bar {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@keyframes orbit-pulse {
+  0%   { box-shadow: 0 0 0 0px var(--orbit-color-core); }
+  70%  { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0px transparent; }
+}

@@ -1,0 +1,109 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MD3 Z-INDEX GOVERNANCE SYSTEM - GOLD COMPLIANCE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   This file is the single source of truth for layering.
+
+   RULES (NON-NEGOTIABLE):
+   1. These are the ONLY z-index values allowed in the application
+   2. Components MUST reference these tokens via var()
+   3. Direct numeric z-index is FORBIDDEN (enforced by ESLint)
+   4. Legacy --z-* tokens are FORBIDDEN
+   5. Any new layer MUST be added here first
+
+   ALLOWED TOKENS (MD3 GOLD STANDARD):
+   - --md-sys-z-base: Base layout content
+   - --md-sys-z-raised: Raised content, overlays within layout
+   - --md-sys-z-nav: Navigation, BottomNav, NavigationRail, ContextualStrip
+   - --md-sys-z-app-bar: Header, TopAppBar
+   - --md-sys-z-sticky: Sticky banners, fixed notices
+   - --md-sys-z-snackbar: Snackbars, toasts
+   - --md-sys-z-modal: Modals, dialogs, bottom sheets
+   - --md-sys-z-tooltip: Tooltips, critical floating affordances
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════
+     BASE LAYER
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-base: 0;
+
+  /* ═══════════════════════════════════════════════════════
+     RAISED CONTENT LAYER
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-raised: 10;
+
+  /* ═══════════════════════════════════════════════════════
+     NAVIGATION LAYER
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-nav: 100;
+
+  /* ═══════════════════════════════════════════════════════
+     APP BAR LAYER
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-app-bar: 200;
+
+  /* ═══════════════════════════════════════════════════════
+     STICKY LAYER
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-sticky: 300;
+
+  /* ═══════════════════════════════════════════════════════
+     SNACKBAR LAYER
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-snackbar: 400;
+
+  /* ═══════════════════════════════════════════════════════
+     MODAL LAYER
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-modal: 500;
+
+  /* ═══════════════════════════════════════════════════════
+     TOOLTIP LAYER
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-tooltip: 600;
+
+  /* ═══════════════════════════════════════════════════════
+     MAXIMUM LAYER (EMERGENCY USE ONLY)
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-z-max: 9999;
+
+  /* ═══════════════════════════════════════════════════════
+     CHART DIMENSIONS (DASHBOARD COMPONENTS)
+     ═══════════════════════════════════════════════════════ */
+
+  --md-sys-chart-height-large: 300px;
+  --md-sys-chart-height-medium: 250px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   USAGE EXAMPLES (CORRECT)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   
+   ✅ CORRECT:
+   .modal {
+     z-index: var(--md-sys-z-modal);
+   }
+   
+   ✅ CORRECT (TypeScript):
+   style={{ zIndex: 'var(--md-sys-z-tooltip)' }}
+   
+   ❌ FORBIDDEN:
+   .modal {
+     z-index: var(--md-sys-z-snackbar);
+   }
+   
+   ❌ FORBIDDEN (TypeScript):
+   style={{ zIndex: 'var(--app-z-tooltip)' }}
+   
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

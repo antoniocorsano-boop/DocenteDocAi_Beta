@@ -1,0 +1,37 @@
+{
+  "name": "docentedoc-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Express backend for DocenteDoc AI — session auth, KeyVault derivation, audit logging",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "ci": "tsc --noEmit && echo 'TypeScript OK'"
+  },
+  "dependencies": {
+    "@sentry/node": "^8.0.0",
+    "@types/stripe": "^8.0.416",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "google-auth-library": "^10.6.2",
+    "helmet": "^7.1.0",
+    "pg": "^8.11.5",
+    "prom-client": "^15.1.3",
+    "stripe": "^20.4.1",
+    "winston": "^3.13.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/express-session": "^1.17.10",
+    "@types/node": "^20.12.7",
+    "@types/pg": "^8.11.5",
+    "tsx": "^4.7.3",
+    "typescript": "^5.4.5"
+  }
+}

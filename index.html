@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <!-- Material Icons Classic — non-blocking (preload trick) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" /></noscript>
+  <!-- Material Symbols Outlined — display=block previene FOUT su mobile (icone come testo) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400..600,0..1,0&display=block"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400..600,0..1,0&display=block" /></noscript>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- CSP tuned to allow pdf.js (new Function), WebAssembly, and external scripts -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self';
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' 'wasm-unsafe-eval' https://accounts.google.com https://apis.google.com;
+    worker-src 'self' blob:;
+    connect-src 'self' https://www.googleapis.com https://oauth2.googleapis.com https://generativelanguage.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://accounts.google.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' https://fonts.gstatic.com https://www.gstatic.com blob:;
+    frame-src 'self' https://accounts.google.com https://apis.google.com https://www.gstatic.com;
+    child-src 'self' https://accounts.google.com https://apis.google.com https://www.gstatic.com blob:;
+    manifest-src 'self';">
+  <title>Orbit — DocenteDoc AI</title>
+  <meta name="description" content="Orbit by DocenteDoc AI — Assistente AI per la pianificazione didattica, il registro di classe e il Copilot per la Pubblica Amministrazione." />
+
+  <!-- CRITICAL: Load scheduler polyfill BEFORE any module scripts -->
+  <!-- This must be a classic script (not type="module") to block module execution -->
+  <script defer src="/scheduler-polyfill.js"></script>
+
+  <!-- PWA & Mobile App Meta Tags -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Orbit">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Orbit brand fonts: Barlow Condensed (display) + Barlow (body) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;500&display=swap" /></noscript>
+  <!-- CopilotDoc brand fonts: Lora (display serif) + DM Sans (body) + DM Mono (data) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" /></noscript>
+
+  <!-- Google Identity Services for Drive Sync - LOAD AFTER modules to avoid conflicts -->
+  <!-- REMOVED: <script type="module" src="/init-flags.js"></script> -->
+
+  <!-- Font: caricati tramite @import in theme.css (mantiene coerenza CSSOM e previene CLS al web font swap) -->
+</head>
+
+  <body>
+    <div id="root">
+      <!-- Splash screen inline: visibile immediatamente (migliora FCP/LCP) -->
+      <div id="app-splash" style="
+        position:fixed;inset:0;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;
+        background:radial-gradient(ellipse at 50% 40%,#141C2E 0%,#070B14 100%);
+        font-family:'Barlow Condensed',system-ui,sans-serif;
+        color:#E8F0FF;
+        gap:20px;
+        z-index:9999;
+      ">
+        <!-- Orbit icon SVG inline -->
+        <svg width="64" height="64" viewBox="0 0 512 512" fill="none" aria-hidden="true">
+          <rect width="512" height="512" rx="110" fill="#141C2E"/>
+          <ellipse cx="256" cy="256" rx="172" ry="60" stroke="#00C8FF" stroke-width="2.5" stroke-opacity="0.85"/>
+          <ellipse cx="256" cy="256" rx="108" ry="36" stroke="#8B6FFF" stroke-width="2" stroke-opacity="0.65"/>
+          <circle cx="256" cy="256" r="60" fill="#FF8C00" opacity="0.9"/>
+          <circle cx="244" cy="244" r="18" fill="white" fill-opacity="0.18"/>
+          <animateTransform attributeName="transform" type="rotate" from="0 256 256" to="360 256 256" dur="2s" repeatCount="indefinite" additive="sum"/>
+        </svg>
+        <span style="font-size:1.4rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase">ORBIT</span>
+        <span style="font-size:.8rem;font-family:'Barlow',system-ui,sans-serif;color:#8899BB;letter-spacing:.06em">by DocenteDoc AI</span>
+        <!-- LCP anchor: resa visibile subito per minimizzare il Render Delay di LCP.
+             React rimuove #app-splash al montaggio, quindi questo testo è solo transitorio. -->
+        <p style="margin:0;font-size:1rem;font-family:'Barlow',system-ui,sans-serif;color:#C8D8F0;letter-spacing:.02em;max-width:340px;text-align:center">
+          Sono <strong>DocenteDoc AI</strong> — il tuo assistente intelligente per la didattica.
+        </p>
+      </div>
+    </div>
+    <script><!-- React rimuove #app-splash al montaggio -->
+      document.addEventListener('DOMContentLoaded', function() {
+        var ro = new MutationObserver(function() {
+          var root = document.getElementById('root');
+          if (root && root.children.length > 1) {
+            var splash = document.getElementById('app-splash');
+            if (splash) splash.remove();
+            ro.disconnect();
+          }
+        });
+        ro.observe(document.getElementById('root'), { childList: true });
+      });
+    </script>
+    <!-- Main entrypoint: lascia che Vite gestisca i chunk -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+
+</html>

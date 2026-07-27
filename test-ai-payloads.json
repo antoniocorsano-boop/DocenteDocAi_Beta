@@ -1,0 +1,12 @@
+{
+  "circularAnalysis": {
+    "fileContent": "Test circular text for analysis. This is a sample document to test AI analysis functionality."
+  },
+  "lessonGeneration": {
+    "prompt": "Generate a math lesson for grade 1 on addition."
+  },
+  "errorSimulation": {
+    "timeout": "Simulate network timeout by delaying response >30s",
+    "quota": "Simulate quota exceeded by returning 429 status"
+  }
+}

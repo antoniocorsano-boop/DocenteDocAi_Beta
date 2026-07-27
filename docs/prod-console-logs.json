@@ -1,0 +1,384 @@
+{
+  "url": "https://docentedoc-ai.vercel.app",
+  "capturedAt": "2025-12-29T06:16:38.506Z",
+  "console": [
+    {
+      "type": "debug",
+      "text": "[SW] disabled by VITE_ENABLE_SW flag",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/main-WLOVOnu2.js",
+        "lineNumber": 2,
+        "columnNumber": 170
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[lazyStores] data store loaded",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/lazyStores-DBoj7eOQ.js",
+        "lineNumber": 1,
+        "columnNumber": 1181
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[lazyStores] ui store loaded",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/lazyStores-DBoj7eOQ.js",
+        "lineNumber": 1,
+        "columnNumber": 1318
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[lazyStores] settings store loaded",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/lazyStores-DBoj7eOQ.js",
+        "lineNumber": 1,
+        "columnNumber": 1451
+      }
+    },
+    {
+      "type": "warning",
+      "text": "[DEBUG] Forzata chiusura modal Assistant su mount",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 523,
+        "columnNumber": 3158
+      }
+    },
+    {
+      "type": "info",
+      "text": "[instrument] user undefined",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 523,
+        "columnNumber": 3495
+      }
+    },
+    {
+      "type": "info",
+      "text": "[instrument] isRestoring false",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 523,
+        "columnNumber": 3728
+      }
+    },
+    {
+      "type": "info",
+      "text": "[instrument] isRestoring true",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 523,
+        "columnNumber": 3728
+      }
+    },
+    {
+      "type": "log",
+      "text": "[BackupService] Object store created/upgraded",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 1136
+      }
+    },
+    {
+      "type": "log",
+      "text": "[BackupService] No backup found",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 2159
+      }
+    },
+    {
+      "type": "log",
+      "text": "[useAppEngine] No valid backup, loading demo data...",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 17555
+      }
+    },
+    {
+      "type": "info",
+      "text": "[instrument] isRestoring false",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 523,
+        "columnNumber": 3728
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[SignIn] GSI skipped in non-production/unauthorized origin docentedoc-ai.vercel.app",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 401,
+        "columnNumber": 25366
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[SignIn] GSI skipped in non-production/unauthorized origin docentedoc-ai.vercel.app",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 401,
+        "columnNumber": 25366
+      }
+    },
+    {
+      "type": "log",
+      "text": "[IndexedDbService] KB object store created/upgraded",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 3859
+      }
+    },
+    {
+      "type": "log",
+      "text": "[IndexedDbService] KB content saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 4445
+      }
+    },
+    {
+      "type": "log",
+      "text": "[BackupService] Backup saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 1695
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[SignIn] GSI skipped in non-production/unauthorized origin docentedoc-ai.vercel.app",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 401,
+        "columnNumber": 25366
+      }
+    },
+    {
+      "type": "log",
+      "text": "[IndexedDbService] KB content saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 4445
+      }
+    },
+    {
+      "type": "log",
+      "text": "[BackupService] Backup saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 1695
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[SignIn] GSI skipped in non-production/unauthorized origin docentedoc-ai.vercel.app",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 401,
+        "columnNumber": 25366
+      }
+    },
+    {
+      "type": "log",
+      "text": "[IndexedDbService] KB content saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 4445
+      }
+    },
+    {
+      "type": "log",
+      "text": "[BackupService] Backup saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 1695
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[SignIn] GSI skipped in non-production/unauthorized origin docentedoc-ai.vercel.app",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 401,
+        "columnNumber": 25366
+      }
+    },
+    {
+      "type": "log",
+      "text": "[IndexedDbService] KB content saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 4445
+      }
+    },
+    {
+      "type": "log",
+      "text": "[BackupService] Backup saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 1695
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[SignIn] GSI skipped in non-production/unauthorized origin docentedoc-ai.vercel.app",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 401,
+        "columnNumber": 25366
+      }
+    },
+    {
+      "type": "log",
+      "text": "[IndexedDbService] KB content saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 4445
+      }
+    },
+    {
+      "type": "log",
+      "text": "[BackupService] Backup saved successfully",
+      "values": [
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 189,
+        "columnNumber": 1695
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[SignIn] GSI skipped in non-production/unauthorized origin docentedoc-ai.vercel.app",
+      "values": [
+        null,
+        null
+      ],
+      "location": {
+        "url": "https://docentedoc-ai.vercel.app/assets/App-C_i1w1e_.js",
+        "lineNumber": 401,
+        "columnNumber": 25366
+      }
+    }
+  ],
+  "pageErrors": [],
+  "responses": [],
+  "mainResponse": {
+    "status": 200,
+    "url": "https://docentedoc-ai.vercel.app/"
+  },
+  "screenshot": "C:\\Users\\anton\\DocenteDocAI-Flowise\\docentedoc-ai\\docs\\prod-page-screenshot.png"
+}

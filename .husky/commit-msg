@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Validate commit message format (optional but recommended)
+# Expected format: type(scope): message
+# Example: feat(auth): add login validation
+
+npx --no -- commitlint --edit "$1"

@@ -1,0 +1,85 @@
+/**
+ * SkipLink Styles
+ * 
+ * Visual styling for skip-to-content link.
+ * Only visible when focused (keyboard navigation).
+ * Visible in high contrast mode.
+ */
+
+.skip-link {
+  /* Position absolutely to hide offscreen */
+  position: absolute;
+  top: calc(-1 * var(--md-sys-spacing-10));
+  left: 0;
+  z-index: var(--md-sys-z-skip-link);
+  
+  /* Styling */
+  padding: var(--md-sys-spacing-2) var(--md-sys-spacing-4);
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  text-decoration: none;
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  border-radius: var(--md-sys-shape-corner-small);
+  
+  /* Focus styles */
+  &:focus,
+  &:focus-visible {
+    top: var(--md-sys-spacing-3);
+    outline: var(--md-sys-spacing-1) solid var(--md-sys-color-primary);
+    outline-offset: var(--md-sys-spacing-1);
+  }
+  
+  /* Keyboard focus visible */
+  &:focus-visible {
+    top: var(--md-sys-spacing-3);
+    box-shadow: 0 0 0 var(--md-sys-spacing-1) rgba(var(--md-sys-color-primary-rgb), 0.25);
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: more) {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: var(--md-sys-spacing-1) solid currentColor;
+    
+    &:focus,
+    &:focus-visible {
+      outline-width: var(--md-sys-spacing-1);
+      outline-offset: var(--md-sys-spacing-1);
+    }
+  }
+  
+  /* Forced colors mode (Windows High Contrast) */
+  @media (forced-colors: active) {
+    border: var(--md-sys-spacing-1) solid CanvasText;
+    background-color: Canvas;
+    color: CanvasText;
+  }
+  
+  /* Hover state */
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+/* Alternative: Visually hidden but screen-reader accessible */
+.sr-only {
+  position: absolute;
+  width: var(--md-sys-spacing-0);
+  height: var(--md-sys-spacing-0);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* For skip links that should always be visible */
+.skip-link-visible {
+  position: static;
+  display: block;
+  margin-bottom: var(--md-sys-spacing-4);
+}
+
+
