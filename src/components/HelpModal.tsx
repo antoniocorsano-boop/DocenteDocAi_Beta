@@ -206,24 +206,7 @@ const HelpModal: React.FC<HelpModalProps> = ({ onClose, onNavigate, aiSettings, 
     try {
         setLoadingModalMessage('Generazione contenuti...');
 
-        // Fase 4: route via AIBrain + context before legacy calls (daily help gesture)
-        const ctx = AIBrain.buildContext({
-            source: 'help-modal',
-            extra: { action: 'generate-full-document', hasAiSettings: !!aiSettings }
-        });
-        await AIBrain.migrateLegacyAsk('Generate full help/manual PDF document', ctx);
-
         // POST-Fase 4 rollout: generate full document via central prompt builder
-        const docCtx = AIBrain.buildContext({
-            source: 'help-modal',
-            extra: { action: 'generate-full-document', hasAiSettings: !!aiSettings }
-        });
-        await AIBrain.migrateLegacyAsk('Generate full help/manual PDF document', docCtx);
-
-        // POST-Fase 4 rollout
-        const { prompt: essayP } = AIBrain.buildPrompt('academic-essay', {});
-        const { prompt: techP } = AIBrain.buildPrompt('technical-document', {});
-
         const essayContent = await AIBrain.generateWithCentralPrompt('academic-essay', {}, aiSettings);
         const techInfo = await AIBrain.generateWithCentralPrompt('technical-document', {}, aiSettings) || {};
         printFullAppGuide(

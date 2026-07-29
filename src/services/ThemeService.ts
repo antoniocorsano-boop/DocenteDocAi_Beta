@@ -178,12 +178,6 @@ export const ThemeService = {
     name: string;
     colors: Partial<ColorTokens>;
   }> {
-    // Fase 4: route theme generation via AIBrain
-    const ctx = AIBrain.buildContext({ source: 'theme-service', extra: { promptLen: prompt.length } });
-    await AIBrain.migrateLegacyAsk(`Generate theme via AI: ${prompt.substring(0, 60)}`, ctx);
-
-    // Post-Fase 4: central prompt + generateWithCentralPrompt for theme generation
-    const { prompt: themeP } = AIBrain.buildPrompt('theme-generation', { prompt });
     const generated = await AIBrain.generateWithCentralPrompt('theme-generation', { prompt }, aiSettings);
     
     // Map the AI response to our ColorTokens structure

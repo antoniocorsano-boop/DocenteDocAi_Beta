@@ -82,7 +82,6 @@ export const useKeyboardNavigation = (
             switch (event.key) {
                 case 'Escape':
                     event.preventDefault();
-                    logger.debug('[DEBUG] ESC pressed, closing modal'); // TEMP DEBUG
                     if (onClose) onClose();
                     break;
 
@@ -93,14 +92,12 @@ export const useKeyboardNavigation = (
                         // Shift + Tab: vai all'ultimo elemento se siamo sul primo
                         if (document.activeElement === firstElement) {
                             event.preventDefault();
-                            logger.debug('[DEBUG] Focus trap: wrapping to last element'); // TEMP DEBUG
                             lastElement.focus();
                         }
                     } else {
                         // Tab: vai al primo elemento se siamo sull'ultimo
                         if (document.activeElement === lastElement) {
                             event.preventDefault();
-                            logger.debug('[DEBUG] Focus trap: wrapping to first element'); // TEMP DEBUG
                             firstElement.focus();
                         }
                     }
@@ -174,7 +171,6 @@ export const useKeyboardNavigation = (
               setTimeout(() => {
                 const el = previouslyFocusedElement.current as HTMLElement | null;
                 if (el && typeof el.focus === 'function') {
-                  logger.debug('[DEBUG] Restoring focus to previous element:', el); // TEMP DEBUG
                   el.focus();
                 }
                 previouslyFocusedElement.current = null;
@@ -286,5 +282,4 @@ export const useListKeyboardNavigation = (options: UseListKeyboardNavigationOpti
 
 // Re-export for convenience
 export { useCallback } from 'react';
-import { logger } from '../utils/logger';
 

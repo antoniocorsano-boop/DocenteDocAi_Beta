@@ -162,13 +162,6 @@ export const LiveAssistant: React.FC<LiveAssistantProps> = (props) => {
       result = { message: 'Navigazione avviata.' };
     } else if (name === 'searchWeb') {
       const query = typeof args.query === 'string' ? args.query : '';
-      // Post-Fase 4: central prompt + generateWithCentralPrompt for web search
-      const ctx = AIBrain.buildContext({
-        source: 'live-assistant',
-        extra: { tool: 'searchWeb', query }
-      });
-      await AIBrain.migrateLegacyAsk(`Live web search: ${query}`, ctx);
-
       const searchRes = await AIBrain.generateWithCentralPrompt('web-search', { query }, { model: 'gemini-2.5-flash' });
       result = { summary: searchRes.text };
       // FIX: Add sources to transcript

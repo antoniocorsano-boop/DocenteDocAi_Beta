@@ -219,16 +219,7 @@ const CreateLessonFromAiModal: React.FC<CreateLessonFromAiModalProps> = ({ conte
                 }
             };
 
-            // Post-Fase 4: central prompt builder + gateway for daily inclusivity adaptations gesture
-            const ctx = AIBrain.buildContext({
-                class: classe,
-                students,
-                source: 'create-lesson-from-ai',
-                extra: { action: 'inclusivity-adaptations', materia }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera adattamenti inclusivi per lezione ${argomento}`, ctx);
-
-            const { prompt: adaptP } = AIBrain.buildPrompt('inclusivity-adaptations', { lesson: lessonContext, piani: pianiInclusionePerClasse });
+            // POST-Fase 4: central prompt builder
             const adaptations = await AIBrain.generateWithCentralPrompt('inclusivity-adaptations', { lesson: lessonContext, piani: pianiInclusionePerClasse }, aiSettings);
             
             setAdattamenti(prev => prev ? `${prev}\n${adaptations}` : adaptations);

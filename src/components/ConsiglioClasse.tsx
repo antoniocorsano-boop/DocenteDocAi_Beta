@@ -108,16 +108,7 @@ const ConsiglioClasse: React.FC<ConsiglioClasseProps> = (props) => {
             const studentEvals = evaluations.filter(e => e.studenteId === student.id);
             const studentCompEvals = competencyEvaluations.filter(e => e.studenteId === student.id);
 
-            // Post-Fase 4: central prompt + generateWithCentralPrompt (daily consiglio judgment gesture)
-            const ctx = AIBrain.buildContext({
-                class: selectedClass,
-                students: [student],
-                evaluations: studentEvals,
-                source: 'consiglio-classe',
-                extra: { periodo, competenceCount: studentCompEvals.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Suggerisci giudizio periodico per ${student.cognome}`, ctx);
-
+            // POST-Fase 4: central prompt for judgment suggestion
             const suggestion = await AIBrain.generateWithCentralPrompt('judgment-suggestion', {
                 s: student,
                 evals: studentEvals,
@@ -152,14 +143,6 @@ const ConsiglioClasse: React.FC<ConsiglioClasseProps> = (props) => {
                 criticalities: studentiPerf.filter(s => s.grade !== null && parseFloat(s.grade) < 6).map(s => s.nome),
                 strengths: studentiPerf.filter(s => s.grade !== null && parseFloat(s.grade) >= 8).map(s => s.nome)
             };
-
-            // Fase 4: route narrative report (daily high-impact consiglio gesture) via AIBrain
-            const ctx = AIBrain.buildContext({
-                class: selectedClass,
-                source: 'consiglio-classe',
-                extra: { periodo, studentsCount: students.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera report narrativo consiglio di classe`, ctx);
 
             const report = await AIBrain.generateWithCentralPrompt('council-narrative-report', data, aiSettings);
             setNarrativeReport(report);

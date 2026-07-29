@@ -28,11 +28,7 @@ const AiEventParserModal: React.FC<AiEventParserModalProps> = ({ onClose, onEven
         setIsLoading(true);
         setError('');
         try {
-            // Post-Fase 4: central prompt path for event extraction (daily teacher gesture)
-            const { prompt: eventP } = AIBrain.buildPrompt('event-extraction', { text });
-            const ctx = AIBrain.buildContext({ source: 'ai-event-parser', extra: { textLength: text.length } });
-            await AIBrain.migrateLegacyAsk(`Parse event from text`, ctx);
-
+            // POST-Fase 4: central prompt path for event extraction (daily teacher gesture)
             const parsedData = await AIBrain.generateWithCentralPrompt('event-extraction', { text }, aiSettings);
             onEventParsed(parsedData);
         } catch (e) {

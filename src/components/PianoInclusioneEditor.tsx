@@ -55,14 +55,6 @@ const PianoInclusioneEditor: React.FC<PianoInclusioneEditorProps> = ({ student, 
             const studentEvaluations = evaluations.filter(e => e.studenteId === student.id);
             const studentCompetencies = competencyEvaluations.filter(e => e.studenteId === student.id);
             
-            // Post-Fase 4: central prompt builder + gateway for daily PIP/PEI gesture
-            const ctx = AIBrain.buildContext({
-                source: 'piano-inclusione-editor',
-                extra: { studentId: student.id, section, evalsCount: studentEvaluations.length, compCount: studentCompetencies.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera suggerimento PIP/PEI per ${section}`, ctx);
-
-            const { prompt: pipP } = AIBrain.buildPrompt('pip-suggestion', { s: student, evals: studentEvaluations, cEvals: studentCompetencies, comps: settings.competenze, sec: section });
             const text = await AIBrain.generateWithCentralPrompt('pip-suggestion', { s: student, evals: studentEvaluations, cEvals: studentCompetencies, comps: settings.competenze, sec: section }, aiSettings);
 
             if (section.startsWith('obj-')) {

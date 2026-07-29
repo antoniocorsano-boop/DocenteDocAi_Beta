@@ -123,11 +123,6 @@ export const UdaExportModal: React.FC<UdaExportModalProps> = ({ uda, competenze,
             Fasi: ${uda.phases.map(p => p.title).join(', ')}.
             Tipo documento: ${docType === 'docente' ? 'Progettazione tecnica per docenti' : 'Guida semplificata per studenti'}.`;
             
-            // Post-Fase 4: central prompt builder + gateway for daily UDA AI report gesture
-            const ctx = AIBrain.buildContext({ source: 'uda-export-ai-report', extra: { uda: uda.title, type: docType } });
-            await AIBrain.migrateLegacyAsk(`Generate AI report for UDA ${uda.title}`, ctx);
-
-            const { prompt: centralPrompt } = AIBrain.buildPrompt('uda-report', { prompt, uda: uda.title, type: docType });
             const report = await AIBrain.generateWithCentralPrompt('uda-report', { prompt, uda: uda.title, type: docType }, aiSettings);
             setMarkdownReport(report);
         } catch (error) {

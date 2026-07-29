@@ -69,15 +69,7 @@ const CorpusChat: React.FC<CorpusChatProps> = ({ corpus, aiSettings, onClose, kn
             }
             const corpusContent = corpusFiles.map(e => `--- Contenuto da: ${e.fileName} ---\n${e.content}`).join('\n\n');
 
-            // Fase 4: central routing + context builder before legacy call (rollback-safe)
-            const ctx = AIBrain.buildContext({
-                source: 'corpus-chat',
-                extra: { corpusId: corpus.id, corpusName: corpus.displayName, queryLength: text.length, filesCount: corpusFiles.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Corpus chat query: ${text.substring(0, 80)}`, ctx);
-
-            // Post-Fase 4: central prompt for corpus-answer
-            const { prompt: corpusP } = AIBrain.buildPrompt('corpus-answer', { query: text, corpus: corpusContent });
+            // POST-Fase 4: central prompt for corpus-answer
             const modelResponse = await AIBrain.generateWithCentralPrompt('corpus-answer', { query: text, corpus: corpusContent }, aiSettings);
             setMessages(prev => [...prev, modelResponse]); // Update local state directly
 

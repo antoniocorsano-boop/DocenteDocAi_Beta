@@ -87,21 +87,6 @@ const LessonsPage: React.FC<LessonsPageExtendedProps> = ({ lessons, uda, knowled
             let allNewLessons: Lezione[] = [];
 
             for (const targetClass of selectedClasses) {
-                // Post-Fase 4: central prompt builder + gateway for daily lesson sequencing gesture
-                const ctx = AIBrain.buildContext({
-                    class: targetClass,
-                    source: 'lessons-page',
-                    extra: { udaCount: selectedUdaIds.length, kbSelected: selectedKbIds.length }
-                });
-                await AIBrain.migrateLegacyAsk(`Genera sequenza lezioni per ${targetClass}`, ctx);
-
-                // POST-Fase 4 rollout: use buildPrompt + generateWithCentralPrompt
-                const { prompt: seqPrompt } = AIBrain.buildPrompt('lesson-sequence', {
-                    uda: selectedUdas,
-                    classe: targetClass,
-                    kb: kbText
-                });
-
                 const extractedLessons = await AIBrain.generateWithCentralPrompt('lesson-sequence', {
                     uda: selectedUdas,
                     classe: targetClass,
