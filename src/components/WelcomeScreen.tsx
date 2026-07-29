@@ -16,7 +16,7 @@ import { View } from '../types';
 
 interface WelcomeScreenProps {
   onSetupComplete: (data: { name: string; schoolType?: string; firstClass?: string; isGuided: boolean }) => void;
-  onNavigate?: (view: View, context?: any) => void;
+  onNavigate?: (view: View, context?: unknown) => void;
 }
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onSetupComplete, onNavigate }) => {

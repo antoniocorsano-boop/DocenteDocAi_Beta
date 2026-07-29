@@ -112,10 +112,10 @@ const ReportisticaHub: React.FC<ReportisticaHubProps> = (props) => {
     const [aiSummaryAIBrainFocus, setAiSummaryAIBrainFocus] = useState<string | null>(null);
 
     // Additional Fase 3 daily gesture: Real AIBrain.ask tip for reportistica hub
-    const [reportisticaAiTip, setReportisticaAiTip] = React.useState<string | null>(null);
-    const [reportisticaAiLoading, setReportisticaAiLoading] = React.useState(false);
+    const [_reportisticaAiTip, setReportisticaAiTip] = React.useState<string | null>(null);
+    const [_reportisticaAiLoading, setReportisticaAiLoading] = React.useState(false);
 
-    const fetchReportisticaAiTip = React.useCallback(async () => {
+    const _fetchReportisticaAiTip = React.useCallback(async () => {
       setReportisticaAiLoading(true);
       try {
         const res = await AIBrain.ask({
@@ -272,13 +272,11 @@ const ReportisticaHub: React.FC<ReportisticaHubProps> = (props) => {
                     summaryPrompt = brainRes.content.slice(0, 180);
                     setAiSummaryAIBrainFocus(summaryPrompt);
                 }
-                // Also call migrate path + unified recs for deeper consolidation
-                await AIBrain.migrateLegacyAsk(`Genera riepilogo AI classe ${selectedClass}`, ctx);
                 AIBrain.getUnifiedRecommendations(ctx);
             } catch {}
 
             // Post-Fase 4: central prompt builder + gateway for daily class summary report
-            const { prompt: reportP } = AIBrain.buildPrompt('markdown-report', {
+            const { prompt: _reportP } = AIBrain.buildPrompt('markdown-report', {
                 type: 'class_summary',
                 classe: selectedClass,
                 numStudenti: studentsInClass.length,

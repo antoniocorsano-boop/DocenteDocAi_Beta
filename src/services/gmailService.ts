@@ -1,5 +1,5 @@
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { loadGapiClient, requestAccessToken } from './googleDriveService';
 import { logger } from '../utils/logger';
 const GMAIL_MODIFY_SCOPE = 'https://www.googleapis.com/auth/gmail.modify';
@@ -73,9 +73,10 @@ export const listUnreadEmails = async (limit = 5): Promise<{ id: string; snippet
         
         return details;
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         logger.error("Gmail List Error", error);
-        if (error.result?.error?.code === 403 || error.result?.error?.code === 401) {
+        const gmailError = error as { result?: { error?: { code?: number } } };
+        if (gmailError.result?.error?.code === 403 || gmailError.result?.error?.code === 401) {
             // Permission missing, request it
             requestAccessToken(GMAIL_MODIFY_SCOPE);
             throw new Error("Permessi Gmail mancanti. Ho richiesto l'autorizzazione. Riprova dopo aver accettato.");
@@ -94,9 +95,10 @@ export const sendEmail = async (to: string, subject: string, body: string): Prom
                 'raw': raw
             }
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
         logger.error("Gmail Send Error", error);
-        if (error.result?.error?.code === 403 || error.result?.error?.code === 401) {
+        const gmailError = error as { result?: { error?: { code?: number } } };
+        if (gmailError.result?.error?.code === 403 || gmailError.result?.error?.code === 401) {
              requestAccessToken(GMAIL_MODIFY_SCOPE);
              throw new Error("Permessi invio mail mancanti. Ho richiesto l'autorizzazione. Riprova dopo aver accettato.");
         }

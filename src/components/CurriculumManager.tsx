@@ -77,13 +77,7 @@ const CurriculumManager: React.FC<CurriculumManagerProps> = ({ curricula, onUpda
         if (!importText.trim() || !selectedCurriculum) return;
         setIsProcessingAI(true);
         try {
-            // Post-Fase 4: central prompt + generateWithCentralPrompt for curriculum parse
-            const ctx = AIBrain.buildContext({
-                source: 'curriculum-manager',
-                extra: { subject: selectedCurriculum.subject, gradeLevel: selectedCurriculum.gradeLevel, textLength: importText.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Importa curricolo AI per ${selectedCurriculum.subject}`, ctx);
-
+            // POST-Fase 4: central prompt path
             const parsed = await AIBrain.generateWithCentralPrompt('curriculum-parse', {
                 text: importText,
                 subject: selectedCurriculum.subject,

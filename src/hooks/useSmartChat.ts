@@ -481,8 +481,7 @@ export function useSmartChat({ initialMode }: UseSmartChatOptions = {}): UseSmar
     const msg = messages.find(m => m.id === messageId);
     const agentId = msg?.blocks
       ?.find(b => b.type === 'insight')
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ?.data && (msg.blocks.find(b => b.type === 'insight') as any)?.data?.agentsUsed?.[0];
+      ?.data && (msg.blocks.find(b => b.type === 'insight') as { data?: { agentsUsed?: string[] } })?.data?.agentsUsed?.[0];
 
     submitUserFeedback({ agentId: agentId ?? undefined, rating }).catch(() => undefined);
   }, [messages]);

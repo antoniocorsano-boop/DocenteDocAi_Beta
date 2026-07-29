@@ -114,8 +114,7 @@ async function idbCount(): Promise<number> {
 
 // ─── Queue implementation ─────────────────────────────────────────────────────
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const _executors = new Map<string, Executor<any>>();
+const _executors = new Map<string, Executor<unknown>>();
 let _draining    = false;
 let _initialized = false;
 

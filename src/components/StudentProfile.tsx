@@ -117,13 +117,6 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, evaluations, c
         setIsLoadingAi(true);
         setAiJudgment(null);
         try {
-            // Fase 4: route daily student profile judgment gesture via AIBrain
-            const ctx = AIBrain.buildContext({
-                source: 'student-profile',
-                extra: { studentId: student.id, class: student.classe, evalsCount: evaluations.length, compsCount: competencyEvaluations.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera giudizio AI per ${student.cognome}`, ctx);
-
             const suggestion = await AIBrain.generateWithCentralPrompt('judgment-suggestion', {
                 s: student,
                 evals: evaluations,

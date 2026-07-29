@@ -39,14 +39,6 @@ const SmartImportModal: React.FC<SmartImportModalProps> = ({ onClose, aiSettings
 
             setProcessingStatus('Analisi e Ristrutturazione con AI...');
 
-            // Post-Fase 4: central prompt builder + generateWithCentralPrompt for refactor
-            const ctx = AIBrain.buildContext({
-                source: 'smart-import-modal',
-                extra: { fileName: file.name, textLength: text.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Refactor programmazione for ${file.name}`, ctx);
-
-            const { prompt: refP } = AIBrain.buildPrompt('refactor-programmazione', { text });
             const html = await AIBrain.generateWithCentralPrompt('refactor-programmazione', { text }, aiSettings);
 
             // Sanitize output before storing/rendering

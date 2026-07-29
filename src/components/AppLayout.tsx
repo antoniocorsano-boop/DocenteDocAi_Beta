@@ -8,7 +8,7 @@ import BottomNav from './BottomNav';
 import SecondaryNavDrawer from './SecondaryNavDrawer';
 import NavigationRail from './NavigationRail';
 import { Header } from './Header';
-import { View, UserProfile, TimetableSettings, Notifica, BeforeInstallPromptEvent, NavigationParams } from '../types';
+import { View, UserProfile, TimetableSettings, Notifica, BeforeInstallPromptEvent } from '../types';
 import { VIEW_LABELS } from './viewRegistry';
 import '../design-system/app-layout-responsive.css';
 
@@ -70,8 +70,8 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
     const mq = window.matchMedia('(min-width: 1024px)');
     const update = (e: MediaQueryListEvent | MediaQueryList) => setIsDesktop(e.matches);
     setIsDesktop(mq.matches);
-    mq.addEventListener('change', update as any);
-    return () => mq.removeEventListener('change', update as any);
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
   }, []);
 
   // Chiudi il drawer al cambio di vista

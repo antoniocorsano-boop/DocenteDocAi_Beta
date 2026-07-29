@@ -45,8 +45,8 @@ export const VideoAnalysisModal = lazy(() => import('./VideoAnalysisModal'));
 
 export interface ViewConfig {
     id: View;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    component: React.LazyExoticComponent<React.ComponentType<any>>;
+     
+    component: React.LazyExoticComponent<React.ComponentType<Record<string, never>>>;
     fullWidth?: boolean;
     auraWrapper?: boolean;
 }

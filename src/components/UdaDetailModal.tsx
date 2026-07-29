@@ -34,13 +34,6 @@ const UdaDetailModal: React.FC<UdaDetailModalProps> = ({ uda, onClose, onEdit, a
         setIsValidating(true);
         setValidationResult(null);
         try {
-            // Post-Fase 4: central prompt + generateWithCentralPrompt for UDA validation
-            const ctx = AIBrain.buildContext({
-                source: 'uda-detail-modal',
-                extra: { udaId: uda.id, title: uda.title, phases: uda.phases.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Validate UDA vertical curriculum for ${uda.title}`, ctx);
-
             const result = await AIBrain.generateWithCentralPrompt('validate-uda', { uda, kb: knowledgeBase }, aiSettings);
             setValidationResult(result);
             logger.debug(`Audit: Completed AI validation for UDA ${uda.id}`);

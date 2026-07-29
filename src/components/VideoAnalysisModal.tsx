@@ -81,8 +81,8 @@ const VideoAnalysisModal: React.FC<VideoAnalysisModalProps> = ({ onClose, onNavi
             const genaiModule = await import('@google/genai');
             const GoogleGenAI = genaiModule.GoogleGenAI;
             // In AI Studio the key is provided by the host environment; do NOT use VITE_GEMINI_API_KEY.
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const ai = new GoogleGenAI({ apiKey: '' } as any);
+             
+            const ai = new GoogleGenAI({ apiKey: '' } as Record<string, unknown>);
 
             // Veo model parameters
             let operation = await ai.models.generateVideos({

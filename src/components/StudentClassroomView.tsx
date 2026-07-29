@@ -14,7 +14,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Badge from '@mui/material/Badge';
 import PinPadModal from './PinPadModal';
-import AskAIButton from './AskAIButton';
+
 import { logger } from '../utils/logger';
 
 // Note: AIBrain import removed — no consumption needed in student view (teacher daily gestures prioritized in other components)
@@ -88,7 +88,7 @@ interface StudentClassroomViewProps {
 }
 
 const StudentClassroomView: React.FC<StudentClassroomViewProps> = ({ 
-    student, lessons, register, kb, submissions, onUploadSubmission, onLogout, onExitMode, securityPin = '0000', settings, onNavigate
+    student, lessons, register, kb, submissions, onUploadSubmission, onLogout, onExitMode, securityPin = '0000', settings, onNavigate: _onNavigate
 }) => {
     const [activeTab, setActiveTab] = useState<'feed' | 'homework' | 'materials'>('feed');
     const [isExitMenuOpen, setIsExitMenuOpen] = useState(false);

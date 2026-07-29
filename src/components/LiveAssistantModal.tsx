@@ -34,7 +34,7 @@ const LiveAssistantModal: React.FC<LiveAssistantModalProps> = ({
 }) => {
     // Fase 3 continuation: Real AIBrain consumption inside LiveAssistantModal
     const [liveAiSuggestion, setLiveAiSuggestion] = useState<string | null>(null);
-    const [liveAiLoading, setLiveAiLoading] = useState(false);
+    const [_liveAiLoading, setLiveAiLoading] = useState(false);
 
     const fetchLiveAiSuggestion = useCallback(async () => {
         setLiveAiLoading(true);

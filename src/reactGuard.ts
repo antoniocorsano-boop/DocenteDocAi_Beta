@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 /**
  * CRITICAL: React availability guard
  * Runs FIRST before any hook-dependent code to ensure React is available
@@ -9,7 +9,7 @@
 if (typeof window !== 'undefined') {
   // Create a dummy React object that will be replaced when real React loads
   if (!window.__REACT_AVAILABLE__) {
-    (window as any).__REACT_AVAILABLE__ = false;
+    (window as Record<string, boolean>).__REACT_AVAILABLE__ = false;
   }
 }
 

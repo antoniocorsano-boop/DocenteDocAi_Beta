@@ -59,15 +59,7 @@ const CompetencyEvaluationModal: React.FC<CompetencyEvaluationModalProps> = ({ s
 
         setIsGeneratingNote(true);
         try {
-            // Post-Fase 4: central prompt builder + generateWithCentralPrompt (competency note daily gesture)
-            const ctx = AIBrain.buildContext({
-                students: [student],
-                source: 'competency-evaluation',
-                extra: { competence: competenza.nome, level: selectedLevel.nome }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera nota per competenza ${competenza.nome}`, ctx);
-
-            const { prompt: compP } = AIBrain.buildPrompt('competency-note', { s: student, c: competenza, l: selectedLevel });
+            // POST-Fase 4: central prompt builder
             const generatedNote = await AIBrain.generateWithCentralPrompt('competency-note', { s: student, c: competenza, l: selectedLevel }, aiSettings);
             setNota(generatedNote);
         } catch (error) {

@@ -142,7 +142,7 @@ const ClassHealthWidget: React.FC<ClassHealthWidgetProps> = ({
       evaluations,
       source: 'class-health-widget'
     })
-    return computeClassHealthIndex(aiCtx as any)
+    return computeClassHealthIndex(aiCtx as Record<string, unknown>)
   }, [students, evaluations, className])
   // Use pipeline-provided result when available, otherwise compute locally.
   const health = healthProp ?? computed

@@ -99,11 +99,7 @@ const IdeaGeneratorModal: React.FC<IdeaGeneratorModalProps> = ({ onClose, onGene
                 ? knowledgeBase.filter(k => selectedKbIds.includes(k.id)).map(k => `--- ${k.fileName} ---\n${k.content}`).join('\n\n') 
                 : undefined;
                 
-            // Post-Fase 4: central prompt builder + gateway for daily lesson-from-idea gesture
-            const ctx = AIBrain.buildContext({ source: 'idea-generator', extra: { targetClass, ideaLen: ideaText.length, kbUsed: useKb } });
-            await AIBrain.migrateLegacyAsk(`Generate lesson from idea for ${targetClass}`, ctx);
-
-            const { prompt: ideaP } = AIBrain.buildPrompt('lesson-from-idea', { ideaText, kbContent, targetClass });
+            // POST-Fase 4: central prompt builder
             const result = await AIBrain.generateWithCentralPrompt('lesson-from-idea', { ideaText, kbContent, targetClass }, aiSettings);
             onGenerate(result);
             onClose();

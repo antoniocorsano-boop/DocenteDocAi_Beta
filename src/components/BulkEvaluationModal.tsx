@@ -98,14 +98,14 @@ const BulkEvaluationModal: React.FC<BulkEvaluationModalProps> = ({
       }
     }), [materia, tipo, students.length, mode]);
 
-    const bulkEvalRecs = React.useMemo(() => {
+    const _bulkEvalRecs = React.useMemo(() => {
       try { return AIBrain.getUnifiedRecommendations(bulkEvalContext); } catch { return null; }
     }, [bulkEvalContext]);
 
-    const [bulkEvalTip, setBulkEvalTip] = React.useState<string | null>(null);
-    const [bulkEvalLoading, setBulkEvalLoading] = React.useState(false);
+    const [_bulkEvalTip, setBulkEvalTip] = React.useState<string | null>(null);
+    const [_bulkEvalLoading, setBulkEvalLoading] = React.useState(false);
 
-    const fetchBulkEvalTip = React.useCallback(async () => {
+    const _fetchBulkEvalTip = React.useCallback(async () => {
       setBulkEvalLoading(true);
       try {
         const res = await AIBrain.ask({

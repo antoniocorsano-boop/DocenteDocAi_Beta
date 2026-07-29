@@ -99,7 +99,7 @@ Estrai data, ora e titolo dell'evento.
 **FORMATO OUTPUT:** JSON ESCLUSIVO
 `;
 
-export const getLessonEnrichPrompt = (lesson: any): string => `
+export const getLessonEnrichPrompt = (lesson: Record<string, string | undefined>): string => `
 TASK: Arricchisci il piano lezione con contesto didattico, pedagogico, inclusivo e suggerimenti aggiuntivi.
 LEZIONE:
 Titolo/Contenuto: ${lesson?.contenuto || ''}

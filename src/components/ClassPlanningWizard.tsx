@@ -112,24 +112,6 @@ const AnnualPlanningWizard: React.FC<AnnualPlanningWizardProps> = ({
     const handleGenerateSituation = async () => {
         setIsGeneratingSituation(true);
         try {
-            // Post-Fase 4: central prompt builder + gateway for daily "situazione partenza" gesture
-            const ctx = AIBrain.buildContext({
-                class: selectedClass,
-                students,
-                source: 'class-planning-wizard',
-                extra: { step: 'situation', tags: situationTags }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera situazione di partenza per ${selectedClass}`, ctx);
-
-            // Use central prompt builder (POST-Fase 4 rollout)
-            const { prompt: sitPrompt } = AIBrain.buildPrompt('situazione-partenza', {
-                classe: selectedClass,
-                tags: situationTags,
-                notes: situationNotes,
-                students: students.filter(s => s.classe === selectedClass)
-            });
-
-            // Prefer generateWithCentralPrompt for prompt-centralized path
             const text = await AIBrain.generateWithCentralPrompt('situazione-partenza', {
                 classe: selectedClass,
                 tags: situationTags,
@@ -169,25 +151,6 @@ const AnnualPlanningWizard: React.FC<AnnualPlanningWizardProps> = ({
 
         setIsGeneratingPlan(true);
         try {
-            // Fase 4: AIBrain central routing (buildContext + migrate) for KB planning
-            const ctx = AIBrain.buildContext({
-                class: selectedClass,
-                students,
-                source: 'class-planning-wizard',
-                extra: { step: 'sequence', kbCount: selectedKbFiles.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera piano UDA da KB per ${selectedSubject}`, ctx);
-
-// POST-Fase 4 rollout: generate plan via central prompt builder
-            const planCtx = AIBrain.buildContext({
-                class: selectedClass,
-                students,
-                source: 'class-planning-wizard',
-                extra: { step: 'sequence', kbCount: selectedKbFiles.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera piano UDA da KB per ${selectedSubject}`, planCtx);
-
-            const { prompt: planP } = AIBrain.buildPrompt('suggest-annual-plan', { kb: kbContent, subject: selectedSubject, classe: selectedClass });
             const plan = await AIBrain.generateWithCentralPrompt('suggest-annual-plan', { kb: kbContent, subject: selectedSubject, classe: selectedClass }, aiSettings);
             if (plan.length > 0) {
                 setPlannedUdas(plan.map((u, i) => ({ id: `plan-gen-${i}`, title: u.title ?? '', hours: (u as { hours?: number }).hours ?? 10, topic: (u as { topic?: string }).topic ?? u.title ?? '' })));
@@ -322,27 +285,6 @@ const AnnualPlanningWizard: React.FC<AnnualPlanningWizardProps> = ({
             const stats = `Classe composta da ${studentsInClass.length} studenti.`;
             const inclStats = `Sono presenti ${besCount} studenti con Piano di Inclusione (BES/DSA).`;
 
-            // Post-Fase 4: Use central prompt builder + AIBrain gateway for daily planning document gesture
-            const ctx = AIBrain.buildContext({
-                class: selectedClass,
-                students,
-                source: 'class-planning-wizard',
-                extra: { step: 'document', subject: selectedSubject }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera documento programmazione per ${selectedClass}`, ctx);
-
-            // POST-Fase 4: central prompt + generateWithCentralPrompt (prompt centralization rollout)
-            const { prompt: centralPrompt } = AIBrain.buildPrompt('class-planning', {
-                situazionePartenza: situationText,
-                studentiStats: stats,
-                inclusioneStats: inclStats,
-                udaList: udaList,
-                kbContext: kbContext,
-                metodologie: methodology,
-                materia: selectedSubject
-            });
-
-            // Prefer central routing path (still delegates safely inside gateway)
             const htmlContent = await AIBrain.generateWithCentralPrompt('class-planning', {
                 situazionePartenza: situationText,
                 studentiStats: stats,

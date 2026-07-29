@@ -1,11 +1,11 @@
 // MD3 Compliant - Block M Migration (13 violations eliminated)
 // Note: Typography font sizes and functional border radius retained with eslint-disable comments
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
-import { Studente, DidatticaInclusivaProps, View, NavigationParams } from '../types';
+import { Studente, DidatticaInclusivaProps } from '../types';
 import HubShell from './ui/HubShell';
 import PianoInclusioneEditor from './PianoInclusioneEditor';
 import { calculatePerformance } from '../utils/evaluationUtils';
-import { InfoCard, EmptyState, SectionHeader, Avatar } from './ui';
+import { InfoCard, EmptyState, Avatar } from './ui';
 import Button from '@mui/material/Button';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';

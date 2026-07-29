@@ -8,7 +8,7 @@
  *   - handleExportData (snapshot JSON + download)
  *   - handleImportData (JSON backup e CSV/Excel)
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { useState, useEffect, useCallback } from 'react';
 import { useStudentStore } from '../stores/useStudentStore';
 import { useAcademicStore } from '../stores/useAcademicStore';
@@ -18,14 +18,14 @@ import { useUIStore } from '../stores/useUIStore';
 import { loadBackup, deleteBackup } from '../services/backupService';
 import {
     loadKbContentFromIndexedDB,
-    saveKbContentToIndexedDB,
+    _saveKbContentToIndexedDB,
     clearIndexedDB,
 } from '../services/indexedDbService';
 import { validateBackupData } from '../utils/dataValidator';
 import { ImportService } from '../services/importService';
 import { logger } from '../utils/logger';
 import type {
-    BackupPayload, KnowledgeBaseEntry, BackupState, DriveSyncState, View,
+    BackupPayload, KnowledgeBaseEntry, BackupState, _DriveSyncState, View,
 } from '../types.ts';
 import type { ShowToast } from './useNotificationEngine';
 

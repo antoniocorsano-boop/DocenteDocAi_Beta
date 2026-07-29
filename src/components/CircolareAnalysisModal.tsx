@@ -36,14 +36,6 @@ const CircolareAnalysisModal: React.FC<CircolareAnalysisModalProps> = (props) =>
         setIsLoading(true);
         setError('');
         try {
-            // Post-Fase 4: route via central prompt builder + generateWithCentralPrompt (smart routing)
-            const ctx = AIBrain.buildContext({
-                source: 'circolare-analysis',
-                extra: { textLength: manualText.length }
-            });
-            await AIBrain.migrateLegacyAsk(`Analizza circolare: ${manualText.slice(0, 300)}`, ctx);
-
-            // We pass fileContent instead of url to enforce text-only analysis
             // POST-Fase 4: central prompt path
             const analysisResult = await AIBrain.generateWithCentralPrompt('circular-analysis', { fileContent: manualText }, aiSettings);
             setResult(analysisResult);

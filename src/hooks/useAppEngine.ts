@@ -11,14 +11,13 @@
  *   useBackupEngine        — IndexedDB load/restore/demo/export/import
  *   useDriveSyncEngine     — Google Drive OAuth + sync + auto-sync
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { useEffect, useCallback, useMemo } from 'react';
 import {
     AppState, AppActions,
-    Studente, Lezione, Slot, Valutazione, ValutazioneCompetenza, Uda, EventoCalendario,
-    KnowledgeBaseEntry, Corpus, Notifica, Rubrica, PianoInclusione, GiudizioPeriodico,
-    Report, FeedSource, RegisterEntry, NotebookNote, ToDoItem, AiSuggestion, SystemSuggestion,
-    BackupState, DriveSyncState, View, CurriculumSubject, HomeworkSubmission,
+    Studente, Lezione, Slot, Valutazione, Uda, EventoCalendario,
+    Report, RegisterEntry, AiSuggestion,
+    BackupState, DriveSyncState, View,
     LessonScheduleInput, EvaluationInput, UdaCreateInput,
     BackupPayload,
 } from '../types.ts';
@@ -51,14 +50,14 @@ export const useAppEngine = () => {
     // ─── STORES ────────────────────────────────────────────────────────────────
     const { students, evaluations, competencyEvals, pianiInclusione, studentProfileContext, selectedClassForDashboard, orientamentoActivities, ePortfolioEntries, studentOrientamentoStates, actions: studentActions } = useStudentStore();
     const { lessons, slots, uda, eventi, rubriche, curricula, submissions, draftRegister, finalizedRegister, giudizi, reportistica, actions: academicActions } = useAcademicStore();
-    const { user, knowledgeBase, corpora, notifiche, feedSources, suggestions, activeSuggestion, dismissedSuggestions, analyticsEvents, analyticsMetrics, analyticsSettings, templates, actions: systemActions } = useSystemStore();
+    const { user, knowledgeBase, corpora, notifiche, feedSources, suggestions, activeSuggestion, dismissedSuggestions, _analyticsEvents, _analyticsMetrics, _analyticsSettings, _templates, actions: systemActions } = useSystemStore();
     const { modals, circularAnalysisModal, syncConflictModal, createLessonContext, editingSlotKey, activeSlotKey, lessonViewContext, loadingModalMessage, toast, installPrompt, canShowInstallPrompt, isGlobalAiLoading, navigationHistory, backupState, driveSyncState, actions: uiActions } = useUIStore();
     const { settings, aiSettings, themeState, actions: settingsActions } = useSettingsStore();
 
     // ─── DESTRUCTURED ACTIONS ──────────────────────────────────────────────────
-    const { setStudents, setEvaluations, setCompetencyEvals, setPianiInclusione, setStudentProfileContext, setSelectedClassForDashboard, setOrientamentoActivities, setEPortfolioEntries, setStudentOrientamentoStates } = studentActions;
+    const { setStudents, setEvaluations, setCompetencyEvals, setPianiInclusione, _setStudentProfileContext, _setSelectedClassForDashboard, setOrientamentoActivities, setEPortfolioEntries, setStudentOrientamentoStates } = studentActions;
     const { setLessons, setSlots, setUda, setEventi, setRubriche, setCurricula, setSubmissions, setDraftRegister, setFinalizedRegister, setGiudizi, setReportistica } = academicActions;
-    const { setUser, setKnowledgeBase, setCorpora, setNotifiche, setFeedSources, setSuggestions, setActiveSuggestion, trackAnalyticsEvent, setTemplates, dismissSuggestion, reactivateSuggestion } = systemActions;
+    const { setUser, setKnowledgeBase, setCorpora, setNotifiche, setFeedSources, _setSuggestions, _setActiveSuggestion, trackAnalyticsEvent, _setTemplates, _dismissSuggestion, _reactivateSuggestion } = systemActions;
 
     // ─── CROSS-CUTTING HOOKS ───────────────────────────────────────────────────
     usePersistence(isDataLoaded);
@@ -339,7 +338,7 @@ export const useAppEngine = () => {
         savePianoInclusione: studentActions.savePianoInclusione,
         deletePianoInclusione: studentActions.deletePianoInclusione,
         saveRubrica: academicActions.saveRubrica,
-        deleteRubrica: academicActions.deleteRubrica || ((id: string) => { /* no-op for now */ }),
+        deleteRubrica: academicActions.deleteRubrica || ((_id: string) => { /* no-op for now */ }),
         saveGiudizio: academicActions.saveGiudizio,
         setSuggestions: systemActions.setSuggestions,
         setActiveSuggestion: systemActions.setActiveSuggestion,

@@ -182,7 +182,7 @@ export const SettingsViewsRenderer: React.FC<{
                     showToast={props.showToast}
                     settings={props.settings}
                     showGuidanceTips={props.settings.showGuidanceTips}
-                    onNavigate={props.onNavigate as any}
+                    onNavigate={props.onNavigate as (view: string, context?: unknown) => void}
                 />
             );
         case 'studio':
@@ -196,7 +196,7 @@ export const SettingsViewsRenderer: React.FC<{
                     showToast={props.showToast}
                     showGuidanceTips={props.settings.showGuidanceTips}
                     onAiProcessing={props.setIsGlobalAiLoading}
-                    onNavigate={props.onNavigate as any}
+                    onNavigate={props.onNavigate as (view: string, context?: unknown) => void}
                 />
             );
         case 'feed-manager':

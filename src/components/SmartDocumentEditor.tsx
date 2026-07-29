@@ -191,15 +191,6 @@ const SmartDocumentEditor: React.FC<SmartDocumentEditorProps> = ({ initialConten
 
         setIsAiThinking(true);
         try {
-            // Fase 4: central routing + context before legacy AI call (daily document edit gesture)
-            const ctx = AIBrain.buildContext({
-                source: 'smart-document-editor',
-                extra: { instruction, selectedLength: textToProcess.length }
-            });
-            await AIBrain.migrateLegacyAsk(`AI refine: ${instruction}`, ctx);
-
-            // Post-Fase 4: central prompt + generateWithCentralPrompt
-            const { prompt: refineP } = AIBrain.buildPrompt('refine-text', { text: textToProcess, instruction });
             const newText = await AIBrain.generateWithCentralPrompt('refine-text', { text: textToProcess, instruction }, aiSettings);
             // SECURITY: Sanitize AI output before insertion
             const safeText = sanitizeHTML(newText);
@@ -225,12 +216,6 @@ const SmartDocumentEditor: React.FC<SmartDocumentEditorProps> = ({ initialConten
         
         setIsAiThinking(true);
         try {
-            // Fase 4: FULL routing for daily document table gen (buildContext + migrateLegacyAsk before legacy)
-            const ctx = AIBrain.buildContext({ source: 'smart-document-editor', extra: { action: 'table', descLen: desc.length } });
-            await AIBrain.migrateLegacyAsk(`Generate document table: ${desc.substring(0, 60)}`, ctx);
-
-            // Post-Fase 4: central prompt for document-table
-            const { prompt: tableP } = AIBrain.buildPrompt('document-table', { desc });
             const tableHtml = await AIBrain.generateWithCentralPrompt('document-table', { desc, content: desc }, aiSettings);
             const safeTable = sanitizeHTML(tableHtml);
             

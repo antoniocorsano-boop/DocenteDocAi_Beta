@@ -79,7 +79,6 @@ export const M3Dialog: React.FC<M3DialogProps> = ({
   return (
     <Dialog
       open={isOpen}
-      onClose={backdropClickable ? onClose : undefined}
       maxWidth={MAX_WIDTH_MAP[maxWidth]}
       fullWidth
       fullScreen={mode === 'fullscreen' || (mobileFullscreen && isMobile)}

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import Fab from '@mui/material/Fab';
 import ButtonBase from '@mui/material/ButtonBase';
+import Button from '@mui/material/Button';
 import { PageWrapper, M3Surface } from './ui';
 import { JourneyProgressPanel, LevelUpCelebration } from './journey';
 import { useJourneyProgress } from '../hooks/useJourneyProgress';
@@ -73,13 +74,6 @@ function getTimedLabel(h: number): string {
 }
 
 // â”€â”€ Prompt contestuali per ora del giorno â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function getContextualPrompts(h: number): string[] {
-  if (h < 9)  return ['Cosa devo fare oggi?', 'Traccia di lezione rapida', 'Studenti con pendenze BES', 'Attività di avvio classe'];
-  if (h < 14) return ['Genera una domanda per l\'interrogazione', 'Suggerisci argomento prossima ora', 'Analizza andamento classe', 'Annota un comportamento'];
-  if (h < 18) return ['Genera una UDA completa', 'Scrivi la programmazione annuale', 'Compila un PDP', 'Prepara verbale consiglio'];
-  return ['Relazione finale di classe', 'Analisi rendimento quadrimestre', 'Certificazione competenze', 'Cosa programmo per domani?'];
-}
-
 // â”€â”€ Documenti burocratici â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DOC_ACTIONS: { label: string; icon: string; view: View; desc: string }[] = [
   { label: 'UDA',           icon: 'layers',            view: 'uda' as View,                        desc: 'Unità di Apprendimento' },
@@ -142,7 +136,6 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
   const timedActions     = useMemo(() => getTimedActions(hour), [hour]);
   const timedLabel       = useMemo(() => getTimedLabel(hour), [hour]);
-  const contextualPrompts = useMemo(() => getContextualPrompts(hour), [hour]);
   const deadlineAlerts   = useMemo(() => getDeadlineAlerts(now), [now]);
 
   const lessonsCount = Object.keys(lessons || {}).length;

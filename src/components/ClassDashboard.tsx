@@ -11,7 +11,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { View, Studente, Lezione, Valutazione, Slot, NavigationParams } from '../types';
 import { DAYS_OF_WEEK } from '../constants';
 import { calculatePerformance } from '../utils/evaluationUtils';
-import { SectionHeader, PageWrapper } from './ui';
+
 import Avatar from './ui/Avatar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';

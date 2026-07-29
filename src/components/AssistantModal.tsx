@@ -75,7 +75,7 @@ const AssistantModal: React.FC<AssistantModalProps> = ({
   open,
   onClose,
   mode = 'chat',
-  aiSettings,
+  aiSettings: _aiSettings,
   context,
   onOpenImageAnalysis,
   onOpenVideoAnalysis,

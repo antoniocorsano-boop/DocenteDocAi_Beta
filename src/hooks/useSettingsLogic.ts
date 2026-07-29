@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { messages } from '../messages';
@@ -83,7 +83,7 @@ export const useSettingsLogic = ({
         }
     }, [debouncedSettings, settings, onSaveSettings, showToast]);
 
-    const handleChange = useCallback((field: keyof TimetableSettings, value: any) => {
+    const handleChange = useCallback((field: keyof TimetableSettings, value: unknown) => {
         setLocalSettings(prev => ({ ...prev, [field]: value }));
     }, []);
 

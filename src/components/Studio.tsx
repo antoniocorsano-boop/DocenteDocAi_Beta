@@ -18,8 +18,8 @@ declare global {
   }
 }
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { KnowledgeBaseEntry, StudioProps, GeneratedQuiz, View, NavigationParams } from '../types'; 
+import React, { useState, useEffect, useMemo } from 'react';
+import { KnowledgeBaseEntry, StudioProps, GeneratedQuiz } from '../types'; 
 import HubShell from './ui/HubShell';
 // Fase 4 + Post-Fase 4: Use AIBrain centralized wrappers (internal smart routing + central prompt path)
 // Direct legacy import removed; routed via AIBrain.generate* + buildPrompt/generateWithCentralPrompt
@@ -180,7 +180,7 @@ export const Studio: React.FC<StudioProps> = ({ corpora, knowledgeBase, setKnowl
                 }
 
                 // Post-Fase 4: central prompt + generateWithCentralPrompt for image (daily studio gesture)
-                const { prompt: imgPrompt } = AIBrain.buildPrompt('studio-image', { prompt });
+                const { prompt: _imgPrompt } = AIBrain.buildPrompt('studio-image', { prompt });
                 const { data, mimeType } = await AIBrain.generateWithCentralPrompt('studio-image', { prompt }, aiSettings);
                 
                 // Check for duplicates created in the last 2 seconds to prevent double-save in StrictMode
@@ -210,15 +210,9 @@ export const Studio: React.FC<StudioProps> = ({ corpora, knowledgeBase, setKnowl
                 return;
 
             } else if (task === 'quiz') {
-                // Post-Fase 4: central prompt builder + gateway for daily quiz gesture
-                try {
-                    const ctx = AIBrain.buildContext({ source: 'studio-quiz', extra: { task, fileCount: selectedFileIds.length } });
-                    await AIBrain.migrateLegacyAsk(`Generate quiz: ${action?.title || task}`, ctx);
-                } catch {}
-
-                const { prompt: quizPrompt } = AIBrain.buildPrompt('quiz', { topic: (extraConfig as any)?.topic || 'quiz', numQuestions: (extraConfig as any)?.numQuestions, difficulty: (extraConfig as any)?.difficulty });
-                const quiz = await AIBrain.generateWithCentralPrompt('quiz', { topic: (extraConfig as any)?.topic || 'quiz', numQuestions: (extraConfig as any)?.numQuestions, difficulty: (extraConfig as any)?.difficulty, corpus: contextContent }, aiSettings);
-                setGeneratedQuiz(quiz as any);
+                const config = extraConfig as Record<string, unknown>;
+                const quiz = await AIBrain.generateWithCentralPrompt('quiz', { topic: (config?.topic as string) || 'quiz', numQuestions: config?.numQuestions as number, difficulty: config?.difficulty as string, corpus: contextContent }, aiSettings);
+                setGeneratedQuiz(quiz as GeneratedQuiz);
                 setIsLoading(false);
                 if (onAiProcessing) onAiProcessing(false);
                 setIsTestGeneratorOpen(false);
@@ -231,7 +225,7 @@ export const Studio: React.FC<StudioProps> = ({ corpora, knowledgeBase, setKnowl
                 }
                 title = prompt;
                 // Post-Fase 4: central prompt + generateWithCentralPrompt (prompt centralization)
-                const { prompt: docPrompt } = AIBrain.buildPrompt('document', { prompt: enhancedPrompt || prompt, corpus: contextContent });
+                const { prompt: _docPrompt } = AIBrain.buildPrompt('document', { prompt: enhancedPrompt || prompt, corpus: contextContent });
                 htmlContent = await AIBrain.generateWithCentralPrompt('document', { prompt: enhancedPrompt || prompt, corpus: contextContent }, aiSettings);
                 setIsDocumentGeneratorOpen(false);
             } else {
