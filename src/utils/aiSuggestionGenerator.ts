@@ -24,18 +24,6 @@ export const generateAiSuggestions = async (appState: AppState): Promise<AiSugge
             return cached;
         }
 
-        // Generate suggestions using centralized AI service
-        // Post-Fase 4: central prompt path (buildPrompt + generateWithCentralPrompt)
-        const ctx = AIBrain.buildContext({ source: 'ai-suggestion-generator', extra: { students: appState.students?.length || 0 } });
-        await AIBrain.migrateLegacyAsk('Generate proactive AI suggestions', ctx);
-
-        const { prompt: proactiveP } = AIBrain.buildPrompt('proactive-suggestions', {
-          studentContext: (appState.students || []).map((s: any) => s.cognome || s.nome || ''),
-          studentsLength: (appState.students || []).length,
-          evaluations: appState.evaluations || [],
-          competencyEvals: appState.competencyEvals || [],
-          udas: appState.uda || []
-        });
         const prioritizedSuggestions = await AIBrain.generateWithCentralPrompt('proactive-suggestions', {
           studentContext: (appState.students || []).map((s: any) => s.cognome || s.nome || ''),
           studentsLength: (appState.students || []).length,

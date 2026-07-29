@@ -210,13 +210,6 @@ export const Studio: React.FC<StudioProps> = ({ corpora, knowledgeBase, setKnowl
                 return;
 
             } else if (task === 'quiz') {
-                // Post-Fase 4: central prompt builder + gateway for daily quiz gesture
-                try {
-                    const ctx = AIBrain.buildContext({ source: 'studio-quiz', extra: { task, fileCount: selectedFileIds.length } });
-                    await AIBrain.migrateLegacyAsk(`Generate quiz: ${action?.title || task}`, ctx);
-                } catch {}
-
-                const { prompt: quizPrompt } = AIBrain.buildPrompt('quiz', { topic: (extraConfig as any)?.topic || 'quiz', numQuestions: (extraConfig as any)?.numQuestions, difficulty: (extraConfig as any)?.difficulty });
                 const quiz = await AIBrain.generateWithCentralPrompt('quiz', { topic: (extraConfig as any)?.topic || 'quiz', numQuestions: (extraConfig as any)?.numQuestions, difficulty: (extraConfig as any)?.difficulty, corpus: contextContent }, aiSettings);
                 setGeneratedQuiz(quiz as any);
                 setIsLoading(false);

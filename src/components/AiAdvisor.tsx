@@ -65,18 +65,7 @@ const AiAdvisor: React.FC<AiAdvisorProps> = ({ students, evaluations, competency
             setAdvisorStatus(requestType === 'recupero' ? "Elaborazione strategie di recupero..." : "Elaborazione strategie di potenziamento...");
             await new Promise(r => setTimeout(r, 500)); // UX delay
 
-            // Post-Fase 4: central prompt builder + gateway for daily pedagogical advice gesture
-            const ctx = AIBrain.buildContext({
-                class: 'ai-advisor',
-                students,
-                evaluations: evaluations as any[],
-                source: 'ai-advisor',
-                extra: { requestType, selectedStudentId }
-            });
-            await AIBrain.migrateLegacyAsk(`Genera consiglio pedagogico per ${requestType}`, ctx);
-
-            // POST-Fase 4 rollout
-            const { prompt: pedP } = AIBrain.buildPrompt('pedagogical-advice', { type: requestType, ... (studentData as any) });
+            // POST-Fase 4 rollout: generate pedagogical advice via central prompt builder
             const result = await AIBrain.generateWithCentralPrompt('pedagogical-advice', { type: requestType, ... (studentData as any) }, aiSettings) as any;
             setAdvice((result?.suggerimenti || []) as Advice[]);
         } catch (err) {

@@ -272,8 +272,6 @@ const ReportisticaHub: React.FC<ReportisticaHubProps> = (props) => {
                     summaryPrompt = brainRes.content.slice(0, 180);
                     setAiSummaryAIBrainFocus(summaryPrompt);
                 }
-                // Also call migrate path + unified recs for deeper consolidation
-                await AIBrain.migrateLegacyAsk(`Genera riepilogo AI classe ${selectedClass}`, ctx);
                 AIBrain.getUnifiedRecommendations(ctx);
             } catch {}
 

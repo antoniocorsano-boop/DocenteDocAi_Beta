@@ -454,18 +454,14 @@ ${String(data.text || '')}`;
    * This is the new preferred internal path (smart routing expansion).
    * Falls back to legacy delegation only inside gateway.
    */
-  async generateWithCentralPrompt(task: string, data: Record<string, unknown>, aiSettings?: any): Promise<any> {
-    const { prompt, metadata } = this.buildPrompt(task, data);
-    const ctx = this.buildContext({ source: `central-${task}`, extra: metadata });
+   async generateWithCentralPrompt(task: string, data: Record<string, unknown>, aiSettings?: any): Promise<any> {
+     const { prompt, metadata } = this.buildPrompt(task, data);
 
-    // POST-FASE 4 usage tracking (central path)
-    usage.generateWithCentralPromptCalls++;
-    trackCentralUsage(task);
+     // POST-FASE 4 usage tracking (central path)
+     usage.generateWithCentralPromptCalls++;
+     trackCentralUsage(task);
 
-    await this.migrateLegacyAsk(`Central prompt generation: ${task}`, ctx);
-
-    // Internal smart routing path (post-Fase 4): attempt to use central prompt directly
-    // (keeps legacy as safe fallback for now)
+     // Internal smart routing path (post-Fase 4): delegate to legacy service with central prompt
     try {
       // For now we still delegate to legacy implementation but with central prompt injected where possible
       // In future iterations we can replace the legacy call body entirely.

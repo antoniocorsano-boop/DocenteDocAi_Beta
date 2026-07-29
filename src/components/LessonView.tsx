@@ -68,14 +68,7 @@ const LessonView: React.FC<LessonViewProps> = ({ lesson, onClose, onStartClassro
     if (!aiSettings) return;
     setIsEnriching(true);
     try {
-        // Post-Fase 4: central prompt path for lesson enrichment (daily teacher gesture)
-        const { prompt: enrichP } = AIBrain.buildPrompt('lesson-enrich', { lesson });
-        const ctx = AIBrain.buildContext({ source: 'lesson-view', extra: { lessonId: lesson.id, action: 'enrich' } });
-        await AIBrain.migrateLegacyAsk(`Enrich lesson: ${lesson.contenuto}`, ctx);
-
         const enrichment = await AIBrain.generateWithCentralPrompt('lesson-enrich', { lesson }, aiSettings);
-
-        {/* AIBrain (Post-Fase 4): LessonView — buildPrompt('lesson-enrich') + generateWithCentralPrompt + buildContext + migrateLegacyAsk (daily enrich gesture) */}
         if (enrichment) {
             onUpdateLesson({
                 ...lesson,
