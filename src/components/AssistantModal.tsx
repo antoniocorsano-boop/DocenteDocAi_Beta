@@ -428,18 +428,21 @@ const AssistantModal: React.FC<AssistantModalProps> = ({
                 label: 'Analisi Immagine',
                 description: 'Carica e analizza immagini con AI',
                 onAction: onOpenImageAnalysis,
-              {
-                key: 'video',
-                icon: 'video_search',
-                label: 'Analisi Video',
-                description: 'Analizza contenuti video con AI',
-                onAction: onOpenVideoAnalysis,
-              {
-                key: 'circular',
-                icon: 'description',
-                label: 'Analisi Circolare',
-                description: 'Estrai dati da circolari scolastiche',
-                onAction: onOpenCircularAnalysis,
+                },
+                {
+                  key: 'video',
+                  icon: 'video_search',
+                  label: 'Analisi Video',
+                  description: 'Analizza contenuti video con AI',
+                  onAction: onOpenVideoAnalysis,
+                },
+                {
+                  key: 'circular',
+                  icon: 'description',
+                  label: 'Analisi Circolare',
+                  description: 'Estrai dati da circolari scolastiche',
+                  onAction: onOpenCircularAnalysis,
+                },
             ].map(tool => (
               <ButtonBase
                 key={tool.key}

@@ -178,14 +178,14 @@ const AnnualPlanningWizard: React.FC<AnnualPlanningWizardProps> = ({
             });
             await AIBrain.migrateLegacyAsk(`Genera piano UDA da KB per ${selectedSubject}`, ctx);
 
-            // Post-Fase 4: central prompt + generateWithCentralPrompt for annual plan from KB
-            const ctx = AIBrain.buildContext({
+// POST-Fase 4 rollout: generate plan via central prompt builder
+            const planCtx = AIBrain.buildContext({
                 class: selectedClass,
                 students,
                 source: 'class-planning-wizard',
                 extra: { step: 'sequence', kbCount: selectedKbFiles.length }
             });
-            await AIBrain.migrateLegacyAsk(`Genera piano UDA da KB per ${selectedSubject}`, ctx);
+            await AIBrain.migrateLegacyAsk(`Genera piano UDA da KB per ${selectedSubject}`, planCtx);
 
             const { prompt: planP } = AIBrain.buildPrompt('suggest-annual-plan', { kb: kbContent, subject: selectedSubject, classe: selectedClass });
             const plan = await AIBrain.generateWithCentralPrompt('suggest-annual-plan', { kb: kbContent, subject: selectedSubject, classe: selectedClass }, aiSettings);
