@@ -1,0 +1,6 @@
+interface:
+  display_name: "DocenteDocAi Beta"
+  short_description: "Repo-specific patterns and workflows for DocenteDocAi_Beta"
+  default_prompt: "Use the DocenteDocAi_Beta repo skill to follow existing architecture, testing, and workflow conventions."
+policy:
+  allow_implicit_invocation: true
