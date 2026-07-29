@@ -1,10 +1,8 @@
 
 import { DEFAULT_TIMETABLE_SETTINGS } from '../constants';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const google: any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const gapi: any;
+declare const google: Record<string, unknown>;
+declare const gapi: Record<string, unknown>;
 
 interface TokenClient {
     requestAccessToken: (options: { prompt?: string; scope?: string }) => void;

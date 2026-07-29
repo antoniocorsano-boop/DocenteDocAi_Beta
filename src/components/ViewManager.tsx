@@ -279,13 +279,12 @@ const ViewManager: React.FC<ViewManagerProps> = ({ view, viewContext, appState, 
                         
                         switch (view) {
                             case 'timetable':
-                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 componentProps = { 
                                     slots, 
                                     lessons, 
                                     settings, 
                                     onEditSlot: handleEditSlot, 
-                                    onShowSlotActions: (slot: Record<string, unknown>, lesson: Record<string, unknown>) => { setActiveSlotKey?.((slot as any).giorno + '-' + (slot as any).ora); setLessonViewContext?.(lesson as unknown as Lezione); }, 
+                                    onShowSlotActions: (slot: Record<string, unknown>, lesson: Record<string, unknown>) => { if (setActiveSlotKey) setActiveSlotKey(String(slot.giorno) + '-' + String(slot.ora)); setLessonViewContext?.(lesson as unknown as Lezione); }, 
                                     showGuidanceTips: settings.showGuidanceTips,
                                     onNavigate: handleNavigate 
                                 };
@@ -372,16 +371,15 @@ const ViewManager: React.FC<ViewManagerProps> = ({ view, viewContext, appState, 
                                 };
                                 break;
                             case 'orientamento':
-                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 componentProps = { 
                                     students, 
                                     activities: orientamentoActivities, 
                                     ePortfolioEntries, 
                                     studentStates: studentOrientamentoStates, 
                                     userClasses: settings.classi, 
-                                    onSaveActivity: (a: Record<string, unknown>) => setOrientamentoActivities(prev => [...(Array.isArray(prev) ? prev.filter(act => (act as any).id !== (a as any).id) : []), a as unknown as OrientamentoActivity]), 
-                                    onSaveEPortfolio: (e: Record<string, unknown>) => setEPortfolioEntries(prev => [...(Array.isArray(prev) ? prev.filter(ent => (ent as any).id !== (e as any).id) : []), e as unknown as EPortfolioEntry]), 
-                                    onUpdateStudentState: (s: Record<string, unknown>) => setStudentOrientamentoStates(prev => ({ ...prev, [(s as any).studenteId]: s })), 
+                                    onSaveActivity: (a: Record<string, unknown>) => setOrientamentoActivities(prev => [...(Array.isArray(prev) ? prev.filter(act => (act as Record<string, unknown>).id !== a.id) : []), a as unknown as OrientamentoActivity]), 
+                                    onSaveEPortfolio: (e: Record<string, unknown>) => setEPortfolioEntries(prev => [...(Array.isArray(prev) ? prev.filter(ent => (ent as Record<string, unknown>).id !== e.id) : []), e as unknown as EPortfolioEntry]), 
+                                    onUpdateStudentState: (s: Record<string, unknown>) => setStudentOrientamentoStates(prev => ({ ...prev, [String(s.studenteId)]: s })), 
                                     showToast,
                                     onNavigate: handleNavigate 
                                 };

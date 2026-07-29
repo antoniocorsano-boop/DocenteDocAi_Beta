@@ -5,7 +5,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import ButtonBase from '@mui/material/ButtonBase';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -24,7 +23,7 @@ export interface ToolItem {
 
 interface ToolsGridProps {
   items: ToolItem[];
-  onNavigate?: (view: View, context?: any) => void;
+  onNavigate?: (view: View, context?: unknown) => void;
   columns?: { xs?: number; sm?: number; md?: number };
 }
 

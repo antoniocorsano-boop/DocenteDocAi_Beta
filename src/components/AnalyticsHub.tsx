@@ -16,13 +16,15 @@ import { useAcademicStore } from '../stores/useAcademicStore';
 import { AIBrain } from '../ai/brain/AIBrain';
 
 import InfoCard from './ui/InfoCard';
-import SectionHeader from './ui/SectionHeader';
+
 import EmptyState from './ui/EmptyState';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 import type { Studente, Valutazione, TimetableSettings, View, NavigationParams } from '../types';
 import HubShell from './ui/HubShell';
@@ -67,33 +69,7 @@ const AnalyticsHub: React.FC<AnalyticsHubProps> = ({
     // Central AI pipeline (legacy path still used for now)
     const aiPipeline = useAIPipeline(selectedClass, filteredStudents, filteredEvals);
 
-    // Migration Fase 2 + Fase 3 (sequenza): Use central buildContext + analyzeClass via Post-Fase 4 central prompt (memoized + async handling)
-    const [aiBrainAnalysis, setAiBrainAnalysis] = useState<any>(null);
-    useEffect(() => {
-        if (!selectedClass || filteredStudents.length === 0) {
-            setAiBrainAnalysis(null);
-            return;
-        }
-        (async () => {
-            try {
-                const ctx = AIBrain.buildContext({
-                    class: selectedClass,
-                    students: filteredStudents,
-                    evaluations: filteredEvals,
-                    source: 'analytics-hub',
-                });
-                const analysis = await AIBrain.generateWithCentralPrompt('analyze-class', { 
-                  class: selectedClass, 
-                  students: filteredStudents, 
-                  studentsLength: filteredStudents.length,
-                  evaluations: filteredEvals 
-                }, {} as any);
-                setAiBrainAnalysis(analysis);
-            } catch {
-                setAiBrainAnalysis(null);
-            }
-        })();
-    }, [selectedClass, filteredStudents, filteredEvals]);
+
 
     // Fase 3: Memoized unified recommendation for UI (avoids IIFE in render)
     const analyticsUnifiedRec = useMemo(() => {

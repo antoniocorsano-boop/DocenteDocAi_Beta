@@ -6,7 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { RegisterEntry, RegisterViewProps, View } from '../types';
+import { RegisterEntry, RegisterViewProps } from '../types';
 import InfoCard from './ui/InfoCard';
 import ContextualAskAI from './ui/ContextualAskAI';
 

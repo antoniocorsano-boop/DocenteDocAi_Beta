@@ -12,6 +12,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { SmartChat } from '../chat/SmartChat';
 import { useSettingsStore } from '../../stores/useSettingsStore';
+import type { AiSettings } from '../../types';
 
 interface AssistantViewProps {
   initialMode?: 'chat' | 'docs' | 'tools';
@@ -19,9 +20,9 @@ interface AssistantViewProps {
   context?: Record<string, unknown>;
 }
 
-const AssistantView: React.FC<AssistantViewProps> = ({ initialMode, context }) => {
+const AssistantView: React.FC<AssistantViewProps> = ({ initialMode: _initialMode, context }) => {
   const aiSettings = useSettingsStore((s) => s.aiSettings);
-  const userPlan = (aiSettings as any)?.plan === 'pro' ? 'pro' : 'free';
+  const userPlan = (aiSettings as AiSettings)?.plan === 'pro' ? 'pro' : 'free';
 
   return (
     <Box

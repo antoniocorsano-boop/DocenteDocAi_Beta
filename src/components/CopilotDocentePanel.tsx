@@ -97,7 +97,7 @@ export default function CopilotDocentePanel({ suggestions, classHealth, snapshot
   const capabilityLevel = useTeacherModelStore((s) => s.capabilityLevel);
 
   // Migration step A: Use the single AIBrain for copilot actions
-  const primaryAction = React.useMemo(() => AIBrain.getCopilotPrimaryAction(), []);
+  const _primaryAction = React.useMemo(() => AIBrain.getCopilotPrimaryAction(), []);
 
   // Fase 3 (sequenza): Use central buildContext + unified recommendations (primary + secondaries)
   const unifiedRecs = React.useMemo(() => {

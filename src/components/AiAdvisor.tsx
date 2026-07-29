@@ -45,7 +45,7 @@ const AiAdvisor: React.FC<AiAdvisorProps> = ({ students, evaluations, competency
         setError('');
 
         try {
-            let studentData: unknown;
+            let studentData: Record<string, unknown>;
             if (selectedStudentId === 'all') {
                 studentData = {
                     nome: "Tutta la classe",
@@ -66,7 +66,7 @@ const AiAdvisor: React.FC<AiAdvisorProps> = ({ students, evaluations, competency
             await new Promise(r => setTimeout(r, 500)); // UX delay
 
             // POST-Fase 4 rollout: generate pedagogical advice via central prompt builder
-            const result = await AIBrain.generateWithCentralPrompt('pedagogical-advice', { type: requestType, ... (studentData as any) }, aiSettings) as any;
+            const result = await AIBrain.generateWithCentralPrompt('pedagogical-advice', { type: requestType, ...studentData }, aiSettings) as { suggerimenti?: Advice[] };
             setAdvice((result?.suggerimenti || []) as Advice[]);
         } catch (err) {
             const errorMsg = err instanceof Error ? err.message : "Si è verificato un errore durante la generazione del consiglio.";

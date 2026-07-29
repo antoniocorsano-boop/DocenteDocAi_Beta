@@ -46,14 +46,17 @@ import * as LegacyAIService from '../../services/aiService';
 
 // POST-PHASE 4: Central prompt builder imports (prompt centralization rollout)
 import * as Prompts from '../../services/prompts'; // central prompts (planning, analysis, shared, etc.)
-import { getGoogleAIClient } from '../../services/aiClient'; // for future internal routing if needed
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Type-safe cast helper (replaces `as any` for function params / type assertions)
+function cast<T>(v: unknown): T { return v as T; }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Internal simple cache (Fase 3)
-const cache = new Map<string, { value: any; ts: number }>();
+const cache = new Map<string, { value: unknown; ts: number }>();
 const CACHE_TTL = 30_000; // 30s
 
-function getCacheKey(prefix: string, input: any): string {
+function getCacheKey(prefix: string, input: unknown): string {
   return `${prefix}:${JSON.stringify(input).slice(0, 180)}`;
 }
 
@@ -64,7 +67,7 @@ function getFromCache<T>(key: string): T | null {
   return null;
 }
 
-function setCache(key: string, value: any) {
+function setCache(key: string, value: unknown) {
   cache.set(key, { value, ts: Date.now() });
 }
 
@@ -128,7 +131,7 @@ export const AIBrain = {
       let resultContent = '';
       let confidence = 0.7;
 
-      if (options.mode === 'fast' || (options.context as any)?.quick) {
+      if (options.mode === 'fast' || !!options.context?.quick) {
         // Fast path → copilotBrain snapshot style
         const primary = getCopilotPrimaryAction();
         resultContent = primary?.label || primary?.title || 'Suggerimento rapido disponibile';
@@ -152,7 +155,7 @@ export const AIBrain = {
 
       setCache(cacheKey, finalResult);
       return finalResult;
-    } catch (err) {
+    } catch (_err) {
       const fallback: AskResult = {
         content: 'Errore durante la richiesta AI. Riprova più tardi.',
         confidence: 0,
@@ -308,8 +311,8 @@ export const AIBrain = {
    */
   buildContext(input: {
     class?: string;
-    students?: any[];
-    evaluations?: any[];
+    students?: unknown[];
+    evaluations?: unknown[];
     source?: string;
     extra?: Record<string, unknown>;
   }): Record<string, unknown> {
@@ -340,7 +343,7 @@ export const AIBrain = {
     AIBrain.getUnifiedRecommendations(context),
 
   /** Fase 4 alias for central context */
-  buildAIContext: (students?: any[], evaluations?: any[], className?: string) =>
+  buildAIContext: (students?: unknown[], evaluations?: unknown[], className?: string) =>
     AIBrain.buildContext({ students, evaluations, class: className, source: 'legacy-alias' }),
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -364,82 +367,73 @@ export const AIBrain = {
 
     switch (task) {
       case 'situazione-partenza':
-        prompt = Prompts.getSituazionePartenzaPrompt(data as any);
+        prompt = Prompts.getSituazionePartenzaPrompt(cast(data));
         break;
       case 'class-planning':
-        prompt = Prompts.getClassPlanningPrompt(data as any);
+        prompt = Prompts.getClassPlanningPrompt(cast(data));
         break;
       case 'annual-plan':
         prompt = Prompts.getAnnualPlanPrompt(String(data.kb || ''), String(data.subject || ''), String(data.class || ''));
         break;
       case 'lesson-sequence':
-        prompt = Prompts.getLessonSequencePrompt(data.uda as any[], String(data.classe || ''), String(data.kb || ''));
+        prompt = Prompts.getLessonSequencePrompt(cast(data.uda), String(data.classe || ''), String(data.kb || ''));
         break;
       case 'lesson-from-idea':
         prompt = Prompts.getLessonFromIdeaPrompt(String(data.ideaText || ''), String(data.kbContent || ''));
         break;
       case 'inclusivity-adaptations':
-        prompt = Prompts.getInclusivityAdaptationsPrompt(data as any, (data.piani as any[]) || []);
+        prompt = Prompts.getInclusivityAdaptationsPrompt(cast(data), (cast(data.piani) || []));
         break;
       case 'pedagogical-analysis':
-        prompt = Prompts.getPedagogicalAnalysisPrompt(data as any);
+        prompt = Prompts.getPedagogicalAnalysisPrompt(cast(data));
         break;
       case 'proactive-suggestions':
         prompt = Prompts.getProactiveSuggestionsPrompt(
-          (data.studentContext as string[]) || [],
+          (cast(data.studentContext) || []),
           Number(data.studentsLength || 0),
-          (data.evaluations as any[]) || [],
-          (data.competencyEvals as any[]) || [],
-          (data.udas as any[]) || []
+          (cast(data.evaluations) || []),
+          (cast(data.competencyEvals) || []),
+          (cast(data.udas) || [])
         );
         break;
       case 'competency-note':
-        prompt = Prompts.getCompetencyNotePrompt(data.s as any, data.c as any, data.l as any);
+        prompt = Prompts.getCompetencyNotePrompt(cast(data.s), cast(data.c), cast(data.l));
         break;
       case 'pip-suggestion':
-        prompt = Prompts.getPIPSuggestionPrompt(data.s as any, (data.evals as any[]) || [], (data.cEvals as any[]) || [], (data.comps as any[]) || [], String(data.sec || ''));
+        prompt = Prompts.getPIPSuggestionPrompt(cast(data.s), (cast(data.evals) || []), (cast(data.cEvals) || []), (cast(data.comps) || []), String(data.sec || ''));
         break;
       case 'uda-report':
       case 'markdown-report':
-        prompt = (Prompts as any).getMarkdownReportPrompt ? (Prompts as any).getMarkdownReportPrompt(String(data.type || 'uda-report'), data as any) : `Genera report per: ${data.prompt || ''}`;
+        prompt = Prompts.getMarkdownReportPrompt ? Prompts.getMarkdownReportPrompt(String(data.type || 'uda-report'), cast(data)) : `Genera report per: ${data.prompt || ''}`;
         break;
       case 'refine-text':
-        prompt = (Prompts as any).getRefineTextPrompt ? (Prompts as any).getRefineTextPrompt(String(data.text || ''), String(data.instruction || '')) : `Raffina: ${data.text}`;
+        prompt = Prompts.getRefineTextPrompt ? Prompts.getRefineTextPrompt(String(data.text || ''), String(data.instruction || '')) : `Raffina: ${data.text}`;
         break;
       case 'document-table':
-        prompt = (Prompts as any).getDocumentTablePrompt ? (Prompts as any).getDocumentTablePrompt(String(data.content || '')) : `Genera tabella da: ${data.content}`;
+        prompt = Prompts.getDocumentTablePrompt ? Prompts.getDocumentTablePrompt(String(data.content || '')) : `Genera tabella da: ${data.content}`;
         break;
       case 'technical-document':
-        prompt = (Prompts as any).getTechnicalDocumentContentPrompt ? (Prompts as any).getTechnicalDocumentContentPrompt() : `Genera documento tecnico.`;
+        prompt = Prompts.getTechnicalDocumentContentPrompt ? Prompts.getTechnicalDocumentContentPrompt() : `Genera documento tecnico.`;
         break;
       case 'academic-essay':
-        prompt = (Prompts as any).getAcademicEssayContentPrompt ? (Prompts as any).getAcademicEssayContentPrompt() : `Genera saggio accademico.`;
+        prompt = Prompts.getAcademicEssayContentPrompt ? Prompts.getAcademicEssayContentPrompt() : `Genera saggio accademico.`;
         break;
       case 'pedagogical-advice':
-        prompt = (Prompts as any).getAIPedagogicalAdvicePrompt ? (Prompts as any).getAIPedagogicalAdvicePrompt(data as any, String(data.type || 'general')) : `Consulenza pedagogica: ${data.type}`;
-        break;
-      case 'lesson-from-idea':
-        prompt = Prompts.getLessonFromIdeaPrompt ? Prompts.getLessonFromIdeaPrompt(String(data.ideaText || ''), String(data.kbContent || '')) : `Trasforma idea in lezione: ${data.ideaText}`;
-        break;
-      case 'inclusivity-adaptations':
-        prompt = Prompts.getInclusivityAdaptationsPrompt ? Prompts.getInclusivityAdaptationsPrompt(data as any, (data.piani as any[]) || []) : `Adattamenti inclusivi per: ${JSON.stringify(data)}`;
+        prompt = Prompts.getAIPedagogicalAdvicePrompt ? Prompts.getAIPedagogicalAdvicePrompt(cast(data), String(data.type || 'general')) : `Consulenza pedagogica: ${data.type}`;
         break;
       case 'circular-analysis':
-        prompt = (Prompts as any).getCircularAnalysisPrompt ? (Prompts as any).getCircularAnalysisPrompt(String(data.fileContent || ''), new Date().toISOString()) : `Analizza circolare: ${data.fileContent?.substring(0,100)}`;
+        prompt = Prompts.getCircularAnalysisPrompt ? Prompts.getCircularAnalysisPrompt(String(data.fileContent || ''), new Date().toISOString()) : `Analizza circolare: ${data.fileContent?.substring(0,100)}`;
         break;
-      case 'pip-suggestion':
-        prompt = Prompts.getPIPSuggestionPrompt ? Prompts.getPIPSuggestionPrompt(data.s as any, (data.evals as any[]) || [], (data.cEvals as any[]) || [], (data.comps as any[]) || [], String(data.sec || '')) : `Suggerimento PIP per studente`;
-        break;
-            case 'refactor-programmazione':
+      case 'refactor-programmazione':
         prompt = `Ristruttura il seguente documento di programmazione in formato standardizzato:
 
 ${String(data.text || '')}`;
         break;
       case 'event-extraction':
-        prompt = (Prompts as any).getEventExtractionPrompt ? (Prompts as any).getEventExtractionPrompt(String(data.text || '')) : `Estrai evento da: ${data.text}`;
+        prompt = Prompts.getEventExtractionPrompt ? Prompts.getEventExtractionPrompt(String(data.text || '')) : `Estrai evento da: ${data.text}`;
         break;
       case 'lesson-enrich':
-        prompt = (Prompts as any).getLessonEnrichPrompt ? (Prompts as any).getLessonEnrichPrompt(data.lesson || data) : `Arricchisci la lezione: ${JSON.stringify(data)}`;
+        prompt = Prompts.getLessonEnrichPrompt ? Prompts.getLessonEnrichPrompt(cast(data.lesson || data)) : `Arricchisci la lezione: ${JSON.stringify(data)}`;
         break;
       default:
         // fallback to a generic contextual prompt
@@ -454,8 +448,8 @@ ${String(data.text || '')}`;
    * This is the new preferred internal path (smart routing expansion).
    * Falls back to legacy delegation only inside gateway.
    */
-   async generateWithCentralPrompt(task: string, data: Record<string, unknown>, aiSettings?: any): Promise<any> {
-     const { prompt, metadata } = this.buildPrompt(task, data);
+   async generateWithCentralPrompt(task: string, data: Record<string, unknown>, aiSettings?: unknown): Promise<unknown> {
+      const { prompt, metadata: _metadata } = this.buildPrompt(task, data);
 
      // POST-FASE 4 usage tracking (central path)
      usage.generateWithCentralPromptCalls++;
@@ -466,13 +460,13 @@ ${String(data.text || '')}`;
       // For now we still delegate to legacy implementation but with central prompt injected where possible
       // In future iterations we can replace the legacy call body entirely.
       if (task === 'situazione-partenza') {
-        return await LegacyAIService.generateSituazionePartenza(aiSettings || {}, data as any);
+        return await LegacyAIService.generateSituazionePartenza(aiSettings || {}, data);
       }
       if (task === 'class-planning') {
-        return await LegacyAIService.generateClassPlanningDocument(aiSettings || {}, data as any);
+        return await LegacyAIService.generateClassPlanningDocument(aiSettings || {}, data);
       }
       if (task === 'circular-analysis') {
-        return await LegacyAIService.analyzeCircularDocument(aiSettings || {}, data as any);
+        return await LegacyAIService.analyzeCircularDocument(aiSettings || {}, data);
       }
       if (task === 'markdown-report') {
         return await LegacyAIService.generateMarkdownReport(aiSettings || {}, String(data.type || 'class_summary'), data);
@@ -481,13 +475,13 @@ ${String(data.text || '')}`;
         return await LegacyAIService.generateLessonFromIdea(aiSettings || {}, String(data.ideaText || ''), String(data.targetClass || ''), String(data.kbContent || ''));
       }
       if (task === 'inclusivity-adaptations') {
-        return await LegacyAIService.generateInclusivityAdaptations(aiSettings || {}, data as any, (data.piani as any[]) || []);
+        return await LegacyAIService.generateInclusivityAdaptations(aiSettings || {}, data, (cast(data.piani) || []));
       }
       if (task === 'pedagogical-advice') {
-        return await LegacyAIService.getAIPedagogicalAdvice(aiSettings || {}, data as any, String(data.type || 'general'), (data.comps as any[]) || []);
+        return await LegacyAIService.getAIPedagogicalAdvice(aiSettings || {}, data, String(data.type || 'general'), (cast(data.comps) || []));
       }
       if (task === 'pip-suggestion') {
-        return await LegacyAIService.getPIPSuggestion(aiSettings || {}, data.s as any, (data.evals as any[]) || [], (data.cEvals as any[]) || [], (data.comps as any[]) || [], String(data.sec || ''));
+        return await LegacyAIService.getPIPSuggestion(aiSettings || {}, cast(data.s), (cast(data.evals) || []), (cast(data.cEvals) || []), (cast(data.comps) || []), String(data.sec || ''));
       }
       if (task === 'refactor-programmazione') {
         return await LegacyAIService.refactorProgrammazione(aiSettings || {}, String(data.text || ''));
@@ -496,7 +490,7 @@ ${String(data.text || '')}`;
         return await LegacyAIService.parseCurriculumFromText(aiSettings || {}, String(data.text || ''), String(data.subject || ''), String(data.gradeLevel || ''));
       }
       if (task === 'validate-uda') {
-        return await LegacyAIService.validateUdaVerticalCurriculum(aiSettings || {}, data.uda as any, (data.kb as any[]) || []);
+        return await LegacyAIService.validateUdaVerticalCurriculum(aiSettings || {}, cast(data.uda), (cast(data.kb) || []));
       }
       if (task === 'suggest-annual-plan') {
         return await LegacyAIService.suggestAnnualPlan(aiSettings || {}, String(data.kb || ''), String(data.subject || ''), String(data.classe || ''));
@@ -508,7 +502,7 @@ ${String(data.text || '')}`;
         return await LegacyAIService.generateAnswerFromCorpus(aiSettings || {}, String(data.corpus || ''), String(data.query || ''));
       }
       if (task === 'lesson-pedagogy') {
-        return await LegacyAIService.analyzeLessonPedagogy(aiSettings || {}, data as any);
+        return await LegacyAIService.analyzeLessonPedagogy(aiSettings || {}, data);
       }
       if (task === 'studio-image') {
         return await LegacyAIService.generateImageFromPrompt(aiSettings || {}, String(data.prompt || ''));
@@ -520,7 +514,7 @@ ${String(data.text || '')}`;
         return await LegacyAIService.generateDocumentTable(aiSettings || {}, String(data.desc || ''));
       }
       if (task === 'proactive-suggestions') {
-        return await LegacyAIService.getProactiveSuggestions(aiSettings || {}, data as any);
+        return await LegacyAIService.getProactiveSuggestions(aiSettings || {}, data);
       }
       if (task === 'event-extraction') {
         return await LegacyAIService.extractEventFromText(aiSettings || {}, String(data.text || ''));
@@ -531,7 +525,7 @@ ${String(data.text || '')}`;
       // default generic
       usage.fallbackUsed++;
       return await LegacyAIService.generateContent(prompt, { temperature: 0.7, maxTokens: 1500 });
-    } catch (e) {
+    } catch (_e) {
       // fallback
       usage.fallbackUsed++;
       trackCentralUsage(task, true);
@@ -548,7 +542,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateStudioOutput (Studio daily gesture)
    */
-  async generateStudioOutput(aiSettings: any, corpus: string, task: string): Promise<string> {
+  async generateStudioOutput(aiSettings: unknown, corpus: string, task: string): Promise<string> {
     const ctx = this.buildContext({ source: 'studio-output', extra: { task } });
     await this.migrateLegacyAsk(`Studio output: ${task}`, ctx);
     return LegacyAIService.generateStudioOutput(aiSettings, corpus, task);
@@ -557,7 +551,7 @@ ${String(data.text || '')}`;
   /** 
    * Fase 4: Centralized generateFormattedDocument
    */
-  async generateFormattedDocument(aiSettings: any, corpus: string, prompt: string): Promise<string> {
+  async generateFormattedDocument(aiSettings: unknown, corpus: string, prompt: string): Promise<string> {
     const ctx = this.buildContext({ source: 'studio-document', extra: { promptLen: prompt.length } });
     await this.migrateLegacyAsk(`Generate formatted document: ${prompt.substring(0, 60)}`, ctx);
     return LegacyAIService.generateFormattedDocument(aiSettings, corpus, prompt);
@@ -566,7 +560,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateQuiz
    */
-  async generateQuiz(aiSettings: any, corpus: string, config: any): Promise<any> {
+  async generateQuiz(aiSettings: unknown, corpus: string, config: unknown): Promise<unknown> {
     const ctx = this.buildContext({ source: 'studio-quiz', extra: { ...config } });
     await this.migrateLegacyAsk(`Generate quiz: ${config?.topic || 'quiz'}`, ctx);
     return LegacyAIService.generateQuiz(aiSettings, corpus, config);
@@ -575,7 +569,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateImageFromPrompt
    */
-  async generateImageFromPrompt(aiSettings: any, prompt: string): Promise<{ data: string; mimeType: string }> {
+  async generateImageFromPrompt(aiSettings: unknown, prompt: string): Promise<{ data: string; mimeType: string }> {
     const ctx = this.buildContext({ source: 'studio-image', extra: { prompt: prompt.substring(0, 100) } });
     await this.migrateLegacyAsk(`Generate image from prompt: ${prompt.substring(0, 80)}`, ctx);
     return LegacyAIService.generateImageFromPrompt(aiSettings, prompt);
@@ -584,7 +578,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateMarkdownReport (UDA + Reportistica)
    */
-  async generateMarkdownReport(aiSettings: any, type: string, data: Record<string, unknown>): Promise<string> {
+  async generateMarkdownReport(aiSettings: unknown, type: string, data: Record<string, unknown>): Promise<string> {
     const ctx = this.buildContext({ source: 'uda-export-ai-report', extra: { type, dataKeys: Object.keys(data || {}) } });
     await this.migrateLegacyAsk(`Generate markdown report: ${type}`, ctx);
     return LegacyAIService.generateMarkdownReport(aiSettings, type, data);
@@ -593,7 +587,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized validateUdaVerticalCurriculum
    */
-  async validateUdaVerticalCurriculum(aiSettings: any, uda: any, kb: any[]): Promise<string> {
+  async validateUdaVerticalCurriculum(aiSettings: unknown, uda: unknown, kb: unknown[]): Promise<string> {
     const ctx = this.buildContext({ source: 'uda-detail-modal', extra: { udaId: uda?.id, phases: uda?.phases?.length } });
     await this.migrateLegacyAsk(`Validate UDA vertical curriculum for ${uda?.title || 'UDA'}`, ctx);
     return LegacyAIService.validateUdaVerticalCurriculum(aiSettings, uda, kb);
@@ -602,7 +596,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateClassCouncilNarrativeReport
    */
-  async generateClassCouncilNarrativeReport(aiSettings: any, data: any): Promise<string> {
+  async generateClassCouncilNarrativeReport(aiSettings: unknown, data: unknown): Promise<string> {
     const ctx = this.buildContext({ source: 'consiglio-classe', extra: { classe: data?.classe, periodo: data?.periodo } });
     await this.migrateLegacyAsk(`Generate class council narrative for ${data?.classe}`, ctx);
     return LegacyAIService.generateClassCouncilNarrativeReport(aiSettings, data);
@@ -611,7 +605,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized getPeriodicJudgmentSuggestion (StudentProfile + Consiglio)
    */
-  async getPeriodicJudgmentSuggestion(aiSettings: any, s: any, per: string, evals: any[], cEvals: any[], comps: any[]): Promise<string> {
+  async getPeriodicJudgmentSuggestion(aiSettings: unknown, s: unknown, per: string, evals: unknown[], cEvals: unknown[], comps: unknown[]): Promise<string> {
     const ctx = this.buildContext({ source: 'student-profile', extra: { student: s?.id, periodo: per } });
     await this.migrateLegacyAsk(`Get judgment suggestion for student`, ctx);
     return LegacyAIService.getPeriodicJudgmentSuggestion(aiSettings, s, per, evals, cEvals, comps);
@@ -620,7 +614,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateLessonSequenceForClass
    */
-  async generateLessonSequenceForClass(aiSettings: any, uda: any[], classe: string, kb: string): Promise<any[]> {
+  async generateLessonSequenceForClass(aiSettings: unknown, uda: unknown[], classe: string, kb: string): Promise<unknown[]> {
     const ctx = this.buildContext({ source: 'lessons-page', extra: { classe, udaCount: uda?.length } });
     await this.migrateLegacyAsk(`Generate lesson sequence for ${classe}`, ctx);
     return LegacyAIService.generateLessonSequenceForClass(aiSettings, uda, classe, kb);
@@ -629,7 +623,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized getAIPedagogicalAdvice
    */
-  async getAIPedagogicalAdvice(aiSettings: any, data: any, type: string, comps: any[]): Promise<any> {
+  async getAIPedagogicalAdvice(aiSettings: unknown, data: unknown, type: string, comps: unknown[]): Promise<unknown> {
     const ctx = this.buildContext({ source: 'ai-advisor', extra: { type } });
     await this.migrateLegacyAsk(`Generate pedagogical advice: ${type}`, ctx);
     return LegacyAIService.getAIPedagogicalAdvice(aiSettings, data, type, comps);
@@ -638,7 +632,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateLessonFromIdea
    */
-  async generateLessonFromIdea(aiSettings: any, ideaText: string, targetClass: string, kbContent?: string): Promise<any> {
+  async generateLessonFromIdea(aiSettings: unknown, ideaText: string, targetClass: string, kbContent?: string): Promise<unknown> {
     const ctx = this.buildContext({ source: 'idea-generator', extra: { targetClass } });
     await this.migrateLegacyAsk(`Generate lesson from idea`, ctx);
     return LegacyAIService.generateLessonFromIdea(aiSettings, ideaText, targetClass, kbContent);
@@ -647,7 +641,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateInclusivityAdaptations
    */
-  async generateInclusivityAdaptations(aiSettings: any, ctxData: any, piani: any[]): Promise<string> {
+  async generateInclusivityAdaptations(aiSettings: unknown, ctxData: unknown, piani: unknown[]): Promise<string> {
     const ctx = this.buildContext({ source: 'create-lesson-ai', extra: { lesson: ctxData?.lesson?.title } });
     await this.migrateLegacyAsk(`Generate inclusivity adaptations`, ctx);
     return LegacyAIService.generateInclusivityAdaptations(aiSettings, ctxData, piani);
@@ -656,7 +650,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized analyzeCircularDocument
    */
-  async analyzeCircularDocument(aiSettings: any, source: any): Promise<any> {
+  async analyzeCircularDocument(aiSettings: unknown, source: unknown): Promise<unknown> {
     const ctx = this.buildContext({ source: 'circolare-analysis' });
     await this.migrateLegacyAsk(`Analyze circular document`, ctx);
     return LegacyAIService.analyzeCircularDocument(aiSettings, source);
@@ -666,13 +660,13 @@ ${String(data.text || '')}`;
    * Post-Fase 4 + Fase 4: Centralized generateSituazionePartenza + generateClassPlanningDocument
    * (delegation kept for compatibility; prefer generateWithCentralPrompt for new code)
    */
-  async generateSituazionePartenza(aiSettings: any, params: any): Promise<string> {
+  async generateSituazionePartenza(aiSettings: unknown, params: unknown): Promise<string> {
     const ctx = this.buildContext({ source: 'planning-wizard', extra: params });
     await this.migrateLegacyAsk(`Generate situazione partenza`, ctx);
     return LegacyAIService.generateSituazionePartenza(aiSettings, params);
   },
 
-  async generateClassPlanningDocument(aiSettings: any, data: any): Promise<string> {
+  async generateClassPlanningDocument(aiSettings: unknown, data: unknown): Promise<string> {
     const ctx = this.buildContext({ source: 'class-planning', extra: { ...data } });
     await this.migrateLegacyAsk(`Generate class planning document`, ctx);
     return LegacyAIService.generateClassPlanningDocument(aiSettings, data);
@@ -681,7 +675,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateCompetencyNote
    */
-  async generateCompetencyNote(aiSettings: any, s: any, c: any, l: any): Promise<string> {
+  async generateCompetencyNote(aiSettings: unknown, s: unknown, c: unknown, l: unknown): Promise<string> {
     const ctx = this.buildContext({ source: 'competency-evaluation' });
     await this.migrateLegacyAsk(`Generate competency note`, ctx);
     return LegacyAIService.generateCompetencyNote(aiSettings, s, c, l);
@@ -690,7 +684,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized extractEventFromText
    */
-  async extractEventFromText(aiSettings: any, t: string): Promise<any> {
+  async extractEventFromText(aiSettings: unknown, t: string): Promise<unknown> {
     const ctx = this.buildContext({ source: 'ai-event-parser' });
     await this.migrateLegacyAsk(`Extract event from text`, ctx);
     return LegacyAIService.extractEventFromText(aiSettings, t);
@@ -699,7 +693,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized parseCurriculumFromText
    */
-  async parseCurriculumFromText(aiSettings: any, t: string, s: string, g: string): Promise<any> {
+  async parseCurriculumFromText(aiSettings: unknown, t: string, s: string, g: string): Promise<unknown> {
     const ctx = this.buildContext({ source: 'curriculum-manager' });
     await this.migrateLegacyAsk(`Parse curriculum`, ctx);
     return LegacyAIService.parseCurriculumFromText(aiSettings, t, s, g);
@@ -708,7 +702,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateAnswerFromCorpus
    */
-  async generateAnswerFromCorpus(aiSettings: any, corpus: string, q: string): Promise<any> {
+  async generateAnswerFromCorpus(aiSettings: unknown, corpus: string, q: string): Promise<unknown> {
     const ctx = this.buildContext({ source: 'corpus-chat' });
     await this.migrateLegacyAsk(`Generate answer from corpus`, ctx);
     return LegacyAIService.generateAnswerFromCorpus(aiSettings, corpus, q);
@@ -717,13 +711,13 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized refineTextWithAi + generateDocumentTable
    */
-  async refineTextWithAi(aiSettings: any, t: string, i: string): Promise<string> {
+  async refineTextWithAi(aiSettings: unknown, t: string, i: string): Promise<string> {
     const ctx = this.buildContext({ source: 'smart-document-editor', extra: { instruction: i } });
     await this.migrateLegacyAsk(`Refine text with AI`, ctx);
     return LegacyAIService.refineTextWithAi(aiSettings, t, i);
   },
 
-  async generateDocumentTable(aiSettings: any, d: string): Promise<string> {
+  async generateDocumentTable(aiSettings: unknown, d: string): Promise<string> {
     const ctx = this.buildContext({ source: 'smart-document-editor' });
     await this.migrateLegacyAsk(`Generate document table`, ctx);
     return LegacyAIService.generateDocumentTable(aiSettings, d);
@@ -732,7 +726,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized getProactiveSuggestions
    */
-  async getProactiveSuggestions(aiSettings: any, state: any): Promise<any[]> {
+  async getProactiveSuggestions(aiSettings: unknown, state: unknown): Promise<unknown[]> {
     const ctx = this.buildContext({ source: 'ai-suggestions' });
     await this.migrateLegacyAsk(`Get proactive suggestions`, ctx);
     return LegacyAIService.getProactiveSuggestions(aiSettings, state);
@@ -741,7 +735,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized refactorProgrammazione
    */
-  async refactorProgrammazione(aiSettings: any, t: string): Promise<string> {
+  async refactorProgrammazione(aiSettings: unknown, t: string): Promise<string> {
     const ctx = this.buildContext({ source: 'smart-import' });
     await this.migrateLegacyAsk(`Refactor programmazione`, ctx);
     return LegacyAIService.refactorProgrammazione(aiSettings, t);
@@ -750,7 +744,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateContent (for nka/*)
    */
-  async generateContent(prompt: string, options?: any): Promise<{ content: string }> {
+  async generateContent(prompt: string, options?: unknown): Promise<{ content: string }> {
     const ctx = this.buildContext({ source: 'nka-llm' });
     await this.migrateLegacyAsk(`NKA generateContent`, ctx);
     return LegacyAIService.generateContent(prompt, options || {});
@@ -759,7 +753,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateThemeFromPrompt (ThemeService)
    */
-  async generateThemeFromPrompt(aiSettings: any, p: string): Promise<any> {
+  async generateThemeFromPrompt(aiSettings: unknown, p: string): Promise<unknown> {
     const ctx = this.buildContext({ source: 'theme-service' });
     await this.migrateLegacyAsk(`Generate theme from prompt`, ctx);
     return LegacyAIService.generateThemeFromPrompt(aiSettings, p);
@@ -768,13 +762,13 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized generateTechnicalDocumentContent + generateAcademicEssayContent (HelpModal)
    */
-  async generateTechnicalDocumentContent(aiSettings: any): Promise<any> {
+  async generateTechnicalDocumentContent(aiSettings: unknown): Promise<unknown> {
     const ctx = this.buildContext({ source: 'help-modal', extra: { type: 'technical' } });
     await this.migrateLegacyAsk(`Generate technical document content`, ctx);
     return LegacyAIService.generateTechnicalDocumentContent(aiSettings);
   },
 
-  async generateAcademicEssayContent(aiSettings: any): Promise<any> {
+  async generateAcademicEssayContent(aiSettings: unknown): Promise<unknown> {
     const ctx = this.buildContext({ source: 'help-modal', extra: { type: 'essay' } });
     await this.migrateLegacyAsk(`Generate academic essay content`, ctx);
     return LegacyAIService.generateAcademicEssayContent(aiSettings);
@@ -783,13 +777,13 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized analyzeLessonPedagogy + addContextToLesson (LessonView)
    */
-  async analyzeLessonPedagogy(aiSettings: any, lesson: { title: string; description: string }): Promise<any> {
+  async analyzeLessonPedagogy(aiSettings: unknown, lesson: { title: string; description: string }): Promise<unknown> {
     const ctx = this.buildContext({ source: 'lesson-view', extra: { lessonTitle: lesson.title } });
     await this.migrateLegacyAsk(`Analyze lesson pedagogy`, ctx);
     return LegacyAIService.analyzeLessonPedagogy(aiSettings, lesson);
   },
 
-  async addContextToLesson(aiSettings: any, lesson: any): Promise<string> {
+  async addContextToLesson(aiSettings: unknown, lesson: unknown): Promise<string> {
     const ctx = this.buildContext({ source: 'lesson-view', extra: { lessonId: lesson?.id, action: 'enrich' } });
     await this.migrateLegacyAsk(`Add context to lesson`, ctx);
     return LegacyAIService.addContextToLesson(aiSettings, lesson);
@@ -798,7 +792,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized suggestAnnualPlan (Annual/ClassPlanningWizard)
    */
-  async suggestAnnualPlan(aiSettings: any, kb: string, subj: string, cls: string): Promise<any[]> {
+  async suggestAnnualPlan(aiSettings: unknown, kb: string, subj: string, cls: string): Promise<unknown[]> {
     const ctx = this.buildContext({ source: 'annual-planning', extra: { subject: subj, classe: cls } });
     await this.migrateLegacyAsk(`Suggest annual plan for ${cls} ${subj}`, ctx);
     return LegacyAIService.suggestAnnualPlan(aiSettings, kb, subj, cls);
@@ -807,13 +801,13 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized discoverAndCreateFeed / fetchAndParseRssFeed (FeedManager - disabled paths)
    */
-  async discoverAndCreateFeed(url: string): Promise<any> {
+  async discoverAndCreateFeed(url: string): Promise<unknown> {
     const ctx = this.buildContext({ source: 'feed-manager' });
     await this.migrateLegacyAsk(`Discover feed: ${url}`, ctx);
     return LegacyAIService.discoverAndCreateFeed(url);
   },
 
-  async fetchAndParseRssFeed(url: string): Promise<any> {
+  async fetchAndParseRssFeed(url: string): Promise<unknown> {
     const ctx = this.buildContext({ source: 'feed-manager' });
     await this.migrateLegacyAsk(`Fetch RSS: ${url}`, ctx);
     return LegacyAIService.fetchAndParseRssFeed(url);
@@ -822,7 +816,7 @@ ${String(data.text || '')}`;
   /**
    * Fase 4: Centralized performWebSearch (LiveAssistant web search tool)
    */
-  async performWebSearch(aiSettings: any, query: string): Promise<{ text: string; sources: { title: string; uri: string }[] }> {
+  async performWebSearch(aiSettings: unknown, query: string): Promise<{ text: string; sources: { title: string; uri: string }[] }> {
     const ctx = this.buildContext({ source: 'live-assistant', extra: { tool: 'searchWeb', query } });
     await this.migrateLegacyAsk(`Web search: ${query}`, ctx);
     return LegacyAIService.performWebSearch(aiSettings, query);

@@ -21,14 +21,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import EmptyState from '../ui/EmptyState';
 import HubShell from '../ui/HubShell';
-import type { View, NavigationParams } from '../../types';
+import type { View } from '../../types';
 
 // Migration Fase 2: CopilotView (8th high-traffic hub) imports single AIBrain (side-by-side)
 import { AIBrain } from '../../ai/brain/AIBrain';
 
 interface CopilotViewProps {
     initialSubTab?: string;
-    onNavigate?: (view: View, context?: any) => void;
+    onNavigate?: (view: View, context?: unknown) => void;
 }
 
 const SUB_TAB_TO_INDEX: Record<string, number> = {

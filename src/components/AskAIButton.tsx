@@ -35,8 +35,8 @@ const AskAIButton: React.FC<AskAIButtonProps> = ({
   const resolvedLabel = label || (() => {
     if (!context) return 'Chiedi all’AI';
 
-    const src = (context as any).source as string | undefined;
-    const classe = (context as any).classe as string | undefined;
+    const src = (context as Record<string, unknown>).source as string | undefined;
+    const classe = (context as Record<string, unknown>).classe as string | undefined;
 
     // === CANONICAL LABELS (Phase 4) ===
     const CANONICAL: Record<string, string> = {
@@ -72,12 +72,12 @@ const AskAIButton: React.FC<AskAIButtonProps> = ({
     // Real consumption using canonical path + deprecation helper example
     if (context) {
       // Use migrateLegacyAsk for gradual deprecation path (rollback-safe)
-      AIBrain.migrateLegacyAsk('Chiedi all’AI', context as any).catch(() => {});
+      AIBrain.migrateLegacyAsk('Chiedi all’AI', context as Record<string, unknown>).catch(() => {});
     }
     onNavigate('assistente', context);
   };
 
-  const size = compact ? 'var(--md-sys-spacing-10)' : 'var(--md-sys-spacing-12)';
+  const _size = compact ? 'var(--md-sys-spacing-10)' : 'var(--md-sys-spacing-12)';
 
   return (
     <ButtonBase

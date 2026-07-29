@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Studente, Valutazione, ValutazioneCompetenza, EvaluationModuleProps, Prova, View, NavigationParams } from '../types';
+import { Studente, Valutazione, ValutazioneCompetenza, EvaluationModuleProps, Prova } from '../types';
 import AddProvaModal from './AddProvaModal';
 import BulkEvaluationModal from './BulkEvaluationModal';
 import StudentProfile from './StudentProfile';

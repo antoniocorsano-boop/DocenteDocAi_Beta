@@ -25,7 +25,7 @@ export const generateAiSuggestions = async (appState: AppState): Promise<AiSugge
         }
 
         const prioritizedSuggestions = await AIBrain.generateWithCentralPrompt('proactive-suggestions', {
-          studentContext: (appState.students || []).map((s: any) => s.cognome || s.nome || ''),
+          studentContext: (appState.students || []).map(s => s.cognome || s.nome || ''),
           studentsLength: (appState.students || []).length,
           evaluations: appState.evaluations || [],
           competencyEvals: appState.competencyEvals || [],

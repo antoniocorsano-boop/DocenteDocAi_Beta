@@ -49,8 +49,7 @@ interface ChatMessage {
   command?: CopilotCommand
 }
 
-// Fase 3: unified types
-type CopilotResponse = { message: string; command?: CopilotCommand }
+
 
 const ChatBubble: React.FC<{ msg: ChatMessage }> = ({ msg }) => {
   const isUser = msg.role === 'user'

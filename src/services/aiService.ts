@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { AiSettings, Lezione, Uda, Valutazione, ValutazioneCompetenza, Competenza, Studente, Livello, KnowledgeBaseEntry, AiSuggestion, PianoInclusione, CircularAnalysisResult, EventoCalendario, ChatMessage, GeneratedQuiz, LessonAnalysisResult, CurriculumSubject, TechnicalDocumentContent, EssayContent } from '../types';
 import { getGoogleAIClient, callAiWithRetry } from './aiClient';
 import * as Prompts from './aiPrompts';
@@ -69,7 +69,7 @@ export const cleanAndParseJson = <T>(text: string): T => {
     }
     try {
         return JSON.parse(cleanedText) as T;
-    } catch (e) {
+    } catch (_e) {
         throw new Error("Il formato della risposta AI non è valido. Riprova.");
     }
 };
@@ -255,7 +255,7 @@ export const generateTechnicalDocumentContent = async (aiSettings: AiSettings): 
     });
 };
 
-export const generateAcademicEssayContent = async (aiSettings: AiSettings): Promise<EssayContent | null> => {
+export const generateAcademicEssayContent = async (_aiSettings: AiSettings): Promise<EssayContent | null> => {
     return callAiWithRetry(async () => {
         const ai = await getGoogleAIClient();
         const r = await ai.models.generateContent({
@@ -277,7 +277,7 @@ export const generateAcademicEssayContent = async (aiSettings: AiSettings): Prom
  * @param comps - Elenco completo delle competenze di riferimento
  * @returns Stringa con il giudizio sintetico suggerito
  */
-export const getPeriodicJudgmentSuggestion = async (aiSettings: AiSettings, s: Studente, per: string, evals: Valutazione[], cEvals: ValutazioneCompetenza[], comps: Competenza[]): Promise<string> => {
+export const getPeriodicJudgmentSuggestion = async (aiSettings: AiSettings, s: Studente, per: string, evals: Valutazione[], cEvals: ValutazioneCompetenza[], _comps: Competenza[]): Promise<string> => {
     return callAiWithRetry(async () => {
         const ai = await getGoogleAIClient();
         const r = await ai.models.generateContent({
@@ -360,7 +360,7 @@ export const getAIPedagogicalAdvice = async (aiSettings: AiSettings, data: {
     lesson: Lezione;
     students: Studente[];
     evaluations: Valutazione[];
-}, type: string, comps: Competenza[]): Promise<Record<string, unknown>> => {
+}, type: string, _comps: Competenza[]): Promise<Record<string, unknown>> => {
     return callAiWithRetry(async () => {
         const ai = await getGoogleAIClient();
         const r = await ai.models.generateContent({
@@ -499,7 +499,7 @@ export const chatWithAi = async (aiSettings: AiSettings, messages: ChatMessage[]
     return callAiWithRetry(async () => {
         const ai = await getGoogleAIClient();
         const lastMessage = messages[messages.length - 1];
-        const history = messages.slice(0, -1).map(m => ({
+        const _history = messages.slice(0, -1).map(m => ({
             role: m.role === 'user' ? 'user' : 'model',
             parts: [{ text: m.text }]
         }));
@@ -556,7 +556,7 @@ export const analyzeImage = async (aiSettings: AiSettings, img: string, p: strin
     });
 };
 
-export const parseCurriculumFromText = async (aiSettings: AiSettings, t: string, s: string, g: string): Promise<CurriculumSubject> => {
+export const parseCurriculumFromText = async (aiSettings: AiSettings, t: string, _s: string, _g: string): Promise<CurriculumSubject> => {
     return callAiWithRetry(async () => {
         const ai = await getGoogleAIClient();
         const r = await ai.models.generateContent({
@@ -590,8 +590,8 @@ export const generateDocumentTable = async (aiSettings: AiSettings, d: string): 
     });
 };
 
-export const discoverAndCreateFeed = async (url: string): Promise<never> => { throw new Error("RSS Disabilitato."); };
-export const fetchAndParseRssFeed = async (url: string): Promise<never> => { throw new Error("RSS Disabilitato."); };
+export const discoverAndCreateFeed = async (_url: string): Promise<never> => { throw new Error("RSS Disabilitato."); };
+export const fetchAndParseRssFeed = async (_url: string): Promise<never> => { throw new Error("RSS Disabilitato."); };
 
 export const generateClassCouncilNarrativeReport = async (aiSettings: AiSettings, data: {
     classe: string;

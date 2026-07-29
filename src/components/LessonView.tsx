@@ -179,7 +179,7 @@ const LessonView: React.FC<LessonViewProps> = ({ lesson, onClose, onStartClassro
       setIsAnalyzing(true);
       try {
           // Post-Fase 4: central prompt path
-          const { prompt: pedPrompt } = AIBrain.buildPrompt('lesson-pedagogy', { title: lesson.contenuto, description: `${lesson.materia || ''} ${lesson.classe || ''} - ${lesson.obiettivi || ''} ${lesson.contesto || ''}` });
+          const { prompt: _pedPrompt } = AIBrain.buildPrompt('lesson-pedagogy', { title: lesson.contenuto, description: `${lesson.materia || ''} ${lesson.classe || ''} - ${lesson.obiettivi || ''} ${lesson.contesto || ''}` });
           const result = await AIBrain.generateWithCentralPrompt('lesson-pedagogy', { 
             title: lesson.contenuto, 
             description: `${lesson.materia || ''} ${lesson.classe || ''} - ${lesson.obiettivi || ''} ${lesson.contesto || ''}` 

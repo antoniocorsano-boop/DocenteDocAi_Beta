@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
+ 
 import { Theme, ColorTokens, DesignSystemDefinition } from '../types';
 import { defaultLightTheme, defaultDarkTheme, hexToRgb, rgbToHsl, adjustColor, getLegibleTextColor, hexToRgbString } from './utils';
 
@@ -77,7 +77,7 @@ export { defaultDarkTheme };
 
 // --- Main Functions (Moved from utils.ts) ---
 
-const generateRolePalette = (hexSeed: string, mode: 'light' | 'dark', role: 'primary' | 'secondary' | 'tertiary' | 'error') => {
+const _generateRolePalette = (hexSeed: string, mode: 'light' | 'dark', role: 'primary' | 'secondary' | 'tertiary' | 'error') => {
     const rgb = hexToRgb(hexSeed);
     if (!rgb) return null;
     const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
@@ -106,7 +106,7 @@ const generateRolePalette = (hexSeed: string, mode: 'light' | 'dark', role: 'pri
     };
 };
 
-const generateNeutralPalette = (hexSeed: string, mode: 'light' | 'dark') => {
+const _generateNeutralPalette = (hexSeed: string, mode: 'light' | 'dark') => {
     const rgb = hexToRgb(hexSeed);
     if (!rgb) return null;
     const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
@@ -178,7 +178,7 @@ export const createTheme = (config: {
         const tokenKey = key as keyof ColorTokens;
         const value = config.colors[tokenKey];
         if (typeof value === 'string' && value.length > 0) {
-          (newColors as any)[tokenKey] = value;
+          (newColors as Record<string, string>)[tokenKey] = value;
         }
       }
     }
@@ -250,7 +250,7 @@ export const applyTheme = (theme: Theme): void => {
     const tokenName = key as keyof ColorTokens;
     const tokenInfo = baseDesignSystem.colors[tokenName];
     if (tokenInfo) {
-      const value = (themeToApply.colors as any)[tokenName]; // Cast to any
+      const value = (themeToApply.colors as Record<string, string>)[tokenName];
       root.style.setProperty(tokenInfo.cssVar, value);
       
       const rgbValue = hexToRgbString(value);
@@ -263,8 +263,9 @@ export const applyTheme = (theme: Theme): void => {
   for (const key in baseDesignSystem.typography) {
     const tokenName = key as keyof typeof baseDesignSystem.typography;
     const tokenInfo = baseDesignSystem.typography[tokenName];
-    for (const prop in tokenInfo.value as Record<string, unknown>) {
-      root.style.setProperty(`${tokenInfo.cssVar}-${String(prop)}`, (tokenInfo.value as Record<string, string>)[prop]); // Cast to any
+    const tokenValue = tokenInfo.value as Record<string, string>;
+    for (const prop in tokenValue) {
+      root.style.setProperty(`${tokenInfo.cssVar}-${String(prop)}`, tokenValue[prop]);
     }
   }
 

@@ -42,15 +42,7 @@ const createNewUda = (): Uda => ({
     textColor: 'var(--md-sys-color-on-primary)'
 });
 
-const FRAMEWORK_SHORT: Record<string, string> = {
-    'DigCompEdu 3.0 (AI)': 'DigCompEdu',
-    'Competenze Chiave Europee (2018)': 'EU 2018',
-    'Primo Ciclo \u2014 DM 742/2017': 'Primo Ciclo',
-    'Educazione Civica \u2014 L. 92/2019': 'Ed. Civica',
-    'DigComp 2.2 \u2014 Studenti': 'DigComp 2.2',
-    'Orientamento \u2014 DM 328/2022': 'Orientamento',
-    'Assi Culturali \u2014 DM 139/2007': 'Assi Culturali',
-};
+
 
 interface UdaEditorProps {
     udaProp: Uda | 'new';

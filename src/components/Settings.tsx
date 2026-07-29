@@ -21,7 +21,7 @@ import { OrbitControlPanel } from './orbit/OrbitControlPanel';
 import ContextualAskAI from './ui/ContextualAskAI';
 
 const Settings: React.FC<SettingsProps> = (props) => {
-    const onNavigate = (props as any).onNavigate as ((view: View, context?: NavigationParams) => void) | undefined;
+    const onNavigate = (props as Record<string, unknown>).onNavigate as ((view: View, context?: NavigationParams) => void) | undefined;
     const {
         settings, themeState, aiSettings, onSaveSettings, onSaveTheme, onSaveAiSettings,
         onExportData, onImportData, showToast, onCleanDemoData,

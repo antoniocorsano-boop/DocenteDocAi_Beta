@@ -1,7 +1,6 @@
 // MD3 Compliant - Uses CSS custom properties for theming
 import React, { useState, useMemo } from 'react';
 import { Lezione, Slot, TimetableSettings, View, NavigationParams } from '../types';
-import AskAIButton from './AskAIButton';
 import TimetableCell from './TimetableCell';
 import { DAYS_OF_WEEK } from '../constants';
 import Guidance from './Guidance';

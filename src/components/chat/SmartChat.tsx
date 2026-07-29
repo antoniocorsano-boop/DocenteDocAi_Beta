@@ -470,7 +470,7 @@ export function SmartChat({ onClear, userPlan = 'free', height = '100%', initial
 
   // Migration Step A — use the single AIBrain for copilot decisions
   // Fase 3 (sequenza): real consumption of unified recommendations + example ask
-  const copilotPrimary = React.useMemo(() => AIBrain.getCopilotPrimaryAction(), []);
+  const _copilotPrimary = React.useMemo(() => AIBrain.getCopilotPrimaryAction(), []);
 
   const unifiedChatRecs = React.useMemo(() => {
     try {

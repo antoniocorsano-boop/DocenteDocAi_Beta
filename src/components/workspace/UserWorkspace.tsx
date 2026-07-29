@@ -215,7 +215,7 @@ function decodeLandingType(entry: CognitiveEntry): LandingType | null {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 interface UserWorkspaceProps {
-  onNavigate?: (view: View, context?: any) => void;
+  onNavigate?: (view: View, context?: unknown) => void;
 }
 
 export default function UserWorkspace({ onNavigate }: UserWorkspaceProps = {}): React.JSX.Element {

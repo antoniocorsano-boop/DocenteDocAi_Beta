@@ -17,12 +17,12 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { KnowledgeBaseEntry, Corpus, AiSettings, TimetableSettings, View, NavigationParams } from '../types';
 import HubShell from './ui/HubShell';
-import ContextualAskAI from './ui/ContextualAskAI';
+
 const AddSourceModal = lazy(() => import('./AddSourceModal'));
 const DocumentViewerModal = lazy(() => import('./DocumentViewerModal')); 
 const ImageViewerModal = lazy(() => import('./ImageViewerModal'));
 import { KB_CATEGORIES } from '../constants';
-import { InfoCard, CategoryCard, SectionHeader, M3ConfirmDialog, Skeleton } from './ui';
+import { InfoCard, CategoryCard, M3ConfirmDialog, Skeleton } from './ui';
 
 // Migration Fase 2: KnowledgeBase (high-traffic hub) imports AIBrain
 import { AIBrain } from '../ai/brain/AIBrain';

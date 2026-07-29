@@ -52,14 +52,14 @@ const RegisterImportDialog: React.FC<RegisterImportDialogProps> = ({ onClose, on
       extra: { provider, step }
     }), [provider, step]);
 
-    const importRecs = React.useMemo(() => {
+    const _importRecs = React.useMemo(() => {
       try { return AIBrain.getUnifiedRecommendations(importContext); } catch { return null; }
     }, [importContext]);
 
-    const [importAiTip, setImportAiTip] = React.useState<string | null>(null);
-    const [importAiLoading, setImportAiLoading] = React.useState(false);
+    const [_importAiTip, setImportAiTip] = React.useState<string | null>(null);
+    const [_importAiLoading, setImportAiLoading] = React.useState(false);
 
-    const fetchImportAiTip = React.useCallback(async () => {
+    const _fetchImportAiTip = React.useCallback(async () => {
       setImportAiLoading(true);
       try {
         const res = await AIBrain.ask({

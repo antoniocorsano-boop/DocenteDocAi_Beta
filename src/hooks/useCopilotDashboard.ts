@@ -68,7 +68,7 @@ export function useCopilotDashboard(): CopilotDashboardData {
       const ctx = AIBrain.buildContext({ source: 'copilot-dashboard-hook', extra: { signals: dmState.signals.length } });
       // Prefer unified gateway
       const recs = AIBrain.getUnifiedRecommendations(ctx);
-      if (recs?.primary) return recs.primary as any;
+      if (recs?.primary) return recs.primary as unknown;
       // Fallback + deprecation path exercise
       if (import.meta.env.DEV) AIBrain.migrateLegacyAsk('legacy-copilot-dashboard', ctx).catch(() => {});
       return getCopilotPrimaryAction();
@@ -80,7 +80,7 @@ export function useCopilotDashboard(): CopilotDashboardData {
   const secondaries = React.useMemo(() => {
     try {
       const recs = AIBrain.getUnifiedRecommendations();
-      return (recs?.secondary || getTopSecondaryActions()) as any;
+      return (recs?.secondary || getTopSecondaryActions()) as unknown;
     } catch {
       return getTopSecondaryActions();
     }
